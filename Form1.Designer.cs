@@ -267,10 +267,10 @@ partial class Form1
         // 
         // TxtCompResponsable
         // 
-        TxtCompResponsable.Location = new Point(455, 59);
+        TxtCompResponsable.Location = new Point(462, 59);
         TxtCompResponsable.Name = "TxtCompResponsable";
         TxtCompResponsable.PlaceholderText = "Nom du responsable…";
-        TxtCompResponsable.Size = new Size(185, 24);
+        TxtCompResponsable.Size = new Size(178, 24);
         TxtCompResponsable.TabIndex = 9;
         // 
         // GrpIndem

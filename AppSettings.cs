@@ -13,11 +13,11 @@ public sealed class FieldPos
 public sealed class AppSettings
 {
     // ── Compétition ───────────────────────────────────────────────────────────
-    public FieldPos CompOpposant    { get; set; } = new() { X = 100f, Y = 700f, Hauteur = 16, Largeur = 200f };
-    public FieldPos CompDate        { get; set; } = new() { X = 340f, Y = 700f, Hauteur = 16, Largeur = 100f };
-    public FieldPos CompHeure       { get; set; } = new() { X = 470f, Y = 700f, Hauteur = 16, Largeur =  70f };
-    public FieldPos CompAdresse     { get; set; } = new() { X = 100f, Y = 680f, Hauteur = 16, Largeur = 300f };
-    public FieldPos CompResponsable { get; set; } = new() { X = 360f, Y = 680f, Hauteur = 16, Largeur = 200f };
+    public FieldPos Opposant    { get; set; } = new() { X = 100f, Y = 700f, Hauteur = 16, Largeur = 200f };
+    public FieldPos Date        { get; set; } = new() { X = 340f, Y = 700f, Hauteur = 16, Largeur = 100f };
+    public FieldPos Heure       { get; set; } = new() { X = 470f, Y = 700f, Hauteur = 16, Largeur =  70f };
+    public FieldPos Adresse     { get; set; } = new() { X = 100f, Y = 680f, Hauteur = 16, Largeur = 300f };
+    public FieldPos Responsable { get; set; } = new() { X = 360f, Y = 680f, Hauteur = 16, Largeur = 200f };
 
     // ── Tableau financier — coordonnées réelles extraites du PDF ──────────────
     // Origine : coin bas-gauche · A4 = 595 × 842 pt

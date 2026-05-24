@@ -1,5 +1,5 @@
-using System.Globalization;
-using System.Text.RegularExpressions;
+/* PdfService.cs
+ */
 using iText.IO.Font.Constants;
 using iText.IO.Image;
 using iText.Kernel.Colors;
@@ -7,19 +7,24 @@ using iText.Kernel.Font;
 using iText.Kernel.Pdf;
 using iText.Kernel.Pdf.Canvas;
 using iText.Kernel.Pdf.Canvas.Parser;
+using iText.Kernel.Pdf.Canvas.Parser.Filter;
 using iText.Kernel.Pdf.Canvas.Parser.Listener;
 using iText.Layout;
 using iText.Layout.Properties;
+using System.Diagnostics;
+using System.Globalization;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace OrdreMission;
 
 /// <summary>Données de compétition lues depuis la convocation PDF.</summary>
 public sealed class CompetitionInfo
 {
-    public string Opposant    { get; init; } = "";
-    public string Date        { get; init; } = "";
-    public string Heure       { get; init; } = "";
-    public string Adresse     { get; init; } = "";
+    public string Opposant { get; init; } = "";
+    public string Date { get; init; } = "";
+    public string Heure { get; init; } = "";
+    public string Adresse { get; init; } = "";
     public string Responsable { get; init; } = "";
 }
 
@@ -42,11 +47,8 @@ public static class PdfService
             using var pdfDoc = new PdfDocument(reader);
 
             int pageNum = Math.Max(1, Math.Min(page, pdfDoc.GetNumberOfPages()));
-            string text = PdfTextExtractor.GetTextFromPage(
-                pdfDoc.GetPage(pageNum),
-                new SimpleTextExtractionStrategy());
 
-            return ParseCompetitionInfo(text);
+            return ParseCompetitionInfo(pdfDoc);
         }
         catch
         {
@@ -54,59 +56,52 @@ public static class PdfService
         }
     }
 
-    private static CompetitionInfo ParseCompetitionInfo(string text)
+    // Extrait les champs de la competition depuis le texte brut du PDF
+    private static string ExtractTextFromRegion(PdfDocument pdfDoc, int x, int y, int width, int height)
     {
-        // Extrait le premier groupe capturant du pattern, ou "" si absent.
-        static string Get(string pattern, string input)
-        {
-            var m = Regex.Match(input, pattern,
-                RegexOptions.IgnoreCase | RegexOptions.Multiline);
-            return m.Success ? m.Groups[1].Value.Trim() : "";
-        }
+        iText.Kernel.Geom.Rectangle rect = new iText.Kernel.Geom.Rectangle(x, y, width, height);
+        TextRegionEventFilter filter = new TextRegionEventFilter(rect);
 
-        // Nettoie les espaces multiples produits par l'extraction PDF.
-        static string Clean(string s) =>
-            Regex.Replace(s, @"\s{2,}", " ").Trim();
+        ITextExtractionStrategy strategy = new FilteredTextEventListener(
+            new LocationTextExtractionStrategy(),
+            filter
+        );
 
+        return PdfTextExtractor.GetTextFromPage(pdfDoc.GetPage(1), strategy);
+    }
+
+    private static CompetitionInfo ParseCompetitionInfo(PdfDocument pdfDoc)
+    {
         return new CompetitionInfo
         {
-            // "Opposant :" ou "Opposant -" suivi du nom du club
-            Opposant    = Clean(Get(@"[Oo]pposant\s*[:\-]\s*(.+?)$",          text)),
-
-            // "le," ou "le " suivi de la date (jusqu'a "a" horaire ou fin de ligne)
-            Date        = Clean(Get(@"\ble[,\s]+\s*(.{3,30}?)(?:\s+[aà]\s+\d|\s*$)", text)),
-
-            // "a " ou "a " suivi de l'heure au format hh:mm ou hhhmm
-            Heure       = Clean(Get(@"\b[aà]\s+(\d{1,2}\s*[hH:]\s*\d{2})\b",  text)),
-
-            // "ADRESSE DE LA SALLE" suivi de l'adresse
-            Adresse     = Clean(Get(@"ADRESSE\s+DE\s+LA\s+SALLE\s*[:\-]?\s*(.+?)$", text)),
-
-            // "Responsable" suivi du nom
-            Responsable = Clean(Get(@"[Rr]esponsable\s*[:\-]\s*(.+?)$",        text)),
+            Opposant = ExtractTextFromRegion(pdfDoc, 100, 700, 400, 20),
+            Date = ExtractTextFromRegion(pdfDoc, 100, 650, 400, 20),
+            Heure = ExtractTextFromRegion(pdfDoc, 100, 600, 400, 20),
+            Adresse = ExtractTextFromRegion(pdfDoc, 100, 550, 400, 20),
+            Responsable = ExtractTextFromRegion(pdfDoc, 100, 500, 400, 20)
         };
     }
 
     // ── Génération du PDF complété ────────────────────────────────────────────
 
     public static void Generate(
-        string      inputPath,
-        string      outputPath,
-        decimal     peage,
-        decimal     nbKm,
-        decimal     totalFrais,
-        string?     signatureImagePath,
-        string?     rapportAccueil,
-        string?     rapportEquipement,
-        string?     opposant,
-        string?     date,
-        string?     heure,
-        string?     adresse,
-        string?     responsable,
+        string inputPath,
+        string outputPath,
+        decimal peage,
+        decimal nbKm,
+        decimal totalFrais,
+        string? signatureImagePath,
+        string? rapportAccueil,
+        string? rapportEquipement,
+        string? opposant,
+        string? date,
+        string? heure,
+        string? adresse,
+        string? responsable,
         AppSettings cfg)
     {
         // Cree le dossier de destination si necessaire
-        string? outDir = Path.GetDirectoryName(outputPath);
+        string? outDir = System.IO.Path.GetDirectoryName(outputPath);
         if (!string.IsNullOrEmpty(outDir))
             Directory.CreateDirectory(outDir);
 
@@ -119,8 +114,27 @@ public static class PdfService
         using var pdfDoc = new PdfDocument(reader, writer);
 
         // -- Etape 1 : effacer les zones pre-imprimees avec un rectangle blanc ----
-        var page   = pdfDoc.GetPage(cfg.Page);
+        var page = pdfDoc.GetPage(cfg.Page);
         var canvas = new PdfCanvas(page);
+
+        /*
+        for (int x = 0; x < 590; x += 100)
+        {
+            canvas.SetLineWidth(1)
+                  .MoveTo(x, 0) // Point de départ (x, y)
+                  .LineTo(x, 840) // Point d'arrivée
+                  .Stroke();
+        }
+
+        for (int y = 0; y < 840; y += 100)
+        {
+            canvas.SetLineWidth(1)
+                  .MoveTo(0, y) // Point de départ (x, y)
+                  .LineTo(590, y) // Point d'arrivée
+                  .Stroke();
+        }
+        */
+
 
         canvas.SetFillColor(cfg.RectanglesVisibles ? ColorConstants.LIGHT_GRAY : ColorConstants.WHITE);
 
@@ -132,16 +146,17 @@ public static class PdfService
             canvas.Rectangle(new iText.Kernel.Geom.Rectangle(pos.X - 3f, pos.Y - 3f, pos.Largeur, pos.Hauteur)).Fill();
         }
 
+        EraseField(cfg.Opposant);
+        EraseField(cfg.Date);
+        EraseField(cfg.Heure);
+        EraseField(cfg.Adresse);
+        EraseField(cfg.Responsable);
+
         EraseField(cfg.Peage);
         EraseField(cfg.NbKm);
         EraseField(cfg.TotalFrais);
         EraseField(cfg.RapportAccueil);
         EraseField(cfg.RapportEquipement);
-        if (!string.IsNullOrWhiteSpace(opposant))    EraseField(cfg.CompOpposant);
-        if (!string.IsNullOrWhiteSpace(date))        EraseField(cfg.CompDate);
-        if (!string.IsNullOrWhiteSpace(heure))       EraseField(cfg.CompHeure);
-        if (!string.IsNullOrWhiteSpace(adresse))     EraseField(cfg.CompAdresse);
-        if (!string.IsNullOrWhiteSpace(responsable)) EraseField(cfg.CompResponsable);
 
         // Rectangle de positionnement de la signature (toujours gris clair quand visible)
         if (cfg.SignatureVisible)
@@ -153,8 +168,8 @@ public static class PdfService
         canvas.Release();
 
         // -- Etape 2 : ecrire les nouvelles valeurs --------------------------------
-        using var doc  = new Document(pdfDoc);
-        var fontBold   = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
+        using var doc = new Document(pdfDoc);
+        var fontBold = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
         var fontNormal = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
 
         void PutText(FieldPos pos, string text, PdfFont font, float fontSize)
@@ -166,10 +181,17 @@ public static class PdfService
                 TextAlignment.LEFT, VerticalAlignment.BOTTOM, 0);
         }
 
+        // Champs compétition
+        if (!string.IsNullOrWhiteSpace(opposant)) PutText(cfg.Opposant, opposant!.Trim(), fontBold, 10f);
+        if (!string.IsNullOrWhiteSpace(date)) PutText(cfg.Date, date!.Trim(), fontNormal, 10f);
+        if (!string.IsNullOrWhiteSpace(heure)) PutText(cfg.Heure, heure!.Trim(), fontNormal, 10f);
+        if (!string.IsNullOrWhiteSpace(adresse)) PutText(cfg.Adresse, adresse!.Trim(), fontNormal, 10f);
+        if (!string.IsNullOrWhiteSpace(responsable)) PutText(cfg.Responsable, responsable!.Trim(), fontNormal, 10f);
+
         // Tableau financier
-        PutText(cfg.Peage,      peage.ToString("0.00", Fr)      + " EUR", fontBold,   10f);
-        PutText(cfg.NbKm,       nbKm.ToString("0", Fr),                   fontBold,   10f);
-        PutText(cfg.TotalFrais, totalFrais.ToString("0.00", Fr) + " EUR", fontBold,   10f);
+        PutText(cfg.Peage, peage.ToString("0.00", Fr) + " EUR", fontBold, 10f);
+        PutText(cfg.NbKm, nbKm.ToString("0", Fr), fontBold, 10f);
+        PutText(cfg.TotalFrais, totalFrais.ToString("0.00", Fr) + " EUR", fontBold, 10f);
 
         // Rapport JA (uniquement si renseigne)
         if (!string.IsNullOrWhiteSpace(rapportAccueil))
@@ -177,13 +199,6 @@ public static class PdfService
 
         if (!string.IsNullOrWhiteSpace(rapportEquipement))
             PutText(cfg.RapportEquipement, rapportEquipement.Trim(), fontNormal, 9f);
-
-        // Champs compétition
-        if (!string.IsNullOrWhiteSpace(opposant))    PutText(cfg.CompOpposant,    opposant!.Trim(),    fontBold,   10f);
-        if (!string.IsNullOrWhiteSpace(date))        PutText(cfg.CompDate,        date!.Trim(),        fontNormal, 10f);
-        if (!string.IsNullOrWhiteSpace(heure))       PutText(cfg.CompHeure,       heure!.Trim(),       fontNormal, 10f);
-        if (!string.IsNullOrWhiteSpace(adresse))     PutText(cfg.CompAdresse,     adresse!.Trim(),     fontNormal, 10f);
-        if (!string.IsNullOrWhiteSpace(responsable)) PutText(cfg.CompResponsable, responsable!.Trim(), fontNormal, 10f);
 
         // Signature image
         if (signatureImagePath is { } sigPath && File.Exists(sigPath))
@@ -193,5 +208,8 @@ public static class PdfService
             img.ScaleToFit(cfg.SigW, cfg.SigH);
             doc.Add(img);
         }
+
+        // -- Etape 3 : fermer le document --------------------------------
+        doc.Close();
     }
 }
