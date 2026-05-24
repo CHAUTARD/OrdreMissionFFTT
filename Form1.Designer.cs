@@ -70,12 +70,10 @@ partial class Form1
         TxtRapEquip = new TextBox();
         BtnGen = new Button();
         BtnReset = new Button();
-        BtnPos = new Button();
         BtnOpen = new Button();
         StatusPrincipal = new StatusStrip();
         LblStatus = new ToolStripStatusLabel();
         MenuPrincipal.SuspendLayout();
-        StatusPrincipal.SuspendLayout();
         GrpPdf.SuspendLayout();
         GrpComp.SuspendLayout();
         GrpIndem.SuspendLayout();
@@ -88,6 +86,7 @@ partial class Form1
         TblRapport.SuspendLayout();
         PnlRapAccueil.SuspendLayout();
         PnlRapEquip.SuspendLayout();
+        StatusPrincipal.SuspendLayout();
         SuspendLayout();
         // 
         // MenuPrincipal
@@ -153,19 +152,19 @@ partial class Form1
         MnuOutilsRecherche.Size = new Size(209, 22);
         MnuOutilsRecherche.Text = "🔍  &Recherche club FFTT…";
         MnuOutilsRecherche.Click += MnuOutilsRecherche_Click;
-        //
+        // 
         // MnuOutilsSep2
-        //
+        // 
         MnuOutilsSep2.Name = "MnuOutilsSep2";
         MnuOutilsSep2.Size = new Size(206, 6);
-        //
+        // 
         // MnuOutilsSignature
-        //
-        MnuOutilsSignature.Name   = "MnuOutilsSignature";
-        MnuOutilsSignature.Size   = new Size(209, 22);
-        MnuOutilsSignature.Text   = "🖊  &Signature…";
+        // 
+        MnuOutilsSignature.Name = "MnuOutilsSignature";
+        MnuOutilsSignature.Size = new Size(209, 22);
+        MnuOutilsSignature.Text = "🖊  &Signature…";
         MnuOutilsSignature.Click += MnuOutilsSignature_Click;
-        //
+        // 
         // MnuAide
         // 
         MnuAide.Alignment = ToolStripItemAlignment.Right;
@@ -177,7 +176,7 @@ partial class Form1
         // MnuAideAPropos
         // 
         MnuAideAPropos.Name = "MnuAideAPropos";
-        MnuAideAPropos.Size = new Size(180, 22);
+        MnuAideAPropos.Size = new Size(122, 22);
         MnuAideAPropos.Text = "À &propos";
         MnuAideAPropos.Click += MnuAideAPropos_Click;
         // 
@@ -648,7 +647,7 @@ partial class Form1
         TxtRapEquip.Name = "TxtRapEquip";
         TxtRapEquip.Size = new Size(453, 40);
         TxtRapEquip.TabIndex = 0;
-        //
+        // 
         // BtnGen
         // 
         BtnGen.BackColor = Color.FromArgb(21, 101, 192);
@@ -657,7 +656,7 @@ partial class Form1
         BtnGen.FlatStyle = FlatStyle.Flat;
         BtnGen.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
         BtnGen.ForeColor = Color.White;
-        BtnGen.Location = new Point(462, 544);
+        BtnGen.Location = new Point(228, 546);
         BtnGen.Name = "BtnGen";
         BtnGen.Size = new Size(210, 44);
         BtnGen.TabIndex = 4;
@@ -670,67 +669,54 @@ partial class Form1
         BtnReset.Cursor = Cursors.Hand;
         BtnReset.FlatStyle = FlatStyle.Flat;
         BtnReset.ForeColor = Color.DarkRed;
-        BtnReset.Location = new Point(12, 544);
+        BtnReset.Location = new Point(12, 546);
         BtnReset.Name = "BtnReset";
-        BtnReset.Size = new Size(210, 44);
+        BtnReset.Size = new Size(184, 44);
         BtnReset.TabIndex = 11;
         BtnReset.Text = "🗑 &Effacer";
         BtnReset.Click += BtnReset_Click;
-        // 
-        // BtnPos
-        // 
-        BtnPos.Cursor = Cursors.Hand;
-        BtnPos.FlatStyle = FlatStyle.Flat;
-        BtnPos.Location = new Point(96, 596);
-        BtnPos.Name = "BtnPos";
-        BtnPos.Size = new Size(221, 44);
-        BtnPos.TabIndex = 5;
-        BtnPos.Text = "Positions P&DF…";
-        BtnPos.Click += BtnPos_Click;
         // 
         // BtnOpen
         // 
         BtnOpen.Cursor = Cursors.Hand;
         BtnOpen.FlatStyle = FlatStyle.Flat;
-        BtnOpen.Location = new Point(378, 596);
+        BtnOpen.Location = new Point(451, 546);
         BtnOpen.Name = "BtnOpen";
         BtnOpen.Size = new Size(221, 44);
         BtnOpen.TabIndex = 6;
         BtnOpen.Text = "📂  &Ouvrir PDF généré";
         BtnOpen.Click += BtnOpen_Click;
-        //
+        // 
         // StatusPrincipal
-        //
-        StatusPrincipal.BackColor   = Color.FromArgb(224, 231, 246);
-        StatusPrincipal.Dock        = DockStyle.Bottom;
+        // 
+        StatusPrincipal.BackColor = Color.FromArgb(224, 231, 246);
         StatusPrincipal.Items.AddRange(new ToolStripItem[] { LblStatus });
-        StatusPrincipal.Location    = new Point(0, 737);
-        StatusPrincipal.Name        = "StatusPrincipal";
-        StatusPrincipal.Size        = new Size(697, 22);
-        StatusPrincipal.SizingGrip  = false;
-        StatusPrincipal.TabIndex    = 7;
-        StatusPrincipal.Text        = "StatusPrincipal";
-        //
+        StatusPrincipal.Location = new Point(0, 601);
+        StatusPrincipal.Name = "StatusPrincipal";
+        StatusPrincipal.Size = new Size(697, 22);
+        StatusPrincipal.SizingGrip = false;
+        StatusPrincipal.TabIndex = 7;
+        StatusPrincipal.Text = "StatusPrincipal";
+        // 
         // LblStatus
-        //
-        LblStatus.ForeColor  = Color.FromArgb(40, 60, 120);
-        LblStatus.Name       = "LblStatus";
-        LblStatus.Size       = new Size(696, 17);
-        LblStatus.Spring     = true;
-        LblStatus.Text       = "Prêt.";
-        LblStatus.TextAlign  = ContentAlignment.MiddleLeft;
+        // 
+        LblStatus.ForeColor = Color.FromArgb(40, 60, 120);
+        LblStatus.Name = "LblStatus";
+        LblStatus.Size = new Size(682, 17);
+        LblStatus.Spring = true;
+        LblStatus.Text = "Prêt.";
+        LblStatus.TextAlign = ContentAlignment.MiddleLeft;
         // 
         // Form1
         // 
         BackColor = Color.FromArgb(244, 246, 251);
-        ClientSize = new Size(697, 662);
+        ClientSize = new Size(697, 623);
         Controls.Add(GrpPdf);
         Controls.Add(GrpComp);
         Controls.Add(GrpIndem);
         Controls.Add(GrpRap);
         Controls.Add(BtnGen);
         Controls.Add(BtnReset);
-        Controls.Add(BtnPos);
         Controls.Add(BtnOpen);
         Controls.Add(StatusPrincipal);
         Controls.Add(MenuPrincipal);
@@ -831,7 +817,6 @@ partial class Form1
 
     private Button BtnGen;
     private Button BtnReset;
-    private Button BtnPos;
     private Button BtnOpen;
 
     private StatusStrip          StatusPrincipal;

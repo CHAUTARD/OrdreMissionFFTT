@@ -60,7 +60,6 @@ public partial class Form1 : Form
     private void NudPeage_ValueChanged(object? sender, EventArgs e) => Recalculate();
     private void NudKm_ValueChanged(object? sender, EventArgs e)    => Recalculate();
     private void BtnGen_Click(object? sender, EventArgs e)    => Generate();
-    private void BtnPos_Click(object? sender, EventArgs e)    => OpenPositions();
     private void BtnOpen_Click(object? sender, EventArgs e)   => OpenOutputPdf();
     private void BtnRechercheFftt_Click(object? sender, EventArgs e) => OuvrirRechercheFftt();
 
