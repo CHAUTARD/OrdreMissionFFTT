@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace OrdreMission;
 
@@ -7,8 +8,9 @@ public partial class Form1 : Form
 {
     private static readonly CultureInfo Fr = CultureInfo.GetCultureInfo("fr-FR");
 
-    private AppSettings _cfg = AppSettings.Load();
-    private string?     _signaturePath;
+    private AppSettings    _cfg      = AppSettings.Load();
+    private EmailTemplate  _emailTpl = EmailTemplate.Load();
+    private string?        _signaturePath;
 
     public Form1()
     {
@@ -36,7 +38,6 @@ public partial class Form1 : Form
         TxtCompDate.Text        = _cfg.DerniereDate;
         TxtCompHeure.Text       = _cfg.DerniereHeure;
         TxtCompAdresse.Text     = _cfg.DerniereAdresse;
-        TxtCompResponsable.Text = _cfg.DernierResponsable;
     }
 
     private void ApplyParams()
@@ -58,12 +59,30 @@ public partial class Form1 : Form
     private void BtnReset_Click(object? sender, EventArgs e)  => ResetForm();
     private void NudPeage_ValueChanged(object? sender, EventArgs e) => Recalculate();
     private void NudKm_ValueChanged(object? sender, EventArgs e)    => Recalculate();
-    private void BtnParams_Click(object? sender, EventArgs e)       => OpenParametres();
-    private void BtnImport_Click(object? sender, EventArgs e) => ImportSignature();
-    private void BtnClear_Click(object? sender, EventArgs e)  => ClearSignature();
     private void BtnGen_Click(object? sender, EventArgs e)    => Generate();
     private void BtnPos_Click(object? sender, EventArgs e)    => OpenPositions();
     private void BtnOpen_Click(object? sender, EventArgs e)   => OpenOutputPdf();
+    private void BtnRechercheFftt_Click(object? sender, EventArgs e) => OuvrirRechercheFftt();
+
+    // ── Handlers menu ─────────────────────────────────────────────────────────
+    private void MnuFichierQuitter_Click(object? sender, EventArgs e)  => Application.Exit();
+    private void MnuOutilsParams_Click(object? sender, EventArgs e)    => OpenParametres();
+    private void MnuOutilsPositions_Click(object? sender, EventArgs e) => OpenPositions();
+    private void MnuOutilsEmail_Click(object? sender, EventArgs e)     => OpenEmailTemplate();
+    private void MnuOutilsRecherche_Click(object? sender, EventArgs e) => OuvrirRechercheFftt();
+    private void MnuOutilsSignature_Click(object? sender, EventArgs e) => OuvrirSignature();
+    private void MnuAideAPropos_Click(object? sender, EventArgs e)
+    {
+        MessageBox.Show(
+            "Convocation JA — Compléter le PDF\n" +
+            "Version 1.00\n\n" +
+            "Outil d'aide à la saisie pour les Juges Arbitres FFTT.\n" +
+            "Complète automatiquement les PDFs de convocation\n" +
+            "et facilite la communication avec les clubs adverses.\n\n" +
+            "Auteur : Patrick CHAUTARD\n" +
+            "© Copyright 2026 — patrick.chautard@free.fr",
+            "À propos de Convocation JA", MessageBoxButtons.OK, MessageBoxIcon.Information);
+    }
 
     // ── Remise à zéro du formulaire ───────────────────────────────────────────
 
@@ -83,7 +102,6 @@ public partial class Form1 : Form
         TxtCompDate.Text        = "";
         TxtCompHeure.Text       = "";
         TxtCompAdresse.Text     = "";
-        TxtCompResponsable.Text = "";
 
         // Indemnités
         NudPeage.Value = 0;
@@ -117,12 +135,11 @@ public partial class Form1 : Form
         Application.DoEvents();
 
         // Lecture automatique des infos compétition depuis le PDF
-        var info = PdfService.ReadCompetitionInfo(dlg.FileName, _cfg.Page);
+        var info = PdfService.ReadCompetitionInfo(dlg.FileName, _cfg);
         if (!string.IsNullOrWhiteSpace(info.Opposant))    TxtCompOpposant.Text    = info.Opposant;
         if (!string.IsNullOrWhiteSpace(info.Date))        TxtCompDate.Text        = info.Date;
         if (!string.IsNullOrWhiteSpace(info.Heure))       TxtCompHeure.Text       = info.Heure;
         if (!string.IsNullOrWhiteSpace(info.Adresse))     TxtCompAdresse.Text     = info.Adresse;
-        if (!string.IsNullOrWhiteSpace(info.Responsable)) TxtCompResponsable.Text = info.Responsable;
 
         bool luOk = !string.IsNullOrWhiteSpace(info.Opposant) || !string.IsNullOrWhiteSpace(info.Date);
         SetStatus(luOk
@@ -146,28 +163,15 @@ public partial class Form1 : Form
 
     // ── Signature ─────────────────────────────────────────────────────────────
 
-    private void ImportSignature()
+    private void OuvrirSignature()
     {
-        using var dlg = new OpenFileDialog
-        {
-            Title  = "Importer l'image de signature",
-            Filter = "Images (*.png;*.jpg;*.jpeg;*.bmp;*.gif)|*.png;*.jpg;*.jpeg;*.bmp;*.gif",
-        };
-        if (dlg.ShowDialog() != DialogResult.OK) return;
+        using var dlg = new SignatureForm(_signaturePath);
+        if (dlg.ShowDialog(this) != DialogResult.OK) return;
 
-        _signaturePath     = dlg.FileName;
-        PicSig.Image       = Image.FromFile(dlg.FileName);
-        LblSigHint.Visible = false;
-        SetStatus("Signature importée : " + Path.GetFileName(dlg.FileName));
-    }
-
-    private void ClearSignature()
-    {
-        PicSig.Image?.Dispose();
-        PicSig.Image       = null;
-        _signaturePath     = null;
-        LblSigHint.Visible = true;
-        SetStatus("Signature effacée.");
+        _signaturePath = dlg.SignaturePath;
+        SetStatus(_signaturePath is not null
+            ? "Signature enregistrée : " + Path.GetFileName(_signaturePath)
+            : "Signature effacée.");
     }
 
     // ── Génération PDF ────────────────────────────────────────────────────────
@@ -218,7 +222,6 @@ public partial class Form1 : Form
             _cfg.DerniereDate       = TxtCompDate.Text.Trim();
             _cfg.DerniereHeure      = TxtCompHeure.Text.Trim();
             _cfg.DerniereAdresse    = TxtCompAdresse.Text.Trim();
-            _cfg.DernierResponsable = TxtCompResponsable.Text.Trim();
             _cfg.Save();
             decimal totalFrais = peage + _cfg.IndemFixe + km * _cfg.TauxKm;
 
@@ -228,14 +231,13 @@ public partial class Form1 : Form
             string date        = TxtCompDate.Text.Trim();
             string heure       = TxtCompHeure.Text.Trim();
             string adresse     = TxtCompAdresse.Text.Trim();
-            string responsable = TxtCompResponsable.Text.Trim();
 
             PdfService.Generate(
                 TxtSource.Text.Trim(), output,
                 peage, km, totalFrais,
                 _signaturePath,
                 rapAccueil, rapEquip,
-                opposant, date, heure, adresse, responsable,
+                opposant, date, heure, adresse,
                 _cfg);
 
             SetStatus($"✔  PDF généré : {Path.GetFileName(output)}");
@@ -304,6 +306,32 @@ public partial class Form1 : Form
         using var dlg = new PositionsForm(_cfg);
         if (dlg.ShowDialog(this) == DialogResult.OK)
             SetStatus("Positions mises à jour.");
+    }
+
+    private void OpenEmailTemplate()
+    {
+        using var dlg = new EmailTemplateForm(_emailTpl);
+        if (dlg.ShowDialog(this) == DialogResult.OK)
+            SetStatus("Modèle d'email enregistré.");
+    }
+
+    // ── Recherche FFTT ────────────────────────────────────────────────────────
+
+    private void OuvrirRechercheFftt()
+    {
+        // Extrait le code postal (5 chiffres) depuis l'adresse saisie
+        string adresse = TxtCompAdresse.Text.Trim();
+        var match = Regex.Match(adresse, @"\b(\d{5})\b");
+        string cp = match.Success ? match.Value : "";
+
+        using var form = new RechercheFfttForm(
+            cp,
+            TxtCompOpposant.Text.Trim(),
+            TxtCompDate.Text.Trim(),
+            TxtCompHeure.Text.Trim(),
+            _cfg,
+            _emailTpl);
+        form.ShowDialog(this);
     }
 
     // ── Utilitaire ────────────────────────────────────────────────────────────

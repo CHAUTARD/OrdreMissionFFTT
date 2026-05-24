@@ -17,7 +17,6 @@ public sealed class AppSettings
     public FieldPos Date        { get; set; } = new() { X = 340f, Y = 700f, Hauteur = 16, Largeur = 100f };
     public FieldPos Heure       { get; set; } = new() { X = 470f, Y = 700f, Hauteur = 16, Largeur =  70f };
     public FieldPos Adresse     { get; set; } = new() { X = 100f, Y = 680f, Hauteur = 16, Largeur = 300f };
-    public FieldPos Responsable { get; set; } = new() { X = 360f, Y = 680f, Hauteur = 16, Largeur = 200f };
 
     // ── Tableau financier — coordonnées réelles extraites du PDF ──────────────
     // Origine : coin bas-gauche · A4 = 595 × 842 pt
@@ -49,7 +48,6 @@ public sealed class AppSettings
     public string  DerniereDate       { get; set; } = "";
     public string  DerniereHeure      { get; set; } = "";
     public string  DerniereAdresse    { get; set; } = "";
-    public string  DernierResponsable { get; set; } = "";
 
     // ── Signature ─────────────────────────────────────────────────────────────
     public float SigX { get; set; } = 350f;
@@ -60,6 +58,14 @@ public sealed class AppSettings
     public int  Page               { get; set; } = 1;
     public bool RectanglesVisibles { get; set; } = false;
     public bool SignatureVisible   { get; set; } = false;
+
+    // ── Arbitre ───────────────────────────────────────────────────────────────
+    public string NomArbitre { get; set; } = "";   // ex. "Patrick CHAUTARD"
+
+    // ── API FFTT Smartping ────────────────────────────────────────────────────
+    // Identifiants obtenus auprès de la FFTT : interfaces.informatiques@fftt.email
+    public string ApiId       { get; set; } = "";
+    public string ApiPassword { get; set; } = "";
 
     // ── Persistance ───────────────────────────────────────────────────────────
 

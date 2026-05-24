@@ -25,7 +25,6 @@ public sealed class CompetitionInfo
     public string Date { get; init; } = "";
     public string Heure { get; init; } = "";
     public string Adresse { get; init; } = "";
-    public string Responsable { get; init; } = "";
 }
 
 public static class PdfService
@@ -38,7 +37,7 @@ public static class PdfService
     /// Extrait le texte du PDF et en deduit les champs de la competition.
     /// Retourne un objet vide (chaines vides) en cas d'echec.
     /// </summary>
-    public static CompetitionInfo ReadCompetitionInfo(string inputPath, int page)
+    public static CompetitionInfo ReadCompetitionInfo(string inputPath, AppSettings cfg)
     {
         try
         {
@@ -46,9 +45,7 @@ public static class PdfService
             using var reader = new PdfReader(inputPath, readerProps).SetUnethicalReading(true);
             using var pdfDoc = new PdfDocument(reader);
 
-            int pageNum = Math.Max(1, Math.Min(page, pdfDoc.GetNumberOfPages()));
-
-            return ParseCompetitionInfo(pdfDoc);
+            return ParseCompetitionInfo(pdfDoc, cfg);
         }
         catch
         {
@@ -57,9 +54,9 @@ public static class PdfService
     }
 
     // Extrait les champs de la competition depuis le texte brut du PDF
-    private static string ExtractTextFromRegion(PdfDocument pdfDoc, int x, int y, int width, int height)
+    private static string ExtractTextFromRegion(PdfDocument pdfDoc, int pageNum, FieldPos pos)
     {
-        iText.Kernel.Geom.Rectangle rect = new iText.Kernel.Geom.Rectangle(x, y, width, height);
+        iText.Kernel.Geom.Rectangle rect = new iText.Kernel.Geom.Rectangle(pos.X, pos.Y, pos.Largeur, pos.Hauteur);
         TextRegionEventFilter filter = new TextRegionEventFilter(rect);
 
         ITextExtractionStrategy strategy = new FilteredTextEventListener(
@@ -67,18 +64,17 @@ public static class PdfService
             filter
         );
 
-        return PdfTextExtractor.GetTextFromPage(pdfDoc.GetPage(1), strategy);
+        return PdfTextExtractor.GetTextFromPage(pdfDoc.GetPage(pageNum), strategy);
     }
 
-    private static CompetitionInfo ParseCompetitionInfo(PdfDocument pdfDoc)
+    private static CompetitionInfo ParseCompetitionInfo(PdfDocument pdfDoc, AppSettings cfg)
     {
         return new CompetitionInfo
         {
-            Opposant = ExtractTextFromRegion(pdfDoc, 100, 700, 400, 20),
-            Date = ExtractTextFromRegion(pdfDoc, 100, 650, 400, 20),
-            Heure = ExtractTextFromRegion(pdfDoc, 100, 600, 400, 20),
-            Adresse = ExtractTextFromRegion(pdfDoc, 100, 550, 400, 20),
-            Responsable = ExtractTextFromRegion(pdfDoc, 100, 500, 400, 20)
+            Opposant    = ExtractTextFromRegion(pdfDoc, cfg.Page, cfg.Opposant),
+            Date        = ExtractTextFromRegion(pdfDoc, cfg.Page, cfg.Date),
+            Heure       = ExtractTextFromRegion(pdfDoc, cfg.Page, cfg.Heure),
+            Adresse     = ExtractTextFromRegion(pdfDoc, cfg.Page, cfg.Adresse)
         };
     }
 
@@ -97,7 +93,6 @@ public static class PdfService
         string? date,
         string? heure,
         string? adresse,
-        string? responsable,
         AppSettings cfg)
     {
         // Cree le dossier de destination si necessaire
@@ -150,7 +145,6 @@ public static class PdfService
         EraseField(cfg.Date);
         EraseField(cfg.Heure);
         EraseField(cfg.Adresse);
-        EraseField(cfg.Responsable);
 
         EraseField(cfg.Peage);
         EraseField(cfg.NbKm);
@@ -186,7 +180,6 @@ public static class PdfService
         if (!string.IsNullOrWhiteSpace(date)) PutText(cfg.Date, date!.Trim(), fontNormal, 10f);
         if (!string.IsNullOrWhiteSpace(heure)) PutText(cfg.Heure, heure!.Trim(), fontNormal, 10f);
         if (!string.IsNullOrWhiteSpace(adresse)) PutText(cfg.Adresse, adresse!.Trim(), fontNormal, 10f);
-        if (!string.IsNullOrWhiteSpace(responsable)) PutText(cfg.Responsable, responsable!.Trim(), fontNormal, 10f);
 
         // Tableau financier
         PutText(cfg.Peage, peage.ToString("0.00", Fr) + " EUR", fontBold, 10f);

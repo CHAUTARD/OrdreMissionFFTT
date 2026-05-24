@@ -77,11 +77,6 @@ partial class PositionsForm
         NudCompAddrY = new NumericUpDown();
         NudCompAddrHt = new NumericUpDown();
         NudCompAddrLg = new NumericUpDown();
-        LblCompPosResp = new Label();
-        NudCompRespX = new NumericUpDown();
-        NudCompRespY = new NumericUpDown();
-        NudCompRespHt = new NumericUpDown();
-        NudCompRespLg = new NumericUpDown();
         GrpSig = new GroupBox();
         label1 = new Label();
         label2 = new Label();
@@ -137,10 +132,6 @@ partial class PositionsForm
         ((System.ComponentModel.ISupportInitialize)NudCompAddrY).BeginInit();
         ((System.ComponentModel.ISupportInitialize)NudCompAddrHt).BeginInit();
         ((System.ComponentModel.ISupportInitialize)NudCompAddrLg).BeginInit();
-        ((System.ComponentModel.ISupportInitialize)NudCompRespX).BeginInit();
-        ((System.ComponentModel.ISupportInitialize)NudCompRespY).BeginInit();
-        ((System.ComponentModel.ISupportInitialize)NudCompRespHt).BeginInit();
-        ((System.ComponentModel.ISupportInitialize)NudCompRespLg).BeginInit();
         GrpSig.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)NudSigX).BeginInit();
         ((System.ComponentModel.ISupportInitialize)NudSigY).BeginInit();
@@ -182,7 +173,7 @@ partial class PositionsForm
         GrpFin.Controls.Add(NudTfY);
         GrpFin.Controls.Add(NudTfSz);
         GrpFin.Controls.Add(NudTfLg);
-        GrpFin.Location = new Point(12, 262);
+        GrpFin.Location = new Point(12, 226);
         GrpFin.Name = "GrpFin";
         GrpFin.Size = new Size(530, 157);
         GrpFin.TabIndex = 1;
@@ -385,7 +376,7 @@ partial class PositionsForm
         GrpRap.Controls.Add(NudRapEqY);
         GrpRap.Controls.Add(NudRapEqSz);
         GrpRap.Controls.Add(NudRapEqLg);
-        GrpRap.Location = new Point(12, 429);
+        GrpRap.Location = new Point(12, 393);
         GrpRap.Name = "GrpRap";
         GrpRap.Size = new Size(530, 122);
         GrpRap.TabIndex = 2;
@@ -555,14 +546,9 @@ partial class PositionsForm
         GrpCompPos.Controls.Add(NudCompAddrY);
         GrpCompPos.Controls.Add(NudCompAddrHt);
         GrpCompPos.Controls.Add(NudCompAddrLg);
-        GrpCompPos.Controls.Add(LblCompPosResp);
-        GrpCompPos.Controls.Add(NudCompRespX);
-        GrpCompPos.Controls.Add(NudCompRespY);
-        GrpCompPos.Controls.Add(NudCompRespHt);
-        GrpCompPos.Controls.Add(NudCompRespLg);
         GrpCompPos.Location = new Point(12, 42);
         GrpCompPos.Name = "GrpCompPos";
-        GrpCompPos.Size = new Size(530, 214);
+        GrpCompPos.Size = new Size(530, 178);
         GrpCompPos.TabIndex = 30;
         GrpCompPos.TabStop = false;
         GrpCompPos.Text = "Compétition";
@@ -789,49 +775,6 @@ partial class PositionsForm
         NudCompAddrLg.TabIndex = 24;
         NudCompAddrLg.Value = new decimal(new int[] { 300, 0, 0, 0 });
         // 
-        // LblCompPosResp
-        // 
-        LblCompPosResp.AutoSize = true;
-        LblCompPosResp.Location = new Point(10, 190);
-        LblCompPosResp.Name = "LblCompPosResp";
-        LblCompPosResp.Size = new Size(79, 15);
-        LblCompPosResp.TabIndex = 25;
-        LblCompPosResp.Text = "Responsable :";
-        // 
-        // NudCompRespX
-        // 
-        NudCompRespX.Location = new Point(220, 187);
-        NudCompRespX.Maximum = new decimal(new int[] { 9999, 0, 0, 0 });
-        NudCompRespX.Name = "NudCompRespX";
-        NudCompRespX.Size = new Size(65, 23);
-        NudCompRespX.TabIndex = 26;
-        // 
-        // NudCompRespY
-        // 
-        NudCompRespY.Location = new Point(290, 187);
-        NudCompRespY.Maximum = new decimal(new int[] { 9999, 0, 0, 0 });
-        NudCompRespY.Name = "NudCompRespY";
-        NudCompRespY.Size = new Size(65, 23);
-        NudCompRespY.TabIndex = 27;
-        // 
-        // NudCompRespHt
-        // 
-        NudCompRespHt.Location = new Point(360, 187);
-        NudCompRespHt.Maximum = new decimal(new int[] { 999, 0, 0, 0 });
-        NudCompRespHt.Name = "NudCompRespHt";
-        NudCompRespHt.Size = new Size(65, 23);
-        NudCompRespHt.TabIndex = 28;
-        NudCompRespHt.Value = new decimal(new int[] { 16, 0, 0, 0 });
-        // 
-        // NudCompRespLg
-        // 
-        NudCompRespLg.Location = new Point(430, 187);
-        NudCompRespLg.Maximum = new decimal(new int[] { 9999, 0, 0, 0 });
-        NudCompRespLg.Name = "NudCompRespLg";
-        NudCompRespLg.Size = new Size(65, 23);
-        NudCompRespLg.TabIndex = 29;
-        NudCompRespLg.Value = new decimal(new int[] { 200, 0, 0, 0 });
-        // 
         // GrpSig
         // 
         GrpSig.Controls.Add(label1);
@@ -843,7 +786,7 @@ partial class PositionsForm
         GrpSig.Controls.Add(NudSigY);
         GrpSig.Controls.Add(NudSigW);
         GrpSig.Controls.Add(NudSigH);
-        GrpSig.Location = new Point(12, 567);
+        GrpSig.Location = new Point(12, 531);
         GrpSig.Name = "GrpSig";
         GrpSig.Size = new Size(530, 87);
         GrpSig.TabIndex = 3;
@@ -935,7 +878,7 @@ partial class PositionsForm
         // 
         GrpPage.Controls.Add(LblPageLbl);
         GrpPage.Controls.Add(NudPage);
-        GrpPage.Location = new Point(12, 660);
+        GrpPage.Location = new Point(12, 624);
         GrpPage.Name = "GrpPage";
         GrpPage.Size = new Size(256, 48);
         GrpPage.TabIndex = 4;
@@ -964,7 +907,7 @@ partial class PositionsForm
         // ChkRectVisibles
         // 
         ChkRectVisibles.AutoSize = true;
-        ChkRectVisibles.Location = new Point(12, 733);
+        ChkRectVisibles.Location = new Point(12, 697);
         ChkRectVisibles.Name = "ChkRectVisibles";
         ChkRectVisibles.Size = new Size(270, 19);
         ChkRectVisibles.TabIndex = 10;
@@ -977,7 +920,7 @@ partial class PositionsForm
         BtnOk.FlatAppearance.BorderSize = 0;
         BtnOk.FlatStyle = FlatStyle.Flat;
         BtnOk.ForeColor = Color.White;
-        BtnOk.Location = new Point(300, 720);
+        BtnOk.Location = new Point(300, 684);
         BtnOk.Name = "BtnOk";
         BtnOk.Size = new Size(100, 32);
         BtnOk.TabIndex = 11;
@@ -989,7 +932,7 @@ partial class PositionsForm
         // 
         BtnCancel.DialogResult = DialogResult.Cancel;
         BtnCancel.FlatStyle = FlatStyle.Flat;
-        BtnCancel.Location = new Point(454, 720);
+        BtnCancel.Location = new Point(454, 684);
         BtnCancel.Name = "BtnCancel";
         BtnCancel.Size = new Size(88, 32);
         BtnCancel.TabIndex = 12;
@@ -999,7 +942,7 @@ partial class PositionsForm
         // 
         AcceptButton = BtnOk;
         CancelButton = BtnCancel;
-        ClientSize = new Size(558, 763);
+        ClientSize = new Size(558, 727);
         Controls.Add(LblInfo);
         Controls.Add(GrpFin);
         Controls.Add(GrpRap);
@@ -1058,10 +1001,6 @@ partial class PositionsForm
         ((System.ComponentModel.ISupportInitialize)NudCompAddrY).EndInit();
         ((System.ComponentModel.ISupportInitialize)NudCompAddrHt).EndInit();
         ((System.ComponentModel.ISupportInitialize)NudCompAddrLg).EndInit();
-        ((System.ComponentModel.ISupportInitialize)NudCompRespX).EndInit();
-        ((System.ComponentModel.ISupportInitialize)NudCompRespY).EndInit();
-        ((System.ComponentModel.ISupportInitialize)NudCompRespHt).EndInit();
-        ((System.ComponentModel.ISupportInitialize)NudCompRespLg).EndInit();
         GrpSig.ResumeLayout(false);
         GrpSig.PerformLayout();
         ((System.ComponentModel.ISupportInitialize)NudSigX).EndInit();
@@ -1123,8 +1062,6 @@ partial class PositionsForm
     private NumericUpDown NudCompHeureX, NudCompHeureY, NudCompHeureHt, NudCompHeureLg;
     private Label         LblCompPosAddr;
     private NumericUpDown NudCompAddrX, NudCompAddrY, NudCompAddrHt, NudCompAddrLg;
-    private Label         LblCompPosResp;
-    private NumericUpDown NudCompRespX, NudCompRespY, NudCompRespHt, NudCompRespLg;
     private GroupBox      GrpSig;
     private Label         LblSigXLbl;
     private NumericUpDown NudSigX;

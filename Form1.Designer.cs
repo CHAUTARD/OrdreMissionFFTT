@@ -8,13 +8,25 @@ partial class Form1
     {
         if (disposing && components != null)
             components.Dispose();
-        PicSig.Image?.Dispose();
         base.Dispose(disposing);
     }
 
     private void InitializeComponent()
     {
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+        MenuPrincipal = new MenuStrip();
+        MnuFichier = new ToolStripMenuItem();
+        MnuFichierQuitter = new ToolStripMenuItem();
+        MnuOutils = new ToolStripMenuItem();
+        MnuOutilsParams = new ToolStripMenuItem();
+        MnuOutilsPositions = new ToolStripMenuItem();
+        MnuOutilsSep1 = new ToolStripSeparator();
+        MnuOutilsEmail = new ToolStripMenuItem();
+        MnuOutilsRecherche = new ToolStripMenuItem();
+        MnuOutilsSep2 = new ToolStripSeparator();
+        MnuOutilsSignature = new ToolStripMenuItem();
+        MnuAide = new ToolStripMenuItem();
+        MnuAideAPropos = new ToolStripMenuItem();
         GrpPdf = new GroupBox();
         LblSourceLabel = new Label();
         TxtSource = new TextBox();
@@ -22,7 +34,6 @@ partial class Form1
         LblOutputLabel = new Label();
         TxtOutput = new TextBox();
         BtnOutput = new Button();
-        BtnParams = new Button();
         GrpComp = new GroupBox();
         LblCompOpposant = new Label();
         TxtCompOpposant = new TextBox();
@@ -32,8 +43,7 @@ partial class Form1
         TxtCompHeure = new TextBox();
         LblCompAdresse = new Label();
         TxtCompAdresse = new TextBox();
-        LblCompResponsable = new Label();
-        TxtCompResponsable = new TextBox();
+        BtnRechercheFftt = new Button();
         GrpIndem = new GroupBox();
         TblFinancier = new TableLayoutPanel();
         LblHdrIndemFix = new Label();
@@ -58,18 +68,14 @@ partial class Form1
         LblRapLbl2 = new Label();
         PnlRapEquip = new Panel();
         TxtRapEquip = new TextBox();
-        GrpSig = new GroupBox();
-        PicSig = new PictureBox();
-        LblSigHint = new Label();
-        BtnImport = new Button();
-        BtnClear = new Button();
-        LblSigFmt = new Label();
         BtnGen = new Button();
         BtnReset = new Button();
         BtnPos = new Button();
         BtnOpen = new Button();
-        PnlStatus = new Panel();
-        LblStatus = new Label();
+        StatusPrincipal = new StatusStrip();
+        LblStatus = new ToolStripStatusLabel();
+        MenuPrincipal.SuspendLayout();
+        StatusPrincipal.SuspendLayout();
         GrpPdf.SuspendLayout();
         GrpComp.SuspendLayout();
         GrpIndem.SuspendLayout();
@@ -82,10 +88,98 @@ partial class Form1
         TblRapport.SuspendLayout();
         PnlRapAccueil.SuspendLayout();
         PnlRapEquip.SuspendLayout();
-        GrpSig.SuspendLayout();
-        ((System.ComponentModel.ISupportInitialize)PicSig).BeginInit();
-        PnlStatus.SuspendLayout();
         SuspendLayout();
+        // 
+        // MenuPrincipal
+        // 
+        MenuPrincipal.Items.AddRange(new ToolStripItem[] { MnuFichier, MnuOutils, MnuAide });
+        MenuPrincipal.Location = new Point(0, 0);
+        MenuPrincipal.Name = "MenuPrincipal";
+        MenuPrincipal.Size = new Size(697, 24);
+        MenuPrincipal.TabIndex = 99;
+        MenuPrincipal.Text = "MenuPrincipal";
+        // 
+        // MnuFichier
+        // 
+        MnuFichier.DropDownItems.AddRange(new ToolStripItem[] { MnuFichierQuitter });
+        MnuFichier.Name = "MnuFichier";
+        MnuFichier.Size = new Size(54, 20);
+        MnuFichier.Text = "&Fichier";
+        // 
+        // MnuFichierQuitter
+        // 
+        MnuFichierQuitter.Name = "MnuFichierQuitter";
+        MnuFichierQuitter.ShortcutKeys = Keys.Alt | Keys.F4;
+        MnuFichierQuitter.Size = new Size(180, 22);
+        MnuFichierQuitter.Text = "&Quitter";
+        MnuFichierQuitter.Click += MnuFichierQuitter_Click;
+        // 
+        // MnuOutils
+        // 
+        MnuOutils.DropDownItems.AddRange(new ToolStripItem[] { MnuOutilsParams, MnuOutilsPositions, MnuOutilsSep1, MnuOutilsEmail, MnuOutilsRecherche, MnuOutilsSep2, MnuOutilsSignature });
+        MnuOutils.Name = "MnuOutils";
+        MnuOutils.Size = new Size(50, 20);
+        MnuOutils.Text = "&Outils";
+        // 
+        // MnuOutilsParams
+        // 
+        MnuOutilsParams.Name = "MnuOutilsParams";
+        MnuOutilsParams.Size = new Size(209, 22);
+        MnuOutilsParams.Text = "⚙  &Paramètres…";
+        MnuOutilsParams.Click += MnuOutilsParams_Click;
+        // 
+        // MnuOutilsPositions
+        // 
+        MnuOutilsPositions.Name = "MnuOutilsPositions";
+        MnuOutilsPositions.Size = new Size(209, 22);
+        MnuOutilsPositions.Text = "Positions dans le &PDF…";
+        MnuOutilsPositions.Click += MnuOutilsPositions_Click;
+        // 
+        // MnuOutilsSep1
+        // 
+        MnuOutilsSep1.Name = "MnuOutilsSep1";
+        MnuOutilsSep1.Size = new Size(206, 6);
+        // 
+        // MnuOutilsEmail
+        // 
+        MnuOutilsEmail.Name = "MnuOutilsEmail";
+        MnuOutilsEmail.Size = new Size(209, 22);
+        MnuOutilsEmail.Text = "✉  Modèle d'&email…";
+        MnuOutilsEmail.Click += MnuOutilsEmail_Click;
+        // 
+        // MnuOutilsRecherche
+        // 
+        MnuOutilsRecherche.Name = "MnuOutilsRecherche";
+        MnuOutilsRecherche.Size = new Size(209, 22);
+        MnuOutilsRecherche.Text = "🔍  &Recherche club FFTT…";
+        MnuOutilsRecherche.Click += MnuOutilsRecherche_Click;
+        //
+        // MnuOutilsSep2
+        //
+        MnuOutilsSep2.Name = "MnuOutilsSep2";
+        MnuOutilsSep2.Size = new Size(206, 6);
+        //
+        // MnuOutilsSignature
+        //
+        MnuOutilsSignature.Name   = "MnuOutilsSignature";
+        MnuOutilsSignature.Size   = new Size(209, 22);
+        MnuOutilsSignature.Text   = "🖊  &Signature…";
+        MnuOutilsSignature.Click += MnuOutilsSignature_Click;
+        //
+        // MnuAide
+        // 
+        MnuAide.Alignment = ToolStripItemAlignment.Right;
+        MnuAide.DropDownItems.AddRange(new ToolStripItem[] { MnuAideAPropos });
+        MnuAide.Name = "MnuAide";
+        MnuAide.Size = new Size(24, 20);
+        MnuAide.Text = "&?";
+        // 
+        // MnuAideAPropos
+        // 
+        MnuAideAPropos.Name = "MnuAideAPropos";
+        MnuAideAPropos.Size = new Size(180, 22);
+        MnuAideAPropos.Text = "À &propos";
+        MnuAideAPropos.Click += MnuAideAPropos_Click;
         // 
         // GrpPdf
         // 
@@ -95,9 +189,9 @@ partial class Form1
         GrpPdf.Controls.Add(LblOutputLabel);
         GrpPdf.Controls.Add(TxtOutput);
         GrpPdf.Controls.Add(BtnOutput);
-        GrpPdf.Location = new Point(12, 10);
+        GrpPdf.Location = new Point(12, 34);
         GrpPdf.Name = "GrpPdf";
-        GrpPdf.Size = new Size(644, 90);
+        GrpPdf.Size = new Size(660, 90);
         GrpPdf.TabIndex = 0;
         GrpPdf.TabStop = false;
         GrpPdf.Text = "Fichier PDF";
@@ -116,14 +210,14 @@ partial class Form1
         TxtSource.Location = new Point(72, 24);
         TxtSource.Name = "TxtSource";
         TxtSource.PlaceholderText = "Sélectionner le PDF de la convocation…";
-        TxtSource.Size = new Size(443, 24);
+        TxtSource.Size = new Size(456, 24);
         TxtSource.TabIndex = 1;
         // 
         // BtnSource
         // 
         BtnSource.Cursor = Cursors.Hand;
         BtnSource.FlatStyle = FlatStyle.Flat;
-        BtnSource.Location = new Point(534, 23);
+        BtnSource.Location = new Point(545, 22);
         BtnSource.Name = "BtnSource";
         BtnSource.Size = new Size(100, 26);
         BtnSource.TabIndex = 2;
@@ -144,30 +238,19 @@ partial class Form1
         TxtOutput.Location = new Point(72, 56);
         TxtOutput.Name = "TxtOutput";
         TxtOutput.PlaceholderText = "PDF généré (laissez vide pour nommer automatiquement)…";
-        TxtOutput.Size = new Size(443, 24);
+        TxtOutput.Size = new Size(456, 24);
         TxtOutput.TabIndex = 4;
         // 
         // BtnOutput
         // 
         BtnOutput.Cursor = Cursors.Hand;
         BtnOutput.FlatStyle = FlatStyle.Flat;
-        BtnOutput.Location = new Point(534, 56);
+        BtnOutput.Location = new Point(545, 54);
         BtnOutput.Name = "BtnOutput";
         BtnOutput.Size = new Size(100, 26);
         BtnOutput.TabIndex = 5;
         BtnOutput.Text = "Parcourir…";
         BtnOutput.Click += BtnOutput_Click;
-        // 
-        // BtnParams
-        // 
-        BtnParams.Cursor = Cursors.Hand;
-        BtnParams.FlatStyle = FlatStyle.Flat;
-        BtnParams.Location = new Point(662, 1);
-        BtnParams.Name = "BtnParams";
-        BtnParams.Size = new Size(35, 33);
-        BtnParams.TabIndex = 9;
-        BtnParams.Text = "⚙";
-        BtnParams.Click += BtnParams_Click;
         // 
         // GrpComp
         // 
@@ -179,9 +262,8 @@ partial class Form1
         GrpComp.Controls.Add(TxtCompHeure);
         GrpComp.Controls.Add(LblCompAdresse);
         GrpComp.Controls.Add(TxtCompAdresse);
-        GrpComp.Controls.Add(LblCompResponsable);
-        GrpComp.Controls.Add(TxtCompResponsable);
-        GrpComp.Location = new Point(12, 110);
+        GrpComp.Controls.Add(BtnRechercheFftt);
+        GrpComp.Location = new Point(12, 134);
         GrpComp.Name = "GrpComp";
         GrpComp.Size = new Size(660, 100);
         GrpComp.TabIndex = 10;
@@ -216,16 +298,16 @@ partial class Form1
         // 
         // TxtCompDate
         // 
-        TxtCompDate.Location = new Point(395, 25);
+        TxtCompDate.Location = new Point(390, 25);
         TxtCompDate.Name = "TxtCompDate";
         TxtCompDate.PlaceholderText = "jj/mm/aaaa";
-        TxtCompDate.Size = new Size(120, 24);
+        TxtCompDate.Size = new Size(164, 24);
         TxtCompDate.TabIndex = 3;
         // 
         // LblCompHeure
         // 
         LblCompHeure.AutoSize = true;
-        LblCompHeure.Location = new Point(534, 32);
+        LblCompHeure.Location = new Point(560, 28);
         LblCompHeure.Name = "LblCompHeure";
         LblCompHeure.Size = new Size(15, 17);
         LblCompHeure.TabIndex = 4;
@@ -233,10 +315,10 @@ partial class Form1
         // 
         // TxtCompHeure
         // 
-        TxtCompHeure.Location = new Point(558, 25);
+        TxtCompHeure.Location = new Point(581, 25);
         TxtCompHeure.Name = "TxtCompHeure";
         TxtCompHeure.PlaceholderText = "hh:mm";
-        TxtCompHeure.Size = new Size(80, 24);
+        TxtCompHeure.Size = new Size(57, 24);
         TxtCompHeure.TabIndex = 5;
         // 
         // LblCompAdresse
@@ -253,30 +335,24 @@ partial class Form1
         TxtCompAdresse.Location = new Point(110, 59);
         TxtCompAdresse.Name = "TxtCompAdresse";
         TxtCompAdresse.PlaceholderText = "Adresse complète…";
-        TxtCompAdresse.Size = new Size(248, 24);
+        TxtCompAdresse.Size = new Size(360, 24);
         TxtCompAdresse.TabIndex = 7;
         // 
-        // LblCompResponsable
+        // BtnRechercheFftt
         // 
-        LblCompResponsable.AutoSize = true;
-        LblCompResponsable.Location = new Point(366, 62);
-        LblCompResponsable.Name = "LblCompResponsable";
-        LblCompResponsable.Size = new Size(90, 17);
-        LblCompResponsable.TabIndex = 8;
-        LblCompResponsable.Text = "Responsable :";
-        // 
-        // TxtCompResponsable
-        // 
-        TxtCompResponsable.Location = new Point(462, 59);
-        TxtCompResponsable.Name = "TxtCompResponsable";
-        TxtCompResponsable.PlaceholderText = "Nom du responsable…";
-        TxtCompResponsable.Size = new Size(178, 24);
-        TxtCompResponsable.TabIndex = 9;
+        BtnRechercheFftt.Cursor = Cursors.Hand;
+        BtnRechercheFftt.FlatStyle = FlatStyle.Flat;
+        BtnRechercheFftt.Location = new Point(477, 57);
+        BtnRechercheFftt.Name = "BtnRechercheFftt";
+        BtnRechercheFftt.Size = new Size(168, 26);
+        BtnRechercheFftt.TabIndex = 8;
+        BtnRechercheFftt.Text = "🔍 Rechercher FFTT";
+        BtnRechercheFftt.Click += BtnRechercheFftt_Click;
         // 
         // GrpIndem
         // 
         GrpIndem.Controls.Add(TblFinancier);
-        GrpIndem.Location = new Point(12, 220);
+        GrpIndem.Location = new Point(12, 244);
         GrpIndem.Name = "GrpIndem";
         GrpIndem.Size = new Size(660, 108);
         GrpIndem.TabIndex = 1;
@@ -444,7 +520,7 @@ partial class Form1
         // GrpRap
         // 
         GrpRap.Controls.Add(TblRapport);
-        GrpRap.Location = new Point(12, 338);
+        GrpRap.Location = new Point(12, 362);
         GrpRap.Name = "GrpRap";
         GrpRap.Size = new Size(660, 172);
         GrpRap.TabIndex = 2;
@@ -572,76 +648,7 @@ partial class Form1
         TxtRapEquip.Name = "TxtRapEquip";
         TxtRapEquip.Size = new Size(453, 40);
         TxtRapEquip.TabIndex = 0;
-        // 
-        // GrpSig
-        // 
-        GrpSig.Controls.Add(PicSig);
-        GrpSig.Controls.Add(LblSigHint);
-        GrpSig.Controls.Add(BtnImport);
-        GrpSig.Controls.Add(BtnClear);
-        GrpSig.Controls.Add(LblSigFmt);
-        GrpSig.Location = new Point(12, 520);
-        GrpSig.Name = "GrpSig";
-        GrpSig.Size = new Size(415, 118);
-        GrpSig.TabIndex = 3;
-        GrpSig.TabStop = false;
-        GrpSig.Text = "Signature";
-        // 
-        // PicSig
-        // 
-        PicSig.BackColor = Color.White;
-        PicSig.BorderStyle = BorderStyle.FixedSingle;
-        PicSig.Location = new Point(8, 24);
-        PicSig.Name = "PicSig";
-        PicSig.Size = new Size(220, 64);
-        PicSig.SizeMode = PictureBoxSizeMode.Zoom;
-        PicSig.TabIndex = 0;
-        PicSig.TabStop = false;
-        // 
-        // LblSigHint
-        // 
-        LblSigHint.AutoSize = true;
-        LblSigHint.ForeColor = Color.Silver;
-        LblSigHint.Location = new Point(12, 48);
-        LblSigHint.Name = "LblSigHint";
-        LblSigHint.Size = new Size(154, 17);
-        LblSigHint.TabIndex = 1;
-        LblSigHint.Text = "(aucune image importée)";
-        // 
-        // BtnImport
-        // 
-        BtnImport.Cursor = Cursors.Hand;
-        BtnImport.FlatStyle = FlatStyle.Flat;
-        BtnImport.Location = new Point(244, 24);
-        BtnImport.Name = "BtnImport";
-        BtnImport.Size = new Size(148, 30);
-        BtnImport.TabIndex = 2;
-        BtnImport.Text = "&Importer image…";
-        BtnImport.Click += BtnImport_Click;
-        // 
-        // BtnClear
-        // 
-        BtnClear.Cursor = Cursors.Hand;
-        BtnClear.FlatStyle = FlatStyle.Flat;
-        BtnClear.ForeColor = Color.DarkRed;
-        BtnClear.Location = new Point(244, 62);
-        BtnClear.Name = "BtnClear";
-        BtnClear.Size = new Size(80, 26);
-        BtnClear.TabIndex = 3;
-        BtnClear.Text = "Effacer";
-        BtnClear.Click += BtnClear_Click;
-        // 
-        // LblSigFmt
-        // 
-        LblSigFmt.AutoSize = true;
-        LblSigFmt.Font = new Font("Segoe UI", 7.5F);
-        LblSigFmt.ForeColor = Color.Gray;
-        LblSigFmt.Location = new Point(8, 96);
-        LblSigFmt.Name = "LblSigFmt";
-        LblSigFmt.Size = new Size(136, 12);
-        LblSigFmt.TabIndex = 4;
-        LblSigFmt.Text = "Formats : PNG, JPG, BMP, GIF";
-        // 
+        //
         // BtnGen
         // 
         BtnGen.BackColor = Color.FromArgb(21, 101, 192);
@@ -650,7 +657,7 @@ partial class Form1
         BtnGen.FlatStyle = FlatStyle.Flat;
         BtnGen.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
         BtnGen.ForeColor = Color.White;
-        BtnGen.Location = new Point(462, 594);
+        BtnGen.Location = new Point(462, 544);
         BtnGen.Name = "BtnGen";
         BtnGen.Size = new Size(210, 44);
         BtnGen.TabIndex = 4;
@@ -663,7 +670,7 @@ partial class Form1
         BtnReset.Cursor = Cursors.Hand;
         BtnReset.FlatStyle = FlatStyle.Flat;
         BtnReset.ForeColor = Color.DarkRed;
-        BtnReset.Location = new Point(462, 530);
+        BtnReset.Location = new Point(12, 544);
         BtnReset.Name = "BtnReset";
         BtnReset.Size = new Size(210, 44);
         BtnReset.TabIndex = 11;
@@ -674,7 +681,7 @@ partial class Form1
         // 
         BtnPos.Cursor = Cursors.Hand;
         BtnPos.FlatStyle = FlatStyle.Flat;
-        BtnPos.Location = new Point(96, 657);
+        BtnPos.Location = new Point(96, 596);
         BtnPos.Name = "BtnPos";
         BtnPos.Size = new Size(221, 44);
         BtnPos.TabIndex = 5;
@@ -685,55 +692,58 @@ partial class Form1
         // 
         BtnOpen.Cursor = Cursors.Hand;
         BtnOpen.FlatStyle = FlatStyle.Flat;
-        BtnOpen.Location = new Point(378, 657);
+        BtnOpen.Location = new Point(378, 596);
         BtnOpen.Name = "BtnOpen";
         BtnOpen.Size = new Size(221, 44);
         BtnOpen.TabIndex = 6;
         BtnOpen.Text = "📂  &Ouvrir PDF généré";
         BtnOpen.Click += BtnOpen_Click;
-        // 
-        // PnlStatus
-        // 
-        PnlStatus.BackColor = Color.FromArgb(224, 231, 246);
-        PnlStatus.Controls.Add(LblStatus);
-        PnlStatus.Dock = DockStyle.Bottom;
-        PnlStatus.Location = new Point(0, 707);
-        PnlStatus.Name = "PnlStatus";
-        PnlStatus.Size = new Size(697, 28);
-        PnlStatus.TabIndex = 7;
-        // 
+        //
+        // StatusPrincipal
+        //
+        StatusPrincipal.BackColor   = Color.FromArgb(224, 231, 246);
+        StatusPrincipal.Dock        = DockStyle.Bottom;
+        StatusPrincipal.Items.AddRange(new ToolStripItem[] { LblStatus });
+        StatusPrincipal.Location    = new Point(0, 737);
+        StatusPrincipal.Name        = "StatusPrincipal";
+        StatusPrincipal.Size        = new Size(697, 22);
+        StatusPrincipal.SizingGrip  = false;
+        StatusPrincipal.TabIndex    = 7;
+        StatusPrincipal.Text        = "StatusPrincipal";
+        //
         // LblStatus
-        // 
-        LblStatus.AutoSize = true;
-        LblStatus.ForeColor = Color.FromArgb(40, 60, 120);
-        LblStatus.Location = new Point(10, 7);
-        LblStatus.Name = "LblStatus";
-        LblStatus.Size = new Size(34, 17);
-        LblStatus.TabIndex = 0;
-        LblStatus.Text = "Prêt.";
+        //
+        LblStatus.ForeColor  = Color.FromArgb(40, 60, 120);
+        LblStatus.Name       = "LblStatus";
+        LblStatus.Size       = new Size(696, 17);
+        LblStatus.Spring     = true;
+        LblStatus.Text       = "Prêt.";
+        LblStatus.TextAlign  = ContentAlignment.MiddleLeft;
         // 
         // Form1
         // 
         BackColor = Color.FromArgb(244, 246, 251);
-        ClientSize = new Size(697, 735);
+        ClientSize = new Size(697, 662);
         Controls.Add(GrpPdf);
         Controls.Add(GrpComp);
         Controls.Add(GrpIndem);
         Controls.Add(GrpRap);
-        Controls.Add(GrpSig);
         Controls.Add(BtnGen);
         Controls.Add(BtnReset);
-        Controls.Add(BtnParams);
         Controls.Add(BtnPos);
         Controls.Add(BtnOpen);
-        Controls.Add(PnlStatus);
+        Controls.Add(StatusPrincipal);
+        Controls.Add(MenuPrincipal);
         Font = new Font("Segoe UI", 9.5F);
         FormBorderStyle = FormBorderStyle.FixedSingle;
         Icon = (Icon)resources.GetObject("$this.Icon");
+        MainMenuStrip = MenuPrincipal;
         MaximizeBox = false;
         Name = "Form1";
         StartPosition = FormStartPosition.CenterScreen;
         Text = "Convocation JA — Compléter le PDF";
+        MenuPrincipal.ResumeLayout(false);
+        MenuPrincipal.PerformLayout();
         GrpPdf.ResumeLayout(false);
         GrpPdf.PerformLayout();
         GrpComp.ResumeLayout(false);
@@ -752,15 +762,28 @@ partial class Form1
         PnlRapAccueil.PerformLayout();
         PnlRapEquip.ResumeLayout(false);
         PnlRapEquip.PerformLayout();
-        GrpSig.ResumeLayout(false);
-        GrpSig.PerformLayout();
-        ((System.ComponentModel.ISupportInitialize)PicSig).EndInit();
-        PnlStatus.ResumeLayout(false);
-        PnlStatus.PerformLayout();
+        StatusPrincipal.ResumeLayout(false);
+        StatusPrincipal.PerformLayout();
         ResumeLayout(false);
+        PerformLayout();
     }
 
     // ── Déclarations des champs ───────────────────────────────────────────────
+
+    private MenuStrip           MenuPrincipal;
+    private ToolStripMenuItem   MnuFichier;
+    private ToolStripMenuItem   MnuFichierQuitter;
+    private ToolStripMenuItem   MnuOutils;
+    private ToolStripMenuItem   MnuOutilsParams;
+    private ToolStripMenuItem   MnuOutilsPositions;
+    private ToolStripSeparator  MnuOutilsSep1;
+    private ToolStripMenuItem   MnuOutilsEmail;
+    private ToolStripMenuItem   MnuOutilsRecherche;
+    private ToolStripSeparator  MnuOutilsSep2;
+    private ToolStripMenuItem   MnuOutilsSignature;
+    private ToolStripMenuItem   MnuAide;
+    private ToolStripMenuItem   MnuAideAPropos;
+
     private GroupBox          GrpPdf;
     private Label             LblSourceLabel;
     private TextBox           TxtSource;
@@ -778,8 +801,7 @@ partial class Form1
     private TextBox           TxtCompHeure;
     private Label             LblCompAdresse;
     private TextBox           TxtCompAdresse;
-    private Label             LblCompResponsable;
-    private TextBox           TxtCompResponsable;
+    private Button            BtnRechercheFftt;
 
     private GroupBox          GrpIndem;
     private TableLayoutPanel  TblFinancier;
@@ -807,19 +829,11 @@ partial class Form1
     private Panel            PnlRapEquip;
     private TextBox          TxtRapEquip;
 
-    private GroupBox   GrpSig;
-    private PictureBox PicSig;
-    private Label      LblSigHint;
-    private Button     BtnImport;
-    private Button     BtnClear;
-    private Label      LblSigFmt;
-
     private Button BtnGen;
     private Button BtnReset;
-    private Button BtnParams;
     private Button BtnPos;
     private Button BtnOpen;
 
-    private Panel PnlStatus;
-    private Label LblStatus;
+    private StatusStrip          StatusPrincipal;
+    private ToolStripStatusLabel LblStatus;
 }
