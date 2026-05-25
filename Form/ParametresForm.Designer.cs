@@ -37,6 +37,9 @@ partial class ParametresForm
         TxtEmailNominations = new TextBox();
         LblTelNominationsLbl = new Label();
         TxtTelNominations = new TextBox();
+        GrpAzureMaps = new GroupBox();
+        LblAzureMapsLbl = new Label();
+        TxtAzureMapsKey = new TextBox();
         BtnOk = new Button();
         BtnCancel = new Button();
         Grp.SuspendLayout();
@@ -44,6 +47,7 @@ partial class ParametresForm
         ((System.ComponentModel.ISupportInitialize)NudTauxKm).BeginInit();
         GrpAddr.SuspendLayout();
         GrpNominations.SuspendLayout();
+        GrpAzureMaps.SuspendLayout();
         SuspendLayout();
         // 
         // Grp
@@ -263,6 +267,32 @@ partial class ParametresForm
         TxtTelNominations.PlaceholderText = "06 00 00 00 00";
         TxtTelNominations.Size = new Size(160, 23);
         TxtTelNominations.TabIndex = 5;
+        // GrpAzureMaps
+        //
+        GrpAzureMaps.Controls.Add(LblAzureMapsLbl);
+        GrpAzureMaps.Controls.Add(TxtAzureMapsKey);
+        GrpAzureMaps.Location = new Point(12, 350);
+        GrpAzureMaps.Name = "GrpAzureMaps";
+        GrpAzureMaps.Size = new Size(396, 55);
+        GrpAzureMaps.TabIndex = 7;
+        GrpAzureMaps.TabStop = false;
+        GrpAzureMaps.Text = "Azure Maps";
+        //
+        // LblAzureMapsLbl
+        //
+        LblAzureMapsLbl.AutoSize = true;
+        LblAzureMapsLbl.Location = new Point(10, 24);
+        LblAzureMapsLbl.Name = "LblAzureMapsLbl";
+        LblAzureMapsLbl.TabIndex = 0;
+        LblAzureMapsLbl.Text = "Clé d'abonnement :";
+        //
+        // TxtAzureMapsKey
+        //
+        TxtAzureMapsKey.Location = new Point(138, 20);
+        TxtAzureMapsKey.Name = "TxtAzureMapsKey";
+        TxtAzureMapsKey.PlaceholderText = "Votre clé Azure Maps…";
+        TxtAzureMapsKey.Size = new Size(244, 23);
+        TxtAzureMapsKey.TabIndex = 1;
         // 
         // BtnOk
         // 
@@ -272,7 +302,7 @@ partial class ParametresForm
         BtnOk.FlatStyle = FlatStyle.Flat;
         BtnOk.ForeColor = Color.White;
         BtnOk.Image = Properties.Resources.save1;
-        BtnOk.Location = new Point(302, 361);
+        BtnOk.Location = new Point(302, 418);
         BtnOk.Name = "BtnOk";
         BtnOk.Size = new Size(106, 38);
         BtnOk.TabIndex = 7;
@@ -287,7 +317,7 @@ partial class ParametresForm
         BtnCancel.DialogResult = DialogResult.Cancel;
         BtnCancel.FlatStyle = FlatStyle.Flat;
         BtnCancel.Image = Properties.Resources.cancel;
-        BtnCancel.Location = new Point(10, 361);
+        BtnCancel.Location = new Point(10, 418);
         BtnCancel.Name = "BtnCancel";
         BtnCancel.Size = new Size(103, 38);
         BtnCancel.TabIndex = 8;
@@ -299,10 +329,11 @@ partial class ParametresForm
         // 
         AcceptButton = BtnOk;
         CancelButton = BtnCancel;
-        ClientSize = new Size(420, 409);
+        ClientSize = new Size(420, 466);
         Controls.Add(Grp);
         Controls.Add(GrpAddr);
         Controls.Add(GrpNominations);
+        Controls.Add(GrpAzureMaps);
         Controls.Add(BtnOk);
         Controls.Add(BtnCancel);
         Font = new Font("Segoe UI", 9F);
@@ -321,6 +352,8 @@ partial class ParametresForm
         GrpAddr.PerformLayout();
         GrpNominations.ResumeLayout(false);
         GrpNominations.PerformLayout();
+        GrpAzureMaps.ResumeLayout(false);
+        GrpAzureMaps.PerformLayout();
         ResumeLayout(false);
     }
 
@@ -343,6 +376,9 @@ partial class ParametresForm
     private TextBox  TxtVille;
 
     private GroupBox GrpNominations;
+    private GroupBox GrpAzureMaps;
+    private Label    LblAzureMapsLbl;
+    private TextBox  TxtAzureMapsKey;
     private Label    LblNomNominationsLbl;
     private TextBox  TxtNomNominations;
     private Label    LblEmailNominationsLbl;

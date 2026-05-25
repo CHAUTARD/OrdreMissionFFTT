@@ -26,6 +26,7 @@ public partial class ParametresForm : Form
         TxtVille.Text  = _cfg.AdresseVille;
 
         TxtNomNominations.Text   = _cfg.NomResponsableNominations;
+        TxtAzureMapsKey.Text     = _cfg.AzureMapsApiKey;
         TxtEmailNominations.Text = _cfg.EmailResponsableNominations;
         TxtTelNominations.Text   = _cfg.TelResponsableNominations;
     }
@@ -43,6 +44,7 @@ public partial class ParametresForm : Form
         _cfg.NomResponsableNominations   = TxtNomNominations.Text.Trim();
         _cfg.EmailResponsableNominations = TxtEmailNominations.Text.Trim();
         _cfg.TelResponsableNominations   = TxtTelNominations.Text.Trim();
+        _cfg.AzureMapsApiKey             = TxtAzureMapsKey.Text.Trim();
         _cfg.Save();
     }
 }

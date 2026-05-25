@@ -357,6 +357,14 @@ public partial class Form1 : Form
             return;
         }
 
+        if (string.IsNullOrWhiteSpace(_cfg.AzureMapsApiKey))
+        {
+            MessageBox.Show(
+                "Clé Azure Maps non configurée." + Environment.NewLine + "Renseignez-la dans Outils > Paramètres > Azure Maps.",
+                "Clé manquante", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            return;
+        }
+
         string adresseDepart = BuildAdresseDepart();
         if (string.IsNullOrWhiteSpace(adresseDepart))
         {
@@ -374,7 +382,7 @@ public partial class Form1 : Form
 
         try
         {
-            var (km, minutes) = await RoutingService.CalculerAsync(adresseDepart, adresseArrivee);
+            var (km, minutes) = await RoutingService.CalculerAsync(adresseDepart, adresseArrivee, _cfg.AzureMapsApiKey);
 
             int    h     = minutes / 60;
             int    min   = minutes % 60;

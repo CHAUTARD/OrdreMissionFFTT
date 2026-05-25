@@ -67,6 +67,10 @@ public sealed class AppSettings
     public string EmailResponsableNominations { get; set; } = "";
     public string TelResponsableNominations   { get; set; } = "";
 
+    // ── Azure Maps ─────────────────────────────────────────────────────────────
+    // Clé d'abonnement Azure Maps (portail Azure › Clés d'accès).
+    public string AzureMapsApiKey { get; set; } = "";
+
     // ── API FFTT Smartping ────────────────────────────────────────────────────
     // Identifiants obtenus auprès de la FFTT : interfaces.informatiques@fftt.email
     public string ApiId       { get; set; } = "";
