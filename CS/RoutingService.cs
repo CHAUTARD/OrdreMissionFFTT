@@ -1,13 +1,11 @@
 /* RoutingService.cs
- * Calcul d'itinéraire entre deux adresses françaises via Azure Maps.
+ * Calcul d'itinéraire entre deux adresses françaises.
  *
- * Géocodage : Azure Maps Search Address API
- *   GET https://atlas.microsoft.com/search/address/json?api-version=1.0&query=...
+ * Géocodage : Nominatim (OpenStreetMap) — https://nominatim.openstreetmap.org
+ *   Aucune clé API. Limite : 1 requête/seconde, User-Agent obligatoire (CGU §2).
  *
- * Routage   : Azure Maps Route Directions API
- *   GET https://atlas.microsoft.com/route/directions/json?api-version=1.0&query=lat1,lon1:lat2,lon2
- *
- * Clé requise : subscription-key (portail Azure › Azure Maps › Clés d'accès).
+ * Routage   : OSRM public demo server — https://router.project-osrm.org
+ *   Aucune clé API. Usage raisonnable demandé.
  */
 using System.Globalization;
 using System.Text.Json.Nodes;
@@ -20,82 +18,74 @@ public static class RoutingService
 
     static RoutingService()
     {
-        Http.DefaultRequestHeaders.UserAgent.ParseAdd("OrdreMission/1.0");
+        // Nominatim exige un User-Agent identifiable (CGU §2)
+        Http.DefaultRequestHeaders.UserAgent.ParseAdd(
+            "OrdreMission/1.0 (patrick.chautard@free.fr)");
     }
 
     // ── API publique ──────────────────────────────────────────────────────────
 
     /// <summary>
-    /// Calcule la distance (km, arrondi à 0,1) et la durée (minutes) entre deux adresses.
+    /// Calcule la distance (km, arrondi à 0,1) et la durée (minutes)
+    /// entre <paramref name="adresseDepart"/> et <paramref name="adresseArrivee"/>.
     /// </summary>
-    /// <param name="apiKey">Clé d'abonnement Azure Maps.</param>
-    /// <exception cref="InvalidOperationException">Adresse introuvable ou itinéraire impossible.</exception>
+    /// <exception cref="InvalidOperationException">Adresse introuvable ou réseau indisponible.</exception>
     public static async Task<(double Km, int Minutes)> CalculerAsync(
-        string adresseDepart, string adresseArrivee, string apiKey)
+        string adresseDepart, string adresseArrivee)
     {
-        if (string.IsNullOrWhiteSpace(apiKey))
-            throw new InvalidOperationException("Clé Azure Maps non configurée.");
-
-        var dep = await GeocoderAsync(adresseDepart,  apiKey).ConfigureAwait(false)
+        // Géocodage séquentiel : respect de la limite 1 req/s de Nominatim
+        var dep = await GeocoderAsync(adresseDepart).ConfigureAwait(false)
                   ?? throw new InvalidOperationException(
                          "Adresse de départ introuvable :\n" + adresseDepart);
 
-        var arr = await GeocoderAsync(adresseArrivee, apiKey).ConfigureAwait(false)
+        await Task.Delay(1100).ConfigureAwait(false);
+
+        var arr = await GeocoderAsync(adresseArrivee).ConfigureAwait(false)
                   ?? throw new InvalidOperationException(
                          "Adresse d'arrivée introuvable :\n" + adresseArrivee);
 
-        return await RouteAsync(dep, arr, apiKey).ConfigureAwait(false);
+        return await RouteOsrmAsync(dep, arr).ConfigureAwait(false);
     }
 
-    // ── Géocodage Azure Maps Search ───────────────────────────────────────────
+    // ── Géocodage Nominatim ───────────────────────────────────────────────────
 
-    private static async Task<(double Lat, double Lon)?> GeocoderAsync(
-        string adresse, string apiKey)
+    private static async Task<(double Lat, double Lon)?> GeocoderAsync(string adresse)
     {
-        string url = "https://atlas.microsoft.com/search/address/json"
-                   + "?api-version=1.0"
-                   + "&query="            + Uri.EscapeDataString(adresse)
-                   + "&language=fr-FR"
-                   + "&countrySet=FR"
-                   + "&subscription-key=" + Uri.EscapeDataString(apiKey);
+        string url = "https://nominatim.openstreetmap.org/search"
+                   + "?q="             + Uri.EscapeDataString(adresse)
+                   + "&format=json&limit=1&countrycodes=fr";
 
         string json = await Http.GetStringAsync(url).ConfigureAwait(false);
-        var root    = JsonNode.Parse(json);
-        var results = root?["results"]?.AsArray();
-        if (results is null || results.Count == 0) return null;
+        var    arr  = JsonNode.Parse(json)?.AsArray();
+        if (arr is null || arr.Count == 0) return null;
 
-        var pos = results[0]?["position"];
-        if (pos is null) return null;
-
-        double lat = pos["lat"]?.GetValue<double>() ?? double.NaN;
-        double lon = pos["lon"]?.GetValue<double>() ?? double.NaN;
-        if (double.IsNaN(lat) || double.IsNaN(lon)) return null;
+        var item = arr[0];
+        if (!double.TryParse(item?["lat"]?.GetValue<string>(),
+                NumberStyles.Float, CultureInfo.InvariantCulture, out double lat)) return null;
+        if (!double.TryParse(item?["lon"]?.GetValue<string>(),
+                NumberStyles.Float, CultureInfo.InvariantCulture, out double lon)) return null;
 
         return (lat, lon);
     }
 
-    // ── Routage Azure Maps Route ──────────────────────────────────────────────
+    // ── Routage OSRM ──────────────────────────────────────────────────────────
 
-    private static async Task<(double Km, int Minutes)> RouteAsync(
-        (double Lat, double Lon) dep, (double Lat, double Lon) arr, string apiKey)
+    private static async Task<(double Km, int Minutes)> RouteOsrmAsync(
+        (double Lat, double Lon) dep, (double Lat, double Lon) arr)
     {
+        // OSRM attend les coordonnées au format lon,lat (ordre inversé vs lat/lon)
         static string F(double d) => d.ToString("F6", CultureInfo.InvariantCulture);
 
-        // query = "lat1,lon1:lat2,lon2"
-        string query = $"{F(dep.Lat)},{F(dep.Lon)}:{F(arr.Lat)},{F(arr.Lon)}";
-        string url   = "https://atlas.microsoft.com/route/directions/json"
-                     + "?api-version=1.0"
-                     + "&query="            + query
-                     + "&travelMode=car"
-                     + "&subscription-key=" + Uri.EscapeDataString(apiKey);
+        string coords = $"{F(dep.Lon)},{F(dep.Lat)};{F(arr.Lon)},{F(arr.Lat)}";
+        string url    = $"https://router.project-osrm.org/route/v1/driving/{coords}?overview=false";
 
         string json  = await Http.GetStringAsync(url).ConfigureAwait(false);
         var    root  = JsonNode.Parse(json);
-        var    summ  = root?["routes"]?[0]?["summary"]
-                       ?? throw new InvalidOperationException("Aucun itinéraire trouvé par Azure Maps.");
+        var    route = root?["routes"]?[0]
+                       ?? throw new InvalidOperationException("Aucun itinéraire trouvé par OSRM.");
 
-        double metres  = summ["lengthInMeters"]?.GetValue<double>()     ?? 0;
-        double seconds = summ["travelTimeInSeconds"]?.GetValue<double>() ?? 0;
+        double metres  = route["distance"]?.GetValue<double>() ?? 0;
+        double seconds = route["duration"]?.GetValue<double>() ?? 0;
 
         return (Math.Round(metres / 1000.0, 1), (int)Math.Round(seconds / 60.0));
     }
