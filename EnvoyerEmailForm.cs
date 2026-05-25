@@ -11,6 +11,7 @@ public partial class EnvoyerEmailForm : Form
     public EnvoyerEmailForm(string emailDestinataire, string sujetParDefaut, string corpsParDefaut = "")
     {
         InitializeComponent();
+        AppImages.AppliquerAnnuler(BtnAnnuler);
         TxtA.Text     = emailDestinataire;
         TxtObjet.Text = sujetParDefaut;
         TxtCorps.Text = corpsParDefaut;

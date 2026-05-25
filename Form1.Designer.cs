@@ -71,6 +71,7 @@ partial class Form1
         BtnGen = new Button();
         BtnReset = new Button();
         BtnOpen = new Button();
+        BtnEnvoyerOM = new Button();
         StatusPrincipal = new StatusStrip();
         LblStatus = new ToolStripStatusLabel();
         MenuPrincipal.SuspendLayout();
@@ -109,7 +110,7 @@ partial class Form1
         // 
         MnuFichierQuitter.Name = "MnuFichierQuitter";
         MnuFichierQuitter.ShortcutKeys = Keys.Alt | Keys.F4;
-        MnuFichierQuitter.Size = new Size(180, 22);
+        MnuFichierQuitter.Size = new Size(153, 22);
         MnuFichierQuitter.Text = "&Quitter";
         MnuFichierQuitter.Click += MnuFichierQuitter_Click;
         // 
@@ -122,47 +123,52 @@ partial class Form1
         // 
         // MnuOutilsParams
         // 
+        MnuOutilsParams.Image = Properties.Resources.parametre;
         MnuOutilsParams.Name = "MnuOutilsParams";
-        MnuOutilsParams.Size = new Size(209, 22);
-        MnuOutilsParams.Text = "⚙  &Paramètres…";
+        MnuOutilsParams.Size = new Size(195, 22);
+        MnuOutilsParams.Text = "&Paramètres…";
         MnuOutilsParams.Click += MnuOutilsParams_Click;
         // 
         // MnuOutilsPositions
         // 
+        MnuOutilsPositions.Image = Properties.Resources.location;
         MnuOutilsPositions.Name = "MnuOutilsPositions";
-        MnuOutilsPositions.Size = new Size(209, 22);
+        MnuOutilsPositions.Size = new Size(195, 22);
         MnuOutilsPositions.Text = "Positions dans le &PDF…";
         MnuOutilsPositions.Click += MnuOutilsPositions_Click;
         // 
         // MnuOutilsSep1
         // 
         MnuOutilsSep1.Name = "MnuOutilsSep1";
-        MnuOutilsSep1.Size = new Size(206, 6);
+        MnuOutilsSep1.Size = new Size(192, 6);
         // 
         // MnuOutilsEmail
         // 
+        MnuOutilsEmail.Image = Properties.Resources.email;
         MnuOutilsEmail.Name = "MnuOutilsEmail";
-        MnuOutilsEmail.Size = new Size(209, 22);
-        MnuOutilsEmail.Text = "✉  Modèle d'&email…";
+        MnuOutilsEmail.Size = new Size(195, 22);
+        MnuOutilsEmail.Text = "Modèle d'&email…";
         MnuOutilsEmail.Click += MnuOutilsEmail_Click;
         // 
         // MnuOutilsRecherche
         // 
+        MnuOutilsRecherche.Image = Properties.Resources.loupe;
         MnuOutilsRecherche.Name = "MnuOutilsRecherche";
-        MnuOutilsRecherche.Size = new Size(209, 22);
-        MnuOutilsRecherche.Text = "🔍  &Recherche club FFTT…";
+        MnuOutilsRecherche.Size = new Size(195, 22);
+        MnuOutilsRecherche.Text = "&Recherche club FFTT…";
         MnuOutilsRecherche.Click += MnuOutilsRecherche_Click;
         // 
         // MnuOutilsSep2
         // 
         MnuOutilsSep2.Name = "MnuOutilsSep2";
-        MnuOutilsSep2.Size = new Size(206, 6);
+        MnuOutilsSep2.Size = new Size(192, 6);
         // 
         // MnuOutilsSignature
         // 
+        MnuOutilsSignature.Image = Properties.Resources.sign;
         MnuOutilsSignature.Name = "MnuOutilsSignature";
-        MnuOutilsSignature.Size = new Size(209, 22);
-        MnuOutilsSignature.Text = "🖊  &Signature…";
+        MnuOutilsSignature.Size = new Size(195, 22);
+        MnuOutilsSignature.Text = " &Signature…";
         MnuOutilsSignature.Click += MnuOutilsSignature_Click;
         // 
         // MnuAide
@@ -675,18 +681,29 @@ partial class Form1
         BtnReset.TabIndex = 11;
         BtnReset.Text = "🗑 &Effacer";
         BtnReset.Click += BtnReset_Click;
-        // 
+        //
         // BtnOpen
-        // 
-        BtnOpen.Cursor = Cursors.Hand;
+        //
+        BtnOpen.Cursor    = Cursors.Hand;
         BtnOpen.FlatStyle = FlatStyle.Flat;
-        BtnOpen.Location = new Point(451, 546);
-        BtnOpen.Name = "BtnOpen";
-        BtnOpen.Size = new Size(221, 44);
-        BtnOpen.TabIndex = 6;
-        BtnOpen.Text = "📂  &Ouvrir PDF généré";
-        BtnOpen.Click += BtnOpen_Click;
-        // 
+        BtnOpen.Location  = new Point(451, 546);
+        BtnOpen.Name      = "BtnOpen";
+        BtnOpen.Size      = new Size(221, 44);
+        BtnOpen.TabIndex  = 6;
+        BtnOpen.Text      = "📂  &Ouvrir PDF généré";
+        BtnOpen.Click    += BtnOpen_Click;
+        //
+        // BtnEnvoyerOM
+        //
+        BtnEnvoyerOM.Cursor    = Cursors.Hand;
+        BtnEnvoyerOM.FlatStyle = FlatStyle.Flat;
+        BtnEnvoyerOM.Location  = new Point(196, 600);
+        BtnEnvoyerOM.Name      = "BtnEnvoyerOM";
+        BtnEnvoyerOM.Size      = new Size(305, 40);
+        BtnEnvoyerOM.TabIndex  = 7;
+        BtnEnvoyerOM.Text      = "📧  Envoyer l'ordre de mission…";
+        BtnEnvoyerOM.Click    += BtnEnvoyerOM_Click;
+        //
         // StatusPrincipal
         // 
         StatusPrincipal.BackColor = Color.FromArgb(224, 231, 246);
@@ -710,7 +727,7 @@ partial class Form1
         // Form1
         // 
         BackColor = Color.FromArgb(244, 246, 251);
-        ClientSize = new Size(697, 623);
+        ClientSize = new Size(697, 660);
         Controls.Add(GrpPdf);
         Controls.Add(GrpComp);
         Controls.Add(GrpIndem);
@@ -718,6 +735,7 @@ partial class Form1
         Controls.Add(BtnGen);
         Controls.Add(BtnReset);
         Controls.Add(BtnOpen);
+        Controls.Add(BtnEnvoyerOM);
         Controls.Add(StatusPrincipal);
         Controls.Add(MenuPrincipal);
         Font = new Font("Segoe UI", 9.5F);
@@ -818,6 +836,7 @@ partial class Form1
     private Button BtnGen;
     private Button BtnReset;
     private Button BtnOpen;
+    private Button BtnEnvoyerOM;
 
     private StatusStrip          StatusPrincipal;
     private ToolStripStatusLabel LblStatus;

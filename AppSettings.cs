@@ -62,6 +62,11 @@ public sealed class AppSettings
     // ── Arbitre ───────────────────────────────────────────────────────────────
     public string NomArbitre { get; set; } = "";   // ex. "Patrick CHAUTARD"
 
+    // ── Responsable des nominations ───────────────────────────────────────────
+    public string NomResponsableNominations   { get; set; } = "";
+    public string EmailResponsableNominations { get; set; } = "";
+    public string TelResponsableNominations   { get; set; } = "";
+
     // ── API FFTT Smartping ────────────────────────────────────────────────────
     // Identifiants obtenus auprès de la FFTT : interfaces.informatiques@fftt.email
     public string ApiId       { get; set; } = "";
@@ -84,7 +89,8 @@ public sealed class AppSettings
 
     public void Save()
     {
-        var opts = new JsonSerializerOptions { WriteIndented = true };
+        JsonSerializerOptions jsonSerializerOptions = new() { WriteIndented = true };
+        JsonSerializerOptions opts = jsonSerializerOptions;
         File.WriteAllText(FilePath, JsonSerializer.Serialize(this, opts));
     }
 }

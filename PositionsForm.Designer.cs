@@ -13,6 +13,7 @@ partial class PositionsForm
 
     private void InitializeComponent()
     {
+        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PositionsForm));
         LblInfo = new Label();
         GrpFin = new GroupBox();
         LblFinColChamp = new Label();
@@ -920,11 +921,13 @@ partial class PositionsForm
         BtnOk.FlatAppearance.BorderSize = 0;
         BtnOk.FlatStyle = FlatStyle.Flat;
         BtnOk.ForeColor = Color.White;
-        BtnOk.Location = new Point(300, 684);
+        BtnOk.Image = Properties.Resources.save1;
+        BtnOk.Location = new Point(300, 680);
         BtnOk.Name = "BtnOk";
-        BtnOk.Size = new Size(100, 32);
+        BtnOk.Size = new Size(109, 36);
         BtnOk.TabIndex = 11;
-        BtnOk.Text = "Enregistrer";
+        BtnOk.Text = "  &Enregistrer";
+        BtnOk.TextImageRelation = TextImageRelation.ImageBeforeText;
         BtnOk.UseVisualStyleBackColor = false;
         BtnOk.Click += BtnOk_Click;
         // 
@@ -932,11 +935,13 @@ partial class PositionsForm
         // 
         BtnCancel.DialogResult = DialogResult.Cancel;
         BtnCancel.FlatStyle = FlatStyle.Flat;
-        BtnCancel.Location = new Point(454, 684);
+        BtnCancel.Image = Properties.Resources.cancel;
+        BtnCancel.Location = new Point(433, 679);
         BtnCancel.Name = "BtnCancel";
-        BtnCancel.Size = new Size(88, 32);
+        BtnCancel.Size = new Size(109, 36);
         BtnCancel.TabIndex = 12;
-        BtnCancel.Text = "Annuler";
+        BtnCancel.Text = "  &Annuler";
+        BtnCancel.TextImageRelation = TextImageRelation.ImageBeforeText;
         // 
         // PositionsForm
         // 
@@ -954,6 +959,7 @@ partial class PositionsForm
         Controls.Add(BtnCancel);
         Font = new Font("Segoe UI", 9F);
         FormBorderStyle = FormBorderStyle.FixedDialog;
+        Icon = (Icon)resources.GetObject("$this.Icon");
         MaximizeBox = false;
         MinimizeBox = false;
         Name = "PositionsForm";

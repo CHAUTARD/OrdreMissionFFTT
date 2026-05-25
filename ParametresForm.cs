@@ -8,6 +8,8 @@ public partial class ParametresForm : Form
     {
         _cfg = cfg;
         InitializeComponent();
+        AppImages.AppliquerSauvegarde(BtnOk);
+        AppImages.AppliquerAnnuler(BtnCancel);
         LoadValues();
     }
 
@@ -20,6 +22,10 @@ public partial class ParametresForm : Form
         TxtRue.Text    = _cfg.AdresseRue;
         TxtCp.Text     = _cfg.AdresseCodePostal;
         TxtVille.Text  = _cfg.AdresseVille;
+
+        TxtNomNominations.Text   = _cfg.NomResponsableNominations;
+        TxtEmailNominations.Text = _cfg.EmailResponsableNominations;
+        TxtTelNominations.Text   = _cfg.TelResponsableNominations;
     }
 
     private void BtnOk_Click(object? sender, EventArgs e)
@@ -31,6 +37,10 @@ public partial class ParametresForm : Form
         _cfg.AdresseRue         = TxtRue.Text.Trim();
         _cfg.AdresseCodePostal  = TxtCp.Text.Trim();
         _cfg.AdresseVille       = TxtVille.Text.Trim();
+
+        _cfg.NomResponsableNominations   = TxtNomNominations.Text.Trim();
+        _cfg.EmailResponsableNominations = TxtEmailNominations.Text.Trim();
+        _cfg.TelResponsableNominations   = TxtTelNominations.Text.Trim();
         _cfg.Save();
     }
 }

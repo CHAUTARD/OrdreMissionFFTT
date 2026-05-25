@@ -16,13 +16,14 @@ public partial class SignatureForm : Form
     public SignatureForm(string? signaturePathCourant)
     {
         InitializeComponent();
+        AppImages.AppliquerSauvegarde(BtnOk);
+        AppImages.AppliquerAnnuler(BtnAnnuler);
 
         // Recharger la signature si elle était déjà configurée
         if (!string.IsNullOrEmpty(signaturePathCourant) && File.Exists(signaturePathCourant))
         {
             _signaturePath     = signaturePathCourant;
             PicSig.Image       = Image.FromFile(signaturePathCourant);
-            LblSigHint.Visible = false;
         }
     }
 
@@ -40,7 +41,6 @@ public partial class SignatureForm : Form
         PicSig.Image?.Dispose();
         _signaturePath     = dlg.FileName;
         PicSig.Image       = Image.FromFile(dlg.FileName);
-        LblSigHint.Visible = false;
     }
 
     // ── Effacer la signature ──────────────────────────────────────────────────
@@ -50,7 +50,6 @@ public partial class SignatureForm : Form
         PicSig.Image?.Dispose();
         PicSig.Image       = null;
         _signaturePath     = null;
-        LblSigHint.Visible = true;
     }
 
     // ── Valider / Annuler ─────────────────────────────────────────────────────

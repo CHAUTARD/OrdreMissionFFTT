@@ -30,7 +30,7 @@ partial class EmailTemplateForm
         GrpVars.Controls.Add(LblVars);
         GrpVars.Location = new Point(12, 8);
         GrpVars.Name = "GrpVars";
-        GrpVars.Size = new Size(636, 82);
+        GrpVars.Size = new Size(636, 102);
         GrpVars.TabIndex = 0;
         GrpVars.TabStop = false;
         GrpVars.Text = "Variables disponibles";
@@ -42,15 +42,15 @@ partial class EmailTemplateForm
         LblVars.ForeColor = Color.FromArgb(30, 60, 120);
         LblVars.Location = new Point(3, 20);
         LblVars.Name = "LblVars";
-        LblVars.Size = new Size(630, 59);
+        LblVars.Size = new Size(630, 79);
         LblVars.TabIndex = 0;
-        LblVars.Text = "  {jourCourt}  ex : «Samedi 15/12/2026»\r\n  {jourLong}  ex : «samedi 15 décembre 2026»\r\n  {heure}       ex : «16h00»                             \r\n  {nomArbitre}  ex : votre nom";
+        LblVars.Text = "  {jourCourt}  : «Samedi 15/12/2026»\r\n  {jourLong} : «samedi 15 décembre 2026»\r\n  {heure} : «16h00»                             \r\n  {nomArbitre} : votre nom\r\n  {equipe} : CP PAVILLY 1";
         // 
         // LblSujet
         // 
         LblSujet.AutoSize = true;
         LblSujet.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
-        LblSujet.Location = new Point(15, 105);
+        LblSujet.Location = new Point(12, 135);
         LblSujet.Name = "LblSujet";
         LblSujet.Size = new Size(47, 17);
         LblSujet.TabIndex = 1;
@@ -58,7 +58,7 @@ partial class EmailTemplateForm
         // 
         // TxtSujet
         // 
-        TxtSujet.Location = new Point(83, 102);
+        TxtSujet.Location = new Point(80, 132);
         TxtSujet.Name = "TxtSujet";
         TxtSujet.Size = new Size(568, 24);
         TxtSujet.TabIndex = 0;
@@ -67,7 +67,7 @@ partial class EmailTemplateForm
         // 
         LblCorps.AutoSize = true;
         LblCorps.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
-        LblCorps.Location = new Point(15, 141);
+        LblCorps.Location = new Point(12, 171);
         LblCorps.Name = "LblCorps";
         LblCorps.Size = new Size(51, 17);
         LblCorps.TabIndex = 2;
@@ -77,7 +77,7 @@ partial class EmailTemplateForm
         // 
         TxtCorps.AcceptsReturn = true;
         TxtCorps.Font = new Font("Segoe UI", 9.5F);
-        TxtCorps.Location = new Point(15, 161);
+        TxtCorps.Location = new Point(12, 191);
         TxtCorps.Multiline = true;
         TxtCorps.Name = "TxtCorps";
         TxtCorps.ScrollBars = ScrollBars.Vertical;
@@ -89,11 +89,14 @@ partial class EmailTemplateForm
         BtnReinit.Cursor = Cursors.Hand;
         BtnReinit.FlatStyle = FlatStyle.Flat;
         BtnReinit.ForeColor = Color.DarkRed;
-        BtnReinit.Location = new Point(15, 443);
+        BtnReinit.Image = Properties.Resources.reset;
+        BtnReinit.Location = new Point(12, 473);
         BtnReinit.Name = "BtnReinit";
-        BtnReinit.Size = new Size(170, 30);
+        BtnReinit.Size = new Size(170, 41);
         BtnReinit.TabIndex = 2;
-        BtnReinit.Text = "↺  Réinitialiser";
+        BtnReinit.Text = "Réinitialiser";
+        BtnReinit.TextAlign = ContentAlignment.MiddleRight;
+        BtnReinit.TextImageRelation = TextImageRelation.ImageBeforeText;
         BtnReinit.Click += BtnReinit_Click;
         // 
         // BtnAnnuler
@@ -101,11 +104,13 @@ partial class EmailTemplateForm
         BtnAnnuler.Cursor = Cursors.Hand;
         BtnAnnuler.DialogResult = DialogResult.Cancel;
         BtnAnnuler.FlatStyle = FlatStyle.Flat;
-        BtnAnnuler.Location = new Point(355, 443);
+        BtnAnnuler.Image = Properties.Resources.cancel;
+        BtnAnnuler.Location = new Point(341, 473);
         BtnAnnuler.Name = "BtnAnnuler";
-        BtnAnnuler.Size = new Size(140, 30);
+        BtnAnnuler.Size = new Size(140, 41);
         BtnAnnuler.TabIndex = 3;
         BtnAnnuler.Text = "Annuler";
+        BtnAnnuler.TextImageRelation = TextImageRelation.ImageBeforeText;
         BtnAnnuler.Click += BtnAnnuler_Click;
         // 
         // BtnOk
@@ -116,11 +121,13 @@ partial class EmailTemplateForm
         BtnOk.FlatStyle = FlatStyle.Flat;
         BtnOk.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
         BtnOk.ForeColor = Color.White;
-        BtnOk.Location = new Point(503, 443);
+        BtnOk.Image = Properties.Resources.save1;
+        BtnOk.Location = new Point(500, 473);
         BtnOk.Name = "BtnOk";
-        BtnOk.Size = new Size(148, 30);
+        BtnOk.Size = new Size(148, 41);
         BtnOk.TabIndex = 4;
         BtnOk.Text = "Enregistrer";
+        BtnOk.TextImageRelation = TextImageRelation.ImageBeforeText;
         BtnOk.UseVisualStyleBackColor = false;
         BtnOk.Click += BtnOk_Click;
         // 
@@ -128,7 +135,7 @@ partial class EmailTemplateForm
         // 
         AcceptButton = BtnOk;
         CancelButton = BtnAnnuler;
-        ClientSize = new Size(660, 486);
+        ClientSize = new Size(660, 526);
         Controls.Add(GrpVars);
         Controls.Add(LblSujet);
         Controls.Add(TxtSujet);

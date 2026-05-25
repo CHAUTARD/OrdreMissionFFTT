@@ -14,6 +14,8 @@ public partial class EmailTemplateForm : Form
     {
         _tpl = tpl;
         InitializeComponent();
+        AppImages.AppliquerSauvegarde(BtnOk);
+        AppImages.AppliquerAnnuler(BtnAnnuler);
         TxtSujet.Text = _tpl.SujetTemplate;
         TxtCorps.Text = _tpl.CorpsTemplate;
     }

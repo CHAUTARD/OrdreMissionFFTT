@@ -48,7 +48,7 @@ public sealed class EmailTemplate
 
     public void Save()
     {
-        var opts = new JsonSerializerOptions { WriteIndented = true };
+        JsonSerializerOptions opts = new() { WriteIndented = true };
         File.WriteAllText(FilePath, JsonSerializer.Serialize(this, opts));
     }
 
@@ -59,9 +59,8 @@ public sealed class EmailTemplate
         => SujetTemplate.Replace("{jourCourt}", jourCourt);
 
     /// <summary>Génère le corps en substituant toutes les variables.</summary>
-    public string AppliquerCorps(string jourLong, string heure, string nomArbitre)
+    public string AppliquerCorps(string jourLong, string heure)
         => CorpsTemplate
                .Replace("{jourLong}",   jourLong)
-               .Replace("{heure}",      heure)
-               .Replace("{nomArbitre}", nomArbitre);
+               .Replace("{heure}",      heure);
 }

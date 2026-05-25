@@ -33,10 +33,10 @@ public partial class RechercheFfttForm : Form
         _date     = date;
         _heure    = heure;
         InitializeComponent();
+        AppImages.AppliquerSauvegarde(BtnSauvegarderCred);
         TxtCp.Text     = codePostal;
         TxtApiId.Text  = _cfg.ApiId;
         TxtApiPwd.Text = _cfg.ApiPassword;
-        TxtNomArb.Text = _cfg.NomArbitre;
         ActualiserEtatIdentifiants();
     }
 
@@ -73,7 +73,6 @@ public partial class RechercheFfttForm : Form
     {
         _cfg.ApiId       = TxtApiId.Text.Trim();
         _cfg.ApiPassword = TxtApiPwd.Text.Trim();
-        _cfg.NomArbitre  = TxtNomArb.Text.Trim();
         _cfg.Save();
         ActualiserEtatIdentifiants();
     }
@@ -216,7 +215,7 @@ public partial class RechercheFfttForm : Form
         var (jourCourt, jourLong) = FormatDate(_date);
         string heureNorm = NormaliserHeure(_heure);
         string sujet = _emailTpl.AppliquerSujet(jourCourt);
-        string corps = _emailTpl.AppliquerCorps(jourLong, heureNorm, _cfg.NomArbitre.Trim());
+        string corps = _emailTpl.AppliquerCorps(jourLong, heureNorm);
         using var form = new EnvoyerEmailForm(_details.MailCor, sujet, corps);
         form.ShowDialog(this);
     }
@@ -230,8 +229,8 @@ public partial class RechercheFfttForm : Form
     /// </summary>
     private static (string jourCourt, string jourLong) FormatDate(string dateStr)
     {
-        string[] fmts = { "dd/MM/yyyy", "d/M/yyyy", "d/MM/yyyy", "dd/M/yyyy",
-                          "dd/MM/yy",   "d/M/yy",   "d/MM/yy",   "dd/M/yy" };
+        string[] fmts = [ "dd/MM/yyyy", "d/M/yyyy", "d/MM/yyyy", "dd/M/yyyy",
+                          "dd/MM/yy",   "d/M/yy",   "d/MM/yy",   "dd/M/yy" ];
         if (DateTime.TryParseExact(dateStr.Trim(), fmts,
                 FrFR, System.Globalization.DateTimeStyles.None, out DateTime dt))
         {

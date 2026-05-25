@@ -26,18 +26,31 @@ public partial class Form1 : Form
 
     private void RestoreLastState()
     {
-        if (!string.IsNullOrWhiteSpace(_cfg.DernierSource) && File.Exists(_cfg.DernierSource))
-        {
-            TxtSource.Text = _cfg.DernierSource;
-            SetStatus("Dernier fichier restauré : " + Path.GetFileName(_cfg.DernierSource));
-        }
         if (_cfg.DernierPeage > 0) NudPeage.Value = _cfg.DernierPeage;
         if (_cfg.DernierKm    > 0) NudKm.Value    = _cfg.DernierKm;
 
-        TxtCompOpposant.Text    = _cfg.DernierOpposant;
-        TxtCompDate.Text        = _cfg.DerniereDate;
-        TxtCompHeure.Text       = _cfg.DerniereHeure;
-        TxtCompAdresse.Text     = _cfg.DerniereAdresse;
+        // Valeurs de la dernière session (fallback si le PDF n'est pas lisible)
+        TxtCompOpposant.Text = _cfg.DernierOpposant;
+        TxtCompDate.Text     = _cfg.DerniereDate;
+        TxtCompHeure.Text    = _cfg.DerniereHeure;
+        TxtCompAdresse.Text  = _cfg.DerniereAdresse;
+
+        if (!string.IsNullOrWhiteSpace(_cfg.DernierSource) && File.Exists(_cfg.DernierSource))
+        {
+            TxtSource.Text = _cfg.DernierSource;
+
+            // Relecture du PDF pour mettre à jour les infos compétition
+            var info = PdfService.ReadCompetitionInfo(_cfg.DernierSource, _cfg);
+            if (!string.IsNullOrWhiteSpace(info.Opposant)) TxtCompOpposant.Text = info.Opposant;
+            if (!string.IsNullOrWhiteSpace(info.Date))     TxtCompDate.Text     = info.Date;
+            if (!string.IsNullOrWhiteSpace(info.Heure))    TxtCompHeure.Text    = info.Heure;
+            if (!string.IsNullOrWhiteSpace(info.Adresse))  TxtCompAdresse.Text  = info.Adresse;
+
+            bool luOk = !string.IsNullOrWhiteSpace(info.Opposant) || !string.IsNullOrWhiteSpace(info.Date);
+            SetStatus(luOk
+                ? "PDF restauré : " + Path.GetFileName(_cfg.DernierSource) + " — infos compétition mises à jour."
+                : "PDF restauré : " + Path.GetFileName(_cfg.DernierSource) + " — infos issues de la dernière session.");
+        }
     }
 
     private void ApplyParams()
@@ -59,8 +72,9 @@ public partial class Form1 : Form
     private void BtnReset_Click(object? sender, EventArgs e)  => ResetForm();
     private void NudPeage_ValueChanged(object? sender, EventArgs e) => Recalculate();
     private void NudKm_ValueChanged(object? sender, EventArgs e)    => Recalculate();
-    private void BtnGen_Click(object? sender, EventArgs e)    => Generate();
-    private void BtnOpen_Click(object? sender, EventArgs e)   => OpenOutputPdf();
+    private void BtnGen_Click(object? sender, EventArgs e)      => Generate();
+    private void BtnOpen_Click(object? sender, EventArgs e)     => OpenOutputPdf();
+    private void BtnEnvoyerOM_Click(object? sender, EventArgs e) => OuvrirEnvoyerOm();
     private void BtnRechercheFftt_Click(object? sender, EventArgs e) => OuvrirRechercheFftt();
 
     // ── Handlers menu ─────────────────────────────────────────────────────────
@@ -312,6 +326,17 @@ public partial class Form1 : Form
         using var dlg = new EmailTemplateForm(_emailTpl);
         if (dlg.ShowDialog(this) == DialogResult.OK)
             SetStatus("Modèle d'email enregistré.");
+    }
+
+    private void OuvrirEnvoyerOm()
+    {
+        using var dlg = new EnvoyerOmForm(
+            _cfg,
+            TxtOutput.Text.Trim(),
+            TxtCompOpposant.Text.Trim(),
+            TxtCompDate.Text.Trim());
+        if (dlg.ShowDialog(this) == DialogResult.OK)
+            SetStatus("Ordre de mission envoyé au responsable des nominations.");
     }
 
     // ── Recherche FFTT ────────────────────────────────────────────────────────
