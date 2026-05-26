@@ -393,20 +393,21 @@ public partial class Form1 : Form
             LblItineraire.ForeColor = Color.FromArgb(0, 100, 0);
 
             // Proposer de mettre à jour le nombre de km dans les indemnités
-            decimal kmArrondi = (decimal)Math.Round(km, 0);
-            if (NudKm.Value != kmArrondi)
+            decimal kmArrondi      = (decimal)Math.Ceiling(km);
+            decimal kmAllerRetour  = kmArrondi * 2;   // aller + retour
+            if (NudKm.Value != kmAllerRetour)
             {
                 string msg = $"Itinéraire calculé : {km:0.0} km — {duree}"
                            + Environment.NewLine + Environment.NewLine
-                           + $"Mettre à jour le champ km des indemnités ({kmArrondi:0} km) ?";
+                           + $"Mettre à jour le champ km des indemnités ({kmAllerRetour:0} km aller-retour) ?";
                 var rep = MessageBox.Show(msg,
                     "Itinéraire", MessageBoxButtons.YesNo, MessageBoxIcon.Question,
                     MessageBoxDefaultButton.Button1);
                 if (rep == DialogResult.Yes)
                 {
-                    NudKm.Value = kmArrondi;
+                    NudKm.Value = kmAllerRetour;
                     Recalculate();
-                    SetStatus($"Itinéraire : {km:0.0} km — {duree} — indemnités mises à jour.");
+                    SetStatus($"Itinéraire : {km:0.0} km (× 2 = {kmAllerRetour:0} km A/R) — {duree} — indemnités mises à jour.");
                 }
                 else
                 {
