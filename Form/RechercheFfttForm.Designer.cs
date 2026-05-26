@@ -14,6 +14,7 @@ partial class RechercheFfttForm
     private void InitializeComponent()
     {
         GrpCred = new GroupBox();
+        BtnToggleCred = new Button();
         LblApiId = new Label();
         TxtApiId = new TextBox();
         LblApiPwd = new Label();
@@ -50,6 +51,18 @@ partial class RechercheFfttForm
         GrpCred.TabIndex = 0;
         GrpCred.TabStop = false;
         GrpCred.Text = "Identifiants API FFTT Smartping";
+        GrpCred.Visible = false;
+        // 
+        // BtnToggleCred
+        // 
+        BtnToggleCred.Cursor = Cursors.Hand;
+        BtnToggleCred.FlatStyle = FlatStyle.Flat;
+        BtnToggleCred.Location = new Point(450, 13);
+        BtnToggleCred.Name = "BtnToggleCred";
+        BtnToggleCred.Size = new Size(218, 26);
+        BtnToggleCred.TabIndex = 2;
+        BtnToggleCred.Text = "⚙ Identifiants API…";
+        BtnToggleCred.Click += BtnToggleCred_Click;
         // 
         // LblApiId
         // 
@@ -108,7 +121,7 @@ partial class RechercheFfttForm
         // LblCp
         // 
         LblCp.AutoSize = true;
-        LblCp.Location = new Point(15, 89);
+        LblCp.Location = new Point(15, 18);
         LblCp.Name = "LblCp";
         LblCp.Size = new Size(86, 17);
         LblCp.TabIndex = 1;
@@ -116,7 +129,7 @@ partial class RechercheFfttForm
         // 
         // TxtCp
         // 
-        TxtCp.Location = new Point(115, 86);
+        TxtCp.Location = new Point(115, 15);
         TxtCp.MaxLength = 5;
         TxtCp.Name = "TxtCp";
         TxtCp.Size = new Size(72, 24);
@@ -128,7 +141,7 @@ partial class RechercheFfttForm
         BtnRechercher.Cursor = Cursors.Hand;
         BtnRechercher.Enabled = false;
         BtnRechercher.FlatStyle = FlatStyle.Flat;
-        BtnRechercher.Location = new Point(197, 84);
+        BtnRechercher.Location = new Point(197, 13);
         BtnRechercher.Name = "BtnRechercher";
         BtnRechercher.Size = new Size(130, 28);
         BtnRechercher.TabIndex = 4;
@@ -144,7 +157,7 @@ partial class RechercheFfttForm
         DgvClubs.BackgroundColor = Color.White;
         DgvClubs.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
         DgvClubs.Columns.AddRange(new DataGridViewColumn[] { ColNom, ColNumero });
-        DgvClubs.Location = new Point(15, 121);
+        DgvClubs.Location = new Point(15, 50);
         DgvClubs.MultiSelect = false;
         DgvClubs.Name = "DgvClubs";
         DgvClubs.ReadOnly = true;
@@ -172,7 +185,7 @@ partial class RechercheFfttForm
         // 
         GrpDetail.Controls.Add(LblDetail);
         GrpDetail.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
-        GrpDetail.Location = new Point(15, 309);
+        GrpDetail.Location = new Point(15, 238);
         GrpDetail.Name = "GrpDetail";
         GrpDetail.Size = new Size(656, 118);
         GrpDetail.TabIndex = 6;
@@ -191,7 +204,7 @@ partial class RechercheFfttForm
         // 
         LblStatus.AutoSize = true;
         LblStatus.ForeColor = Color.FromArgb(40, 80, 160);
-        LblStatus.Location = new Point(15, 435);
+        LblStatus.Location = new Point(15, 364);
         LblStatus.Name = "LblStatus";
         LblStatus.Size = new Size(0, 17);
         LblStatus.TabIndex = 7;
@@ -206,11 +219,12 @@ partial class RechercheFfttForm
         BtnEmail.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
         BtnEmail.ForeColor = Color.White;
         BtnEmail.Image = Properties.Resources.save1;
-        BtnEmail.Location = new Point(338, 451);
+        BtnEmail.Location = new Point(15, 383);
         BtnEmail.Name = "BtnEmail";
-        BtnEmail.Size = new Size(180, 44);
+        BtnEmail.Size = new Size(220, 44);
         BtnEmail.TabIndex = 6;
-        BtnEmail.Text = "  &Envoyer un email";
+        BtnEmail.Text = "  &Envoyer l'email de confirmation de l'arbitrage";
+        BtnEmail.TextAlign = ContentAlignment.MiddleRight;
         BtnEmail.TextImageRelation = TextImageRelation.ImageBeforeText;
         BtnEmail.UseVisualStyleBackColor = false;
         BtnEmail.Click += BtnEmail_Click;
@@ -220,9 +234,9 @@ partial class RechercheFfttForm
         BtnFermer.Cursor = Cursors.Hand;
         BtnFermer.FlatStyle = FlatStyle.Flat;
         BtnFermer.Image = Properties.Resources.cancel;
-        BtnFermer.Location = new Point(543, 449);
+        BtnFermer.Location = new Point(527, 380);
         BtnFermer.Name = "BtnFermer";
-        BtnFermer.Size = new Size(128, 44);
+        BtnFermer.Size = new Size(128, 47);
         BtnFermer.TabIndex = 7;
         BtnFermer.Text = "  &Fermer";
         BtnFermer.TextAlign = ContentAlignment.MiddleRight;
@@ -232,7 +246,8 @@ partial class RechercheFfttForm
         // RechercheFfttForm
         // 
         CancelButton = BtnFermer;
-        ClientSize = new Size(680, 510);
+        ClientSize = new Size(680, 439);
+        Controls.Add(BtnToggleCred);
         Controls.Add(GrpCred);
         Controls.Add(LblCp);
         Controls.Add(TxtCp);
@@ -258,6 +273,7 @@ partial class RechercheFfttForm
     }
 
     private GroupBox                   GrpCred;
+    private Button                     BtnToggleCred;
     private Label                      LblApiId;
     private TextBox                    TxtApiId;
     private Label                      LblApiPwd;
