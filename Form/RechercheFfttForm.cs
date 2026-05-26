@@ -78,12 +78,12 @@ public partial class RechercheFfttForm : Form
         ActualiserEtatIdentifiants();
     }
 
-    private void BtnToggleCred_Click(object? sender, EventArgs e)
+    private void MnuIdentifiants_Click(object? sender, EventArgs e)
     {
         const int delta = 71;
         bool show = !GrpCred.Visible;
-        GrpCred.Visible    = show;
-        BtnToggleCred.Text = show ? "▲ Masquer identifiants" : "⚙ Identifiants API…";
+        GrpCred.Visible        = show;
+        MnuIdentifiants.Text   = show ? "▲ Masquer identifiants" : "⚙ Identifiants API";
         int sign = show ? +1 : -1;
         foreach (Control c in new Control[] { LblCp, TxtCp, BtnRechercher, DgvClubs, GrpDetail, LblStatus, BtnEmail, BtnFermer })
             c.Top += sign * delta;

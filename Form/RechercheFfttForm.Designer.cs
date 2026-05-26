@@ -14,7 +14,8 @@ partial class RechercheFfttForm
     private void InitializeComponent()
     {
         GrpCred = new GroupBox();
-        BtnToggleCred = new Button();
+        MnuBar = new MenuStrip();
+        MnuIdentifiants = new ToolStripMenuItem();
         LblApiId = new Label();
         TxtApiId = new TextBox();
         LblApiPwd = new Label();
@@ -33,6 +34,7 @@ partial class RechercheFfttForm
         BtnEmail = new Button();
         BtnFermer = new Button();
         GrpCred.SuspendLayout();
+        MnuBar.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)DgvClubs).BeginInit();
         GrpDetail.SuspendLayout();
         SuspendLayout();
@@ -45,7 +47,7 @@ partial class RechercheFfttForm
         GrpCred.Controls.Add(TxtApiPwd);
         GrpCred.Controls.Add(BtnSauvegarderCred);
         GrpCred.Controls.Add(LblCredEtat);
-        GrpCred.Location = new Point(12, 12);
+        GrpCred.Location = new Point(12, 36);
         GrpCred.Name = "GrpCred";
         GrpCred.Size = new Size(656, 59);
         GrpCred.TabIndex = 0;
@@ -53,16 +55,21 @@ partial class RechercheFfttForm
         GrpCred.Text = "Identifiants API FFTT Smartping";
         GrpCred.Visible = false;
         // 
-        // BtnToggleCred
+        // MnuBar
         // 
-        BtnToggleCred.Cursor = Cursors.Hand;
-        BtnToggleCred.FlatStyle = FlatStyle.Flat;
-        BtnToggleCred.Location = new Point(450, 13);
-        BtnToggleCred.Name = "BtnToggleCred";
-        BtnToggleCred.Size = new Size(218, 26);
-        BtnToggleCred.TabIndex = 2;
-        BtnToggleCred.Text = "⚙ Identifiants API…";
-        BtnToggleCred.Click += BtnToggleCred_Click;
+        MnuBar.Items.AddRange(new ToolStripItem[] { MnuIdentifiants });
+        MnuBar.Location = new Point(0, 0);
+        MnuBar.Name = "MnuBar";
+        MnuBar.Size = new Size(680, 24);
+        MnuBar.TabIndex = 10;
+        MnuBar.Text = "MnuBar";
+        // 
+        // MnuIdentifiants
+        // 
+        MnuIdentifiants.Name = "MnuIdentifiants";
+        MnuIdentifiants.Size = new Size(160, 20);
+        MnuIdentifiants.Text = "⚙ Identifiants API";
+        MnuIdentifiants.Click += MnuIdentifiants_Click;
         // 
         // LblApiId
         // 
@@ -121,7 +128,7 @@ partial class RechercheFfttForm
         // LblCp
         // 
         LblCp.AutoSize = true;
-        LblCp.Location = new Point(15, 18);
+        LblCp.Location = new Point(15, 42);
         LblCp.Name = "LblCp";
         LblCp.Size = new Size(86, 17);
         LblCp.TabIndex = 1;
@@ -129,7 +136,7 @@ partial class RechercheFfttForm
         // 
         // TxtCp
         // 
-        TxtCp.Location = new Point(115, 15);
+        TxtCp.Location = new Point(115, 39);
         TxtCp.MaxLength = 5;
         TxtCp.Name = "TxtCp";
         TxtCp.Size = new Size(72, 24);
@@ -141,7 +148,7 @@ partial class RechercheFfttForm
         BtnRechercher.Cursor = Cursors.Hand;
         BtnRechercher.Enabled = false;
         BtnRechercher.FlatStyle = FlatStyle.Flat;
-        BtnRechercher.Location = new Point(197, 13);
+        BtnRechercher.Location = new Point(197, 37);
         BtnRechercher.Name = "BtnRechercher";
         BtnRechercher.Size = new Size(130, 28);
         BtnRechercher.TabIndex = 4;
@@ -157,7 +164,7 @@ partial class RechercheFfttForm
         DgvClubs.BackgroundColor = Color.White;
         DgvClubs.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
         DgvClubs.Columns.AddRange(new DataGridViewColumn[] { ColNom, ColNumero });
-        DgvClubs.Location = new Point(15, 50);
+        DgvClubs.Location = new Point(15, 74);
         DgvClubs.MultiSelect = false;
         DgvClubs.Name = "DgvClubs";
         DgvClubs.ReadOnly = true;
@@ -185,7 +192,7 @@ partial class RechercheFfttForm
         // 
         GrpDetail.Controls.Add(LblDetail);
         GrpDetail.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
-        GrpDetail.Location = new Point(15, 238);
+        GrpDetail.Location = new Point(15, 262);
         GrpDetail.Name = "GrpDetail";
         GrpDetail.Size = new Size(656, 118);
         GrpDetail.TabIndex = 6;
@@ -204,7 +211,7 @@ partial class RechercheFfttForm
         // 
         LblStatus.AutoSize = true;
         LblStatus.ForeColor = Color.FromArgb(40, 80, 160);
-        LblStatus.Location = new Point(15, 364);
+        LblStatus.Location = new Point(15, 388);
         LblStatus.Name = "LblStatus";
         LblStatus.Size = new Size(0, 17);
         LblStatus.TabIndex = 7;
@@ -219,7 +226,7 @@ partial class RechercheFfttForm
         BtnEmail.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
         BtnEmail.ForeColor = Color.White;
         BtnEmail.Image = Properties.Resources.save1;
-        BtnEmail.Location = new Point(15, 383);
+        BtnEmail.Location = new Point(15, 407);
         BtnEmail.Name = "BtnEmail";
         BtnEmail.Size = new Size(220, 44);
         BtnEmail.TabIndex = 6;
@@ -234,7 +241,7 @@ partial class RechercheFfttForm
         BtnFermer.Cursor = Cursors.Hand;
         BtnFermer.FlatStyle = FlatStyle.Flat;
         BtnFermer.Image = Properties.Resources.cancel;
-        BtnFermer.Location = new Point(527, 380);
+        BtnFermer.Location = new Point(527, 404);
         BtnFermer.Name = "BtnFermer";
         BtnFermer.Size = new Size(128, 47);
         BtnFermer.TabIndex = 7;
@@ -246,8 +253,8 @@ partial class RechercheFfttForm
         // RechercheFfttForm
         // 
         CancelButton = BtnFermer;
-        ClientSize = new Size(680, 439);
-        Controls.Add(BtnToggleCred);
+        ClientSize = new Size(680, 463);
+        Controls.Add(MnuBar);
         Controls.Add(GrpCred);
         Controls.Add(LblCp);
         Controls.Add(TxtCp);
@@ -257,6 +264,7 @@ partial class RechercheFfttForm
         Controls.Add(LblStatus);
         Controls.Add(BtnEmail);
         Controls.Add(BtnFermer);
+        MainMenuStrip = MnuBar;
         Font = new Font("Segoe UI", 9.5F);
         FormBorderStyle = FormBorderStyle.FixedDialog;
         MaximizeBox = false;
@@ -266,6 +274,8 @@ partial class RechercheFfttForm
         Text = "Recherche club FFTT — API Smartping";
         GrpCred.ResumeLayout(false);
         GrpCred.PerformLayout();
+        MnuBar.ResumeLayout(false);
+        MnuBar.PerformLayout();
         ((System.ComponentModel.ISupportInitialize)DgvClubs).EndInit();
         GrpDetail.ResumeLayout(false);
         ResumeLayout(false);
@@ -273,7 +283,8 @@ partial class RechercheFfttForm
     }
 
     private GroupBox                   GrpCred;
-    private Button                     BtnToggleCred;
+    private MenuStrip                  MnuBar;
+    private ToolStripMenuItem          MnuIdentifiants;
     private Label                      LblApiId;
     private TextBox                    TxtApiId;
     private Label                      LblApiPwd;
