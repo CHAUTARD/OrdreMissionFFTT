@@ -57,6 +57,7 @@ partial class Form1
         NudPeage = new NumericUpDown();
         LblEuroPeage = new Label();
         PnlDep = new Panel();
+        LblDureeTrajet = new Label();
         NudKm = new NumericUpDown();
         LblKmTaux = new Label();
         LblTotal = new Label();
@@ -357,27 +358,28 @@ partial class Form1
         BtnRechercheFftt.TabIndex = 8;
         BtnRechercheFftt.Text = "🔍 Rechercher FFTT";
         BtnRechercheFftt.Click += BtnRechercheFftt_Click;
-
+        // 
         // LblItineraire
-        //
-        LblItineraire.AutoSize  = true;
-        LblItineraire.Font      = new Font("Segoe UI", 9F, FontStyle.Bold);
+        // 
+        LblItineraire.AutoSize = true;
+        LblItineraire.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
         LblItineraire.ForeColor = Color.FromArgb(80, 80, 80);
-        LblItineraire.Location  = new Point(110, 90);
-        LblItineraire.Name      = "LblItineraire";
-        LblItineraire.TabIndex  = 9;
-        LblItineraire.Text      = "🗺️  —";
-
+        LblItineraire.Location = new Point(110, 90);
+        LblItineraire.Name = "LblItineraire";
+        LblItineraire.Size = new Size(38, 15);
+        LblItineraire.TabIndex = 9;
+        LblItineraire.Text = "🚘  —";
+        // 
         // BtnItineraire
-        //
-        BtnItineraire.Cursor    = Cursors.Hand;
+        // 
+        BtnItineraire.Cursor = Cursors.Hand;
         BtnItineraire.FlatStyle = FlatStyle.Flat;
-        BtnItineraire.Location  = new Point(477, 87);
-        BtnItineraire.Name      = "BtnItineraire";
-        BtnItineraire.Size      = new Size(168, 26);
-        BtnItineraire.TabIndex  = 10;
-        BtnItineraire.Text      = "📍 Calculer itinéraire";
-        BtnItineraire.Click    += BtnItineraire_Click;
+        BtnItineraire.Location = new Point(477, 87);
+        BtnItineraire.Name = "BtnItineraire";
+        BtnItineraire.Size = new Size(168, 26);
+        BtnItineraire.TabIndex = 10;
+        BtnItineraire.Text = "📍 Calculer itinéraire";
+        BtnItineraire.Click += BtnItineraire_Click;
         // 
         // GrpIndem
         // 
@@ -508,6 +510,7 @@ partial class Form1
         // PnlDep
         // 
         PnlDep.BackColor = Color.White;
+        PnlDep.Controls.Add(LblDureeTrajet);
         PnlDep.Controls.Add(NudKm);
         PnlDep.Controls.Add(LblKmTaux);
         PnlDep.Dock = DockStyle.Fill;
@@ -518,18 +521,30 @@ partial class Form1
         // 
         // NudKm
         // 
-        NudKm.Location = new Point(8, 11);
+        NudKm.Location = new Point(82, 11);
         NudKm.Maximum = new decimal(new int[] { 99999, 0, 0, 0 });
         NudKm.Name = "NudKm";
         NudKm.Size = new Size(68, 24);
         NudKm.TabIndex = 0;
         NudKm.ValueChanged += NudKm_ValueChanged;
+
+        // LblDureeTrajet
+        //
+        LblDureeTrajet.AutoSize  = false;
+        LblDureeTrajet.Font      = new Font("Segoe UI", 8.5F);
+        LblDureeTrajet.ForeColor = Color.FromArgb(60, 60, 60);
+        LblDureeTrajet.Location  = new Point(4, 13);
+        LblDureeTrajet.Name      = "LblDureeTrajet";
+        LblDureeTrajet.Size      = new Size(75, 20);
+        LblDureeTrajet.TabIndex  = 10;
+        LblDureeTrajet.Text      = "—";
+        LblDureeTrajet.TextAlign = ContentAlignment.MiddleRight;
         // 
         // LblKmTaux
         // 
         LblKmTaux.AutoSize = true;
         LblKmTaux.Font = new Font("Segoe UI", 9F);
-        LblKmTaux.Location = new Point(81, 14);
+        LblKmTaux.Location = new Point(158, 14);
         LblKmTaux.Name = "LblKmTaux";
         LblKmTaux.Size = new Size(79, 15);
         LblKmTaux.TabIndex = 1;
@@ -706,34 +721,34 @@ partial class Form1
         BtnReset.TabIndex = 11;
         BtnReset.Text = "🗑 &Effacer";
         BtnReset.Click += BtnReset_Click;
-        //
+        // 
         // BtnOpen
-        //
-        BtnOpen.Cursor    = Cursors.Hand;
+        // 
+        BtnOpen.Cursor = Cursors.Hand;
         BtnOpen.FlatStyle = FlatStyle.Flat;
-        BtnOpen.Location  = new Point(451, 566);
-        BtnOpen.Name      = "BtnOpen";
-        BtnOpen.Size      = new Size(221, 44);
-        BtnOpen.TabIndex  = 6;
-        BtnOpen.Text      = "📂  &Ouvrir PDF généré";
-        BtnOpen.Click    += BtnOpen_Click;
-        //
+        BtnOpen.Location = new Point(451, 566);
+        BtnOpen.Name = "BtnOpen";
+        BtnOpen.Size = new Size(221, 44);
+        BtnOpen.TabIndex = 6;
+        BtnOpen.Text = "📂  &Ouvrir PDF généré";
+        BtnOpen.Click += BtnOpen_Click;
+        // 
         // BtnEnvoyerOM
-        //
-        BtnEnvoyerOM.Cursor    = Cursors.Hand;
+        // 
+        BtnEnvoyerOM.Cursor = Cursors.Hand;
         BtnEnvoyerOM.FlatStyle = FlatStyle.Flat;
-        BtnEnvoyerOM.Location  = new Point(196, 620);
-        BtnEnvoyerOM.Name      = "BtnEnvoyerOM";
-        BtnEnvoyerOM.Size      = new Size(305, 40);
-        BtnEnvoyerOM.TabIndex  = 7;
-        BtnEnvoyerOM.Text      = "📧  Envoyer l'ordre de mission…";
-        BtnEnvoyerOM.Click    += BtnEnvoyerOM_Click;
-        //
+        BtnEnvoyerOM.Location = new Point(196, 620);
+        BtnEnvoyerOM.Name = "BtnEnvoyerOM";
+        BtnEnvoyerOM.Size = new Size(305, 40);
+        BtnEnvoyerOM.TabIndex = 7;
+        BtnEnvoyerOM.Text = "📧  Envoyer l'ordre de mission…";
+        BtnEnvoyerOM.Click += BtnEnvoyerOM_Click;
+        // 
         // StatusPrincipal
         // 
         StatusPrincipal.BackColor = Color.FromArgb(224, 231, 246);
         StatusPrincipal.Items.AddRange(new ToolStripItem[] { LblStatus });
-        StatusPrincipal.Location = new Point(0, 621);
+        StatusPrincipal.Location = new Point(0, 658);
         StatusPrincipal.Name = "StatusPrincipal";
         StatusPrincipal.Size = new Size(697, 22);
         StatusPrincipal.SizingGrip = false;
@@ -845,6 +860,7 @@ partial class Form1
     private NumericUpDown     NudPeage;
     private Label             LblEuroPeage;
     private Panel             PnlDep;
+    private Label             LblDureeTrajet;
     private NumericUpDown     NudKm;
     private Label             LblKmTaux;
     private Label             LblTotal;

@@ -128,6 +128,7 @@ public partial class Form1 : Form
 
         LblItineraire.Text      = "🗺️  —";
         LblItineraire.ForeColor = SystemColors.ControlText;
+        LblDureeTrajet.Text     = "—";
         SetStatus("Formulaire remis à zéro.");
     }
 
@@ -391,6 +392,7 @@ public partial class Form1 : Form
 
             LblItineraire.Text      = $"🗺️  {km:0.0} km — {duree}";
             LblItineraire.ForeColor = Color.FromArgb(0, 100, 0);
+            LblDureeTrajet.Text      = duree;
 
             // Proposer de mettre à jour le nombre de km dans les indemnités
             decimal kmArrondi      = (decimal)Math.Ceiling(km);
