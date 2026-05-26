@@ -62,8 +62,10 @@ public partial class Form1 : Form
 
     private void Recalculate()
     {
-        decimal total = NudPeage.Value + _cfg.IndemFixe + NudKm.Value * _cfg.TauxKm;
-        LblTotal.Text = total.ToString("0.00", Fr) + " €";
+        decimal montantKm = NudKm.Value * _cfg.TauxKm;
+        decimal total     = NudPeage.Value + _cfg.IndemFixe + montantKm;
+        LblDureeTrajet.Text = montantKm.ToString("0.00", Fr) + " €";
+        LblTotal.Text       = total.ToString("0.00", Fr) + " €";
     }
 
     // ── Handlers d'événements ─────────────────────────────────────────────────
@@ -128,7 +130,6 @@ public partial class Form1 : Form
 
         LblItineraire.Text      = "🗺️  —";
         LblItineraire.ForeColor = SystemColors.ControlText;
-        LblDureeTrajet.Text     = "—";
         SetStatus("Formulaire remis à zéro.");
     }
 
@@ -390,16 +391,15 @@ public partial class Form1 : Form
             int    min   = minutes % 60;
             string duree = h > 0 ? $"{h}h{min:D2}" : $"{minutes} min";
 
-            LblItineraire.Text      = $"🗺️  {km:0.0} km — {duree}";
+            LblItineraire.Text      = $"🚘  {km:0.0} km — {duree} ";
             LblItineraire.ForeColor = Color.FromArgb(0, 100, 0);
-            LblDureeTrajet.Text      = duree;
 
             // Proposer de mettre à jour le nombre de km dans les indemnités
             decimal kmArrondi      = (decimal)Math.Ceiling(km);
             decimal kmAllerRetour  = kmArrondi * 2;   // aller + retour
             if (NudKm.Value != kmAllerRetour)
             {
-                string msg = $"Itinéraire calculé : {km:0.0} km — {duree}"
+                string msg = $"Itinéraire calculé : {km:0.0} km — {duree} Approximatif"
                            + Environment.NewLine + Environment.NewLine
                            + $"Mettre à jour le champ km des indemnités ({kmAllerRetour:0} km aller-retour) ?";
                 var rep = MessageBox.Show(msg,

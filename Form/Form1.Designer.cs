@@ -519,6 +519,17 @@ partial class Form1
         PnlDep.Size = new Size(241, 40);
         PnlDep.TabIndex = 6;
         // 
+        // LblDureeTrajet
+        // 
+        LblDureeTrajet.Font = new Font("Segoe UI", 8.5F, FontStyle.Bold);
+        LblDureeTrajet.ForeColor = Color.FromArgb(0, 100, 0);
+        LblDureeTrajet.Location = new Point(4, 13);
+        LblDureeTrajet.Name = "LblDureeTrajet";
+        LblDureeTrajet.Size = new Size(75, 20);
+        LblDureeTrajet.TabIndex = 10;
+        LblDureeTrajet.Text = "0,00 €";
+        LblDureeTrajet.TextAlign = ContentAlignment.MiddleRight;
+        // 
         // NudKm
         // 
         NudKm.Location = new Point(82, 11);
@@ -527,18 +538,6 @@ partial class Form1
         NudKm.Size = new Size(68, 24);
         NudKm.TabIndex = 0;
         NudKm.ValueChanged += NudKm_ValueChanged;
-
-        // LblDureeTrajet
-        //
-        LblDureeTrajet.AutoSize  = false;
-        LblDureeTrajet.Font      = new Font("Segoe UI", 8.5F);
-        LblDureeTrajet.ForeColor = Color.FromArgb(60, 60, 60);
-        LblDureeTrajet.Location  = new Point(4, 13);
-        LblDureeTrajet.Name      = "LblDureeTrajet";
-        LblDureeTrajet.Size      = new Size(75, 20);
-        LblDureeTrajet.TabIndex  = 10;
-        LblDureeTrajet.Text      = "—";
-        LblDureeTrajet.TextAlign = ContentAlignment.MiddleRight;
         // 
         // LblKmTaux
         // 
@@ -715,33 +714,42 @@ partial class Form1
         BtnReset.Cursor = Cursors.Hand;
         BtnReset.FlatStyle = FlatStyle.Flat;
         BtnReset.ForeColor = Color.DarkRed;
+        BtnReset.Image = Properties.Resources.corbeille;
         BtnReset.Location = new Point(12, 566);
         BtnReset.Name = "BtnReset";
         BtnReset.Size = new Size(184, 44);
         BtnReset.TabIndex = 11;
-        BtnReset.Text = "🗑 &Effacer";
+        BtnReset.Text = "  &Effacer";
+        BtnReset.TextAlign = ContentAlignment.MiddleRight;
+        BtnReset.TextImageRelation = TextImageRelation.ImageBeforeText;
         BtnReset.Click += BtnReset_Click;
         // 
         // BtnOpen
         // 
         BtnOpen.Cursor = Cursors.Hand;
         BtnOpen.FlatStyle = FlatStyle.Flat;
+        BtnOpen.Image = Properties.Resources.pdf;
         BtnOpen.Location = new Point(451, 566);
         BtnOpen.Name = "BtnOpen";
         BtnOpen.Size = new Size(221, 44);
         BtnOpen.TabIndex = 6;
-        BtnOpen.Text = "📂  &Ouvrir PDF généré";
+        BtnOpen.Text = "  &Ouvrir PDF généré";
+        BtnOpen.TextAlign = ContentAlignment.MiddleRight;
+        BtnOpen.TextImageRelation = TextImageRelation.ImageBeforeText;
         BtnOpen.Click += BtnOpen_Click;
         // 
         // BtnEnvoyerOM
         // 
         BtnEnvoyerOM.Cursor = Cursors.Hand;
         BtnEnvoyerOM.FlatStyle = FlatStyle.Flat;
+        BtnEnvoyerOM.Image = Properties.Resources.email;
         BtnEnvoyerOM.Location = new Point(196, 620);
         BtnEnvoyerOM.Name = "BtnEnvoyerOM";
         BtnEnvoyerOM.Size = new Size(305, 40);
         BtnEnvoyerOM.TabIndex = 7;
-        BtnEnvoyerOM.Text = "📧  Envoyer l'ordre de mission…";
+        BtnEnvoyerOM.Text = "  Envoyer l'ordre de mission…";
+        BtnEnvoyerOM.TextAlign = ContentAlignment.MiddleRight;
+        BtnEnvoyerOM.TextImageRelation = TextImageRelation.ImageBeforeText;
         BtnEnvoyerOM.Click += BtnEnvoyerOM_Click;
         // 
         // StatusPrincipal
