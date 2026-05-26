@@ -357,6 +357,15 @@ public partial class Form1 : Form
             return;
         }
 
+        if (string.IsNullOrWhiteSpace(_cfg.OrsApiKey))
+        {
+            MessageBox.Show(
+                "Clé API OpenRouteService non configurée." + Environment.NewLine
+                + "Renseignez-la dans Outils > Paramètres > OpenRouteService.",
+                "Clé manquante", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            return;
+        }
+
         string adresseDepart = BuildAdresseDepart();
         if (string.IsNullOrWhiteSpace(adresseDepart))
         {
@@ -374,7 +383,7 @@ public partial class Form1 : Form
 
         try
         {
-            var (km, minutes) = await RoutingService.CalculerAsync(adresseDepart, adresseArrivee);
+            var (km, minutes) = await RoutingService.CalculerAsync(adresseDepart, adresseArrivee, _cfg.OrsApiKey);
 
             int    h     = minutes / 60;
             int    min   = minutes % 60;

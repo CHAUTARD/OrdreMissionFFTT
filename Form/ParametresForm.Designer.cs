@@ -276,7 +276,7 @@ partial class ParametresForm
         GrpAzureMaps.Size = new Size(396, 55);
         GrpAzureMaps.TabIndex = 7;
         GrpAzureMaps.TabStop = false;
-        GrpAzureMaps.Text = "Azure Maps";
+        GrpAzureMaps.Text = "OpenRouteService (calcul d'itinéraire)";
         //
         // LblAzureMapsLbl
         //
@@ -284,7 +284,7 @@ partial class ParametresForm
         LblAzureMapsLbl.Location = new Point(10, 24);
         LblAzureMapsLbl.Name = "LblAzureMapsLbl";
         LblAzureMapsLbl.TabIndex = 0;
-        LblAzureMapsLbl.Text = "Clé d'abonnement :";
+        LblAzureMapsLbl.Text = "Clé API :";
         //
         // TxtAzureMapsKey
         //
