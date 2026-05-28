@@ -92,10 +92,10 @@ public partial class Form1 : Form
     {
         MessageBox.Show(
             "Convocation JA — Compléter le PDF\n" +
-            "Version 1.00\n\n" +
-            "Outil d'aide à la saisie pour les Juges Arbitres FFTT.\n" +
+            "Version " + GetVersionAffichee() + "\n\n" +
+            "Outil d'aide à la saisie pour les Juges Arbitres 1 FFTT.\n" +
             "Complète automatiquement les PDFs de convocation\n" +
-            "et facilite la communication avec les clubs adverses.\n\n" +
+            "et facilite la communication avec le club qui acceuille.\n\n" +
             "Auteur : Patrick CHAUTARD\n" +
             "© Copyright 2026 — patrick.chautard@free.fr",
             "À propos de Convocation JA", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -479,6 +479,13 @@ public partial class Form1 : Form
     }
 
     // ── Utilitaire ────────────────────────────────────────────────────────────
+
+    /// <summary>Retourne les 2 premiers composants de la version assemblée (ex. "1.01").</summary>
+    private static string GetVersionAffichee()
+    {
+        var v = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+        return v is null ? "?" : $"{v.Major}.{v.Minor:D2}";
+    }
 
     private void SetStatus(string msg) => LblStatus.Text = msg;
 
