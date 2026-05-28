@@ -19,18 +19,18 @@ public partial class RechercheFfttForm : Form
 
     private readonly AppSettings     _cfg;
     private readonly EmailTemplate   _emailTpl;
-    private readonly string          _opposant;
+    private readonly string          _equipeLocale;
     private readonly string          _date;
     private readonly string          _heure;
     private FfttClubDetails?         _details;
     private CancellationTokenSource? _ctsFetch;
 
-    public RechercheFfttForm(string codePostal, string opposant, string date, string heure,
+    public RechercheFfttForm(string codePostal, string equipeLocale, string date, string heure,
                              AppSettings cfg, EmailTemplate emailTpl)
     {
         _cfg      = cfg;
         _emailTpl = emailTpl;
-        _opposant = opposant;
+        _equipeLocale = equipeLocale;
         _date     = date;
         _heure    = heure;
         InitializeComponent();
@@ -227,7 +227,7 @@ public partial class RechercheFfttForm : Form
         var (jourCourt, jourLong) = FormatDate(_date);
         string heureNorm = NormaliserHeure(_heure);
         string sujet = _emailTpl.AppliquerSujet(jourCourt);
-        string corps = _emailTpl.AppliquerCorps(jourLong, heureNorm, _cfg.NomArbitre, _opposant);
+        string corps = _emailTpl.AppliquerCorps(jourLong, heureNorm, _cfg.NomArbitre, _equipeLocale);
         using var form = new EnvoyerEmailForm(_details.MailCor, sujet, corps);
         form.ShowDialog(this);
     }
