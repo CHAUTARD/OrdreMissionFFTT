@@ -226,7 +226,7 @@ public partial class RechercheFfttForm : Form
         if (_details is null) return;
         var (jourCourt, jourLong) = FormatDate(_date);
         string heureNorm = NormaliserHeure(_heure);
-        string sujet = _emailTpl.AppliquerSujet(jourCourt);
+        string sujet = _emailTpl.AppliquerSujet(jourCourt, _equipeLocale);
         string corps = _emailTpl.AppliquerCorps(jourLong, heureNorm, _cfg.NomArbitre, _equipeLocale);
         using var form = new EnvoyerEmailForm(_details.MailCor, sujet, corps);
         form.ShowDialog(this);

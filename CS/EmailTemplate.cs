@@ -3,10 +3,11 @@
  * Persisté dans email_template.json à côté de l'EXE.
  *
  * Variables disponibles dans les templates :
- *   {jourCourt}   → ex. "Samedi 15/12/2026"
- *   {jourLong}    → ex. "samedi 15 décembre 2026"
- *   {heure}       → ex. "16h00"
- *   {nomArbitre}  → valeur de AppSettings.NomArbitre
+ *   {jourCourt}    → ex. "Samedi 15/12/2026"
+ *   {jourLong}     → ex. "samedi 15 décembre 2026"
+ *   {heure}        → ex. "16h00"
+ *   {nomArbitre}   → valeur de AppSettings.NomArbitre
+ *   {equipeLocale} → nom de l'équipe locale
  */
 using System.Text.Json;
 
@@ -14,7 +15,7 @@ namespace OrdreMission.CS;
 
 public sealed class EmailTemplate
 {
-    // ── Modèles ───────────────────────────────────────────────────────────────
+    // ── Modèles ────────────────────────────────────────────────────────────────────────────
 
     public string SujetTemplate { get; set; } = "Arbitrage de la rencontre du {jourCourt}, {equipeLocale}";
 
@@ -30,7 +31,7 @@ public sealed class EmailTemplate
         "Cordialement\r\n" +
         "{nomArbitre}";
 
-    // ── Persistance ───────────────────────────────────────────────────────────
+    // ── Persistance ───────────────────────────────────────────────────────────────────────────
 
     private static readonly string FilePath =
         System.IO.Path.Combine(AppContext.BaseDirectory, "email_template.json");
@@ -52,18 +53,20 @@ public sealed class EmailTemplate
         File.WriteAllText(FilePath, JsonSerializer.Serialize(this, opts));
     }
 
-    // ── Application des variables ─────────────────────────────────────────────
+    // ── Application des variables ─────────────────────────────────────────────────────
 
-    /// <summary>Génère le sujet en substituant {jourCourt}.</summary>
-    public string AppliquerSujet(string jourCourt)
-        => SujetTemplate.Replace("{jourCourt}", jourCourt);
+    /// <summary>Génère le sujet en substituant {jourCourt} et {equipeLocale}.</summary>
+    public string AppliquerSujet(string jourCourt, string equipeLocale = "")
+        => SujetTemplate
+               .Replace("{jourCourt}", jourCourt)
+               .Replace("{equipeLocale}", equipeLocale);
 
     /// <summary>Génère le corps en substituant toutes les variables.</summary>
     public string AppliquerCorps(string jourLong, string heure,
-                                 string nomArbitre = "", string equipe = "")
+                                 string nomArbitre = "", string equipeLocale = "")
         => CorpsTemplate
-               .Replace("{jourLong}",    jourLong)
-               .Replace("{heure}",       heure)
-               .Replace("{nomArbitre}",  nomArbitre)
-               .Replace("{equipe}",      equipe);
+               .Replace("{jourLong}", jourLong)
+               .Replace("{heure}", heure)
+               .Replace("{nomArbitre}", nomArbitre)
+               .Replace("{equipeLocale}", equipeLocale);
 }
