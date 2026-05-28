@@ -8,15 +8,12 @@
  *   4. Bouton "Envoyer un email" ouvre EnvoyerEmailForm avec l'adresse pré-remplie
  */
 using OrdreMission.CS;
-using System.Globalization;
 using System.Text.RegularExpressions;
 
 namespace OrdreMission;
 
 public partial class RechercheFfttForm : Form
 {
-    private static readonly CultureInfo FrFR = CultureInfo.GetCultureInfo("fr-FR");
-
     private readonly AppSettings     _cfg;
     private readonly EmailTemplate   _emailTpl;
     private readonly string          _equipeLocale;
@@ -224,46 +221,13 @@ public partial class RechercheFfttForm : Form
     private void BtnEmail_Click(object? sender, EventArgs e)
     {
         if (_details is null) return;
-        var (jourCourt, jourLong) = FormatDate(_date);
-        string heureNorm = NormaliserHeure(_heure);
+
+        var (jourCourt, jourLong) = DateHelper.FormatDate(_date);
+        string heureNorm = DateHelper.NormaliserHeure(_heure);
         string sujet = _emailTpl.Appliquer(_emailTpl.SujetTemplate, jourCourt: jourCourt, equipeLocale: _equipeLocale);
         string corps = _emailTpl.Appliquer(_emailTpl.CorpsTemplate, jourLong: jourLong, heure: heureNorm, nomArbitre: _cfg.NomArbitre, equipeLocale: _equipeLocale);
         using var form = new EnvoyerEmailForm(_details.MailCor, sujet, corps);
         form.ShowDialog(this);
-    }
-
-    // ── Helpers de formatage date / heure ─────────────────────────────────────
-
-    /// <summary>
-    /// Retourne (jourCourt, jourLong) à partir d'une date dd/MM/yyyy.
-    /// jourCourt = "Samedi 15/12/2026"  (pour le sujet)
-    /// jourLong  = "samedi 15 décembre 2026"  (pour le corps)
-    /// </summary>
-    private static (string jourCourt, string jourLong) FormatDate(string dateStr)
-    {
-        string[] fmts = [ "dd/MM/yyyy", "d/M/yyyy", "d/MM/yyyy", "dd/M/yyyy",
-                          "dd/MM/yy",   "d/M/yy",   "d/MM/yy",   "dd/M/yy" ];
-        if (DateTime.TryParseExact(dateStr.Trim(), fmts,
-                FrFR, System.Globalization.DateTimeStyles.None, out DateTime dt))
-        {
-            string jourCourt = FrFR.TextInfo.ToTitleCase(dt.ToString("dddd", FrFR))
-                               + " " + dt.ToString("dd/MM/yyyy");
-            string jourLong  = dt.ToString("dddd d MMMM yyyy", FrFR);
-            return (jourCourt, jourLong);
-        }
-        return (dateStr, dateStr);   // fallback si la date n'est pas parseable
-    }
-
-    /// <summary>
-    /// Normalise une heure saisie en "XXhYY" : "16:00" → "16h00", "16h" → "16h00".
-    /// </summary>
-    private static string NormaliserHeure(string heure)
-    {
-        if (string.IsNullOrWhiteSpace(heure)) return "";
-        heure = heure.Trim().Replace(':', 'h').Replace('H', 'h').Replace('.', 'h');
-        if (!heure.Contains('h')) return heure + "h00";
-        if (heure.EndsWith('h'))  return heure + "00";
-        return heure;
     }
 
     private void BtnFermer_Click(object? sender, EventArgs e) => Close();

@@ -36,7 +36,7 @@ partial class Form1
         BtnOutput = new Button();
         GrpComp = new GroupBox();
         LblCompOpposant = new Label();
-        TxtCompOpposant = new TextBox();
+        TxtCompEquipeLocale = new TextBox();
         LblCompDate = new Label();
         TxtCompDate = new TextBox();
         LblCompHeure = new Label();
@@ -75,6 +75,7 @@ partial class Form1
         BtnReset = new Button();
         BtnOpen = new Button();
         BtnEnvoyerOM = new Button();
+        BtnEmailClub = new Button();
         StatusPrincipal = new StatusStrip();
         LblStatus = new ToolStripStatusLabel();
         MenuPrincipal.SuspendLayout();
@@ -114,7 +115,7 @@ partial class Form1
         MnuFichierQuitter.Image = Properties.Resources.cancel;
         MnuFichierQuitter.Name = "MnuFichierQuitter";
         MnuFichierQuitter.ShortcutKeys = Keys.Alt | Keys.F4;
-        MnuFichierQuitter.Size = new Size(180, 22);
+        MnuFichierQuitter.Size = new Size(153, 22);
         MnuFichierQuitter.Text = "&Quitter";
         MnuFichierQuitter.Click += MnuFichierQuitter_Click;
         // 
@@ -264,7 +265,7 @@ partial class Form1
         // GrpComp
         // 
         GrpComp.Controls.Add(LblCompOpposant);
-        GrpComp.Controls.Add(TxtCompOpposant);
+        GrpComp.Controls.Add(TxtCompEquipeLocale);
         GrpComp.Controls.Add(LblCompDate);
         GrpComp.Controls.Add(TxtCompDate);
         GrpComp.Controls.Add(LblCompHeure);
@@ -286,17 +287,17 @@ partial class Form1
         LblCompOpposant.AutoSize = true;
         LblCompOpposant.Location = new Point(8, 28);
         LblCompOpposant.Name = "LblCompOpposant";
-        LblCompOpposant.Size = new Size(73, 17);
+        LblCompOpposant.Size = new Size(93, 17);
         LblCompOpposant.TabIndex = 0;
-        LblCompOpposant.Text = "Opposant :";
+        LblCompOpposant.Text = "Equipe locale :";
         // 
-        // TxtCompOpposant
+        // TxtCompEquipeLocale
         // 
-        TxtCompOpposant.Location = new Point(87, 25);
-        TxtCompOpposant.Name = "TxtCompOpposant";
-        TxtCompOpposant.PlaceholderText = "Nom du club…";
-        TxtCompOpposant.Size = new Size(271, 24);
-        TxtCompOpposant.TabIndex = 1;
+        TxtCompEquipeLocale.Location = new Point(101, 25);
+        TxtCompEquipeLocale.Name = "TxtCompEquipeLocale";
+        TxtCompEquipeLocale.PlaceholderText = "Nom du club…";
+        TxtCompEquipeLocale.Size = new Size(257, 24);
+        TxtCompEquipeLocale.TabIndex = 1;
         // 
         // LblCompDate
         // 
@@ -343,10 +344,10 @@ partial class Form1
         // 
         // TxtCompAdresse
         // 
-        TxtCompAdresse.Location = new Point(110, 59);
+        TxtCompAdresse.Location = new Point(101, 59);
         TxtCompAdresse.Name = "TxtCompAdresse";
         TxtCompAdresse.PlaceholderText = "Adresse complète…";
-        TxtCompAdresse.Size = new Size(360, 24);
+        TxtCompAdresse.Size = new Size(369, 24);
         TxtCompAdresse.TabIndex = 7;
         // 
         // BtnRechercheFftt
@@ -740,18 +741,32 @@ partial class Form1
         BtnOpen.Click += BtnOpen_Click;
         // 
         // BtnEnvoyerOM
-        // 
+        //
         BtnEnvoyerOM.Cursor = Cursors.Hand;
         BtnEnvoyerOM.FlatStyle = FlatStyle.Flat;
         BtnEnvoyerOM.Image = Properties.Resources.email;
-        BtnEnvoyerOM.Location = new Point(196, 620);
+        BtnEnvoyerOM.Location = new Point(12, 620);
         BtnEnvoyerOM.Name = "BtnEnvoyerOM";
-        BtnEnvoyerOM.Size = new Size(305, 40);
+        BtnEnvoyerOM.Size = new Size(330, 40);
         BtnEnvoyerOM.TabIndex = 7;
         BtnEnvoyerOM.Text = "  Envoyer l'ordre de mission…";
         BtnEnvoyerOM.TextAlign = ContentAlignment.MiddleRight;
         BtnEnvoyerOM.TextImageRelation = TextImageRelation.ImageBeforeText;
         BtnEnvoyerOM.Click += BtnEnvoyerOM_Click;
+        //
+        // BtnEmailClub
+        //
+        BtnEmailClub.Cursor = Cursors.Hand;
+        BtnEmailClub.FlatStyle = FlatStyle.Flat;
+        BtnEmailClub.Image = Properties.Resources.email;
+        BtnEmailClub.Location = new Point(354, 620);
+        BtnEmailClub.Name = "BtnEmailClub";
+        BtnEmailClub.Size = new Size(331, 40);
+        BtnEmailClub.TabIndex = 8;
+        BtnEmailClub.Text = "  Envoyer email au club…";
+        BtnEmailClub.TextAlign = ContentAlignment.MiddleRight;
+        BtnEmailClub.TextImageRelation = TextImageRelation.ImageBeforeText;
+        BtnEmailClub.Click += BtnEmailClub_Click;
         // 
         // StatusPrincipal
         // 
@@ -785,6 +800,7 @@ partial class Form1
         Controls.Add(BtnReset);
         Controls.Add(BtnOpen);
         Controls.Add(BtnEnvoyerOM);
+        Controls.Add(BtnEmailClub);
         Controls.Add(StatusPrincipal);
         Controls.Add(MenuPrincipal);
         Font = new Font("Segoe UI", 9.5F);
@@ -847,7 +863,7 @@ partial class Form1
 
     private GroupBox          GrpComp;
     private Label             LblCompOpposant;
-    private TextBox           TxtCompOpposant;
+    private TextBox           TxtCompEquipeLocale;
     private Label             LblCompDate;
     private TextBox           TxtCompDate;
     private Label             LblCompHeure;
@@ -889,6 +905,7 @@ partial class Form1
     private Button BtnReset;
     private Button BtnOpen;
     private Button BtnEnvoyerOM;
+    private Button BtnEmailClub;
 
     private StatusStrip          StatusPrincipal;
     private ToolStripStatusLabel LblStatus;

@@ -9,9 +9,9 @@ public partial class Form1 : Form
 {
     private static readonly CultureInfo Fr = CultureInfo.GetCultureInfo("fr-FR");
 
-    private AppSettings    _cfg      = AppSettings.Load();
-    private EmailTemplate  _emailTpl = EmailTemplate.Load();
-    private string?        _signaturePath;
+    private readonly AppSettings _cfg = AppSettings.Load();
+    private readonly EmailTemplate _emailTpl = EmailTemplate.Load();
+    private string? _signaturePath;
 
     public Form1()
     {
@@ -31,7 +31,7 @@ public partial class Form1 : Form
         if (_cfg.DernierKm    > 0) NudKm.Value    = _cfg.DernierKm;
 
         // Valeurs de la dernière session (fallback si le PDF n'est pas lisible)
-        TxtCompOpposant.Text = _cfg.DernierOpposant;
+        TxtCompEquipeLocale.Text = _cfg.DernierEquipeLocale;
         TxtCompDate.Text     = _cfg.DerniereDate;
         TxtCompHeure.Text    = _cfg.DerniereHeure;
         TxtCompAdresse.Text  = _cfg.DerniereAdresse;
@@ -42,12 +42,12 @@ public partial class Form1 : Form
 
             // Relecture du PDF pour mettre à jour les infos compétition
             var info = PdfService.ReadCompetitionInfo(_cfg.DernierSource, _cfg);
-            if (!string.IsNullOrWhiteSpace(info.Opposant)) TxtCompOpposant.Text = info.Opposant;
+            if (!string.IsNullOrWhiteSpace(info.EquipeLocale)) TxtCompEquipeLocale.Text = info.EquipeLocale;
             if (!string.IsNullOrWhiteSpace(info.Date))     TxtCompDate.Text     = info.Date;
             if (!string.IsNullOrWhiteSpace(info.Heure))    TxtCompHeure.Text    = info.Heure;
             if (!string.IsNullOrWhiteSpace(info.Adresse))  TxtCompAdresse.Text  = info.Adresse;
 
-            bool luOk = !string.IsNullOrWhiteSpace(info.Opposant) || !string.IsNullOrWhiteSpace(info.Date);
+            bool luOk = !string.IsNullOrWhiteSpace(info.EquipeLocale) || !string.IsNullOrWhiteSpace(info.Date);
             SetStatus(luOk
                 ? "PDF restauré : " + Path.GetFileName(_cfg.DernierSource) + " — infos compétition mises à jour."
                 : "PDF restauré : " + Path.GetFileName(_cfg.DernierSource) + " — infos issues de la dernière session.");
@@ -78,6 +78,7 @@ public partial class Form1 : Form
     private void BtnGen_Click(object? sender, EventArgs e)      => Generate();
     private void BtnOpen_Click(object? sender, EventArgs e)     => OpenOutputPdf();
     private void BtnEnvoyerOM_Click(object? sender, EventArgs e) => OuvrirEnvoyerOm();
+    private void BtnEmailClub_Click(object? sender, EventArgs e)   => EnvoyerEmailClub();
     private void BtnRechercheFftt_Click(object? sender, EventArgs e) => OuvrirRechercheFftt();
     private void BtnItineraire_Click(object? sender, EventArgs e)    => _ = CalculerItineraireAsync();
 
@@ -115,7 +116,7 @@ public partial class Form1 : Form
         TxtOutput.Text = "";
 
         // Compétition
-        TxtCompOpposant.Text    = "";
+        TxtCompEquipeLocale.Text    = "";
         TxtCompDate.Text        = "";
         TxtCompHeure.Text       = "";
         TxtCompAdresse.Text     = "";
@@ -155,12 +156,12 @@ public partial class Form1 : Form
 
         // Lecture automatique des infos compétition depuis le PDF
         var info = PdfService.ReadCompetitionInfo(dlg.FileName, _cfg);
-        if (!string.IsNullOrWhiteSpace(info.Opposant))    TxtCompOpposant.Text    = info.Opposant;
+        if (!string.IsNullOrWhiteSpace(info.EquipeLocale))    TxtCompEquipeLocale.Text    = info.EquipeLocale;
         if (!string.IsNullOrWhiteSpace(info.Date))        TxtCompDate.Text        = info.Date;
         if (!string.IsNullOrWhiteSpace(info.Heure))       TxtCompHeure.Text       = info.Heure;
         if (!string.IsNullOrWhiteSpace(info.Adresse))     TxtCompAdresse.Text     = info.Adresse;
 
-        bool luOk = !string.IsNullOrWhiteSpace(info.Opposant) || !string.IsNullOrWhiteSpace(info.Date);
+        bool luOk = !string.IsNullOrWhiteSpace(info.EquipeLocale) || !string.IsNullOrWhiteSpace(info.Date);
         SetStatus(luOk
             ? "PDF source : " + Path.GetFileName(dlg.FileName) + " — infos compétition lues."
             : "PDF source : " + Path.GetFileName(dlg.FileName) + " — aucune info compétition détectée (à saisir manuellement).");
@@ -237,7 +238,7 @@ public partial class Form1 : Form
             _cfg.DernierSource      = TxtSource.Text.Trim();
             _cfg.DernierPeage       = peage;
             _cfg.DernierKm          = km;
-            _cfg.DernierOpposant    = TxtCompOpposant.Text.Trim();
+            _cfg.DernierEquipeLocale = TxtCompEquipeLocale.Text.Trim();
             _cfg.DerniereDate       = TxtCompDate.Text.Trim();
             _cfg.DerniereHeure      = TxtCompHeure.Text.Trim();
             _cfg.DerniereAdresse    = TxtCompAdresse.Text.Trim();
@@ -246,7 +247,7 @@ public partial class Form1 : Form
 
             string rapAccueil  = TxtRapAccueil.Text.Trim();
             string rapEquip    = TxtRapEquip.Text.Trim();
-            string opposant    = TxtCompOpposant.Text.Trim();
+            string opposant    = TxtCompEquipeLocale.Text.Trim();
             string date        = TxtCompDate.Text.Trim();
             string heure       = TxtCompHeure.Text.Trim();
             string adresse     = TxtCompAdresse.Text.Trim();
@@ -339,10 +340,30 @@ public partial class Form1 : Form
         using var dlg = new EnvoyerOmForm(
             _cfg,
             TxtOutput.Text.Trim(),
-            TxtCompOpposant.Text.Trim(),
+            TxtCompEquipeLocale.Text.Trim(),
             TxtCompDate.Text.Trim());
         if (dlg.ShowDialog(this) == DialogResult.OK)
             SetStatus("Ordre de mission envoyé au responsable des nominations.");
+    }
+
+    private void EnvoyerEmailClub()
+    {
+        string equipeLocale = TxtCompEquipeLocale.Text.Trim();
+        string date         = TxtCompDate.Text.Trim();
+        string heure        = TxtCompHeure.Text.Trim();
+
+        var (jourCourt, jourLong) = DateHelper.FormatDate(date);
+        string heureNorm = DateHelper.NormaliserHeure(heure);
+
+        string sujet = _emailTpl.Appliquer(_emailTpl.SujetTemplate,
+                           jourCourt: jourCourt, equipeLocale: equipeLocale);
+        string corps = _emailTpl.Appliquer(_emailTpl.CorpsTemplate,
+                           jourLong: jourLong, heure: heureNorm,
+                           nomArbitre: _cfg.NomArbitre, equipeLocale: equipeLocale);
+
+        using var dlg = new EnvoyerEmailForm("", sujet, corps);
+        if (dlg.ShowDialog(this) == DialogResult.OK)
+            SetStatus("Email envoyé au club qui accueille.");
     }
 
 
@@ -465,12 +486,12 @@ public partial class Form1 : Form
     {
         // Extrait le code postal (5 chiffres) depuis l'adresse saisie
         string adresse = TxtCompAdresse.Text.Trim();
-        var match = Regex.Match(adresse, @"\b(\d{5})\b");
+        var match = MyRegex().Match(adresse);
         string cp = match.Success ? match.Value : "";
 
         using var form = new RechercheFfttForm(
             cp,
-            TxtCompOpposant.Text.Trim(),
+            TxtCompEquipeLocale.Text.Trim(),
             TxtCompDate.Text.Trim(),
             TxtCompHeure.Text.Trim(),
             _cfg,
@@ -496,4 +517,7 @@ public partial class Form1 : Form
         Directory.CreateDirectory(dir);
         return dir;
     }
+
+    [GeneratedRegex(@"\b(\d{5})\b")]
+    private static partial Regex MyRegex();
 }
