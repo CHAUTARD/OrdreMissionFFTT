@@ -21,6 +21,8 @@ partial class ParametresForm
         LblTauxLbl = new Label();
         NudTauxKm = new NumericUpDown();
         LblEuroKm = new Label();
+        LblNomArbitreLbl = new Label();
+        TxtNomArbitre = new TextBox();
         GrpAddr = new GroupBox();
         LblNumeroLbl = new Label();
         TxtNumero = new TextBox();
@@ -121,6 +123,24 @@ partial class ParametresForm
         LblEuroKm.TabIndex = 5;
         LblEuroKm.Text = "€ / km";
         // 
+        // LblNomArbitreLbl
+        // 
+        LblNomArbitreLbl.AutoSize = true;
+        LblNomArbitreLbl.Font     = new Font("Segoe UI", 9F, FontStyle.Bold);
+        LblNomArbitreLbl.Location = new Point(12, 124);
+        LblNomArbitreLbl.Name     = "LblNomArbitreLbl";
+        LblNomArbitreLbl.TabIndex = 20;
+        LblNomArbitreLbl.Text     = "Mon nom et prénom :";
+        // 
+        // TxtNomArbitre
+        // 
+        TxtNomArbitre.Location        = new Point(155, 121);
+        TxtNomArbitre.MaxLength       = 80;
+        TxtNomArbitre.Name            = "TxtNomArbitre";
+        TxtNomArbitre.PlaceholderText = "Prénom NOM";
+        TxtNomArbitre.Size            = new Size(253, 23);
+        TxtNomArbitre.TabIndex        = 21;
+        // 
         // GrpAddr
         // 
         GrpAddr.Controls.Add(LblNumeroLbl);
@@ -131,7 +151,7 @@ partial class ParametresForm
         GrpAddr.Controls.Add(TxtCp);
         GrpAddr.Controls.Add(LblVilleLbl);
         GrpAddr.Controls.Add(TxtVille);
-        GrpAddr.Location = new Point(12, 122);
+        GrpAddr.Location = new Point(12, 152);
         GrpAddr.Name = "GrpAddr";
         GrpAddr.Size = new Size(396, 100);
         GrpAddr.TabIndex = 3;
@@ -210,7 +230,7 @@ partial class ParametresForm
         GrpNominations.Controls.Add(TxtEmailNominations);
         GrpNominations.Controls.Add(LblTelNominationsLbl);
         GrpNominations.Controls.Add(TxtTelNominations);
-        GrpNominations.Location = new Point(12, 228);
+        GrpNominations.Location = new Point(12, 258);
         GrpNominations.Name = "GrpNominations";
         GrpNominations.Size = new Size(396, 116);
         GrpNominations.TabIndex = 6;
@@ -267,27 +287,29 @@ partial class ParametresForm
         TxtTelNominations.PlaceholderText = "06 00 00 00 00";
         TxtTelNominations.Size = new Size(160, 23);
         TxtTelNominations.TabIndex = 5;
+        // 
         // GrpAzureMaps
-        //
+        // 
         GrpAzureMaps.Controls.Add(LblAzureMapsLbl);
         GrpAzureMaps.Controls.Add(TxtAzureMapsKey);
-        GrpAzureMaps.Location = new Point(12, 350);
+        GrpAzureMaps.Location = new Point(12, 380);
         GrpAzureMaps.Name = "GrpAzureMaps";
         GrpAzureMaps.Size = new Size(396, 55);
         GrpAzureMaps.TabIndex = 7;
         GrpAzureMaps.TabStop = false;
         GrpAzureMaps.Text = "OpenRouteService (calcul d'itinéraire)";
-        //
+        // 
         // LblAzureMapsLbl
-        //
+        // 
         LblAzureMapsLbl.AutoSize = true;
         LblAzureMapsLbl.Location = new Point(10, 24);
         LblAzureMapsLbl.Name = "LblAzureMapsLbl";
+        LblAzureMapsLbl.Size = new Size(51, 15);
         LblAzureMapsLbl.TabIndex = 0;
         LblAzureMapsLbl.Text = "Clé API :";
-        //
+        // 
         // TxtAzureMapsKey
-        //
+        // 
         TxtAzureMapsKey.Location = new Point(138, 20);
         TxtAzureMapsKey.Name = "TxtAzureMapsKey";
         TxtAzureMapsKey.PlaceholderText = "Votre clé Azure Maps…";
@@ -302,11 +324,11 @@ partial class ParametresForm
         BtnOk.FlatStyle = FlatStyle.Flat;
         BtnOk.ForeColor = Color.White;
         BtnOk.Image = Properties.Resources.save1;
-        BtnOk.Location = new Point(302, 418);
+        BtnOk.Location = new Point(285, 448);
         BtnOk.Name = "BtnOk";
-        BtnOk.Size = new Size(106, 38);
+        BtnOk.Size = new Size(123, 38);
         BtnOk.TabIndex = 7;
-        BtnOk.Text = "Enregistrer";
+        BtnOk.Text = "  &Enregistrer";
         BtnOk.TextAlign = ContentAlignment.MiddleRight;
         BtnOk.TextImageRelation = TextImageRelation.ImageBeforeText;
         BtnOk.UseVisualStyleBackColor = false;
@@ -317,11 +339,11 @@ partial class ParametresForm
         BtnCancel.DialogResult = DialogResult.Cancel;
         BtnCancel.FlatStyle = FlatStyle.Flat;
         BtnCancel.Image = Properties.Resources.cancel;
-        BtnCancel.Location = new Point(10, 418);
+        BtnCancel.Location = new Point(10, 448);
         BtnCancel.Name = "BtnCancel";
-        BtnCancel.Size = new Size(103, 38);
+        BtnCancel.Size = new Size(121, 38);
         BtnCancel.TabIndex = 8;
-        BtnCancel.Text = "Annuler";
+        BtnCancel.Text = "  &Annuler";
         BtnCancel.TextAlign = ContentAlignment.MiddleRight;
         BtnCancel.TextImageRelation = TextImageRelation.ImageBeforeText;
         // 
@@ -329,7 +351,9 @@ partial class ParametresForm
         // 
         AcceptButton = BtnOk;
         CancelButton = BtnCancel;
-        ClientSize = new Size(420, 466);
+        ClientSize = new Size(420, 496);
+        Controls.Add(LblNomArbitreLbl);
+        Controls.Add(TxtNomArbitre);
         Controls.Add(Grp);
         Controls.Add(GrpAddr);
         Controls.Add(GrpNominations);
@@ -365,6 +389,8 @@ partial class ParametresForm
     private NumericUpDown NudTauxKm;
     private Label         LblEuroKm;
 
+    private Label    LblNomArbitreLbl;
+    private TextBox  TxtNomArbitre;
     private GroupBox GrpAddr;
     private Label    LblNumeroLbl;
     private TextBox  TxtNumero;

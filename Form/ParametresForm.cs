@@ -25,6 +25,7 @@ public partial class ParametresForm : Form
         TxtCp.Text     = _cfg.AdresseCodePostal;
         TxtVille.Text  = _cfg.AdresseVille;
 
+        TxtNomArbitre.Text         = _cfg.NomArbitre;
         TxtNomNominations.Text   = _cfg.NomResponsableNominations;
         TxtAzureMapsKey.Text     = _cfg.OrsApiKey;
         TxtEmailNominations.Text = _cfg.EmailResponsableNominations;
@@ -41,6 +42,7 @@ public partial class ParametresForm : Form
         _cfg.AdresseCodePostal  = TxtCp.Text.Trim();
         _cfg.AdresseVille       = TxtVille.Text.Trim();
 
+        _cfg.NomArbitre                  = TxtNomArbitre.Text.Trim();
         _cfg.NomResponsableNominations   = TxtNomNominations.Text.Trim();
         _cfg.EmailResponsableNominations = TxtEmailNominations.Text.Trim();
         _cfg.TelResponsableNominations   = TxtTelNominations.Text.Trim();
