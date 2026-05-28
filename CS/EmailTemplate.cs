@@ -55,18 +55,20 @@ public sealed class EmailTemplate
 
     // ── Application des variables ─────────────────────────────────────────────────────
 
-    /// <summary>Génère le sujet en substituant {jourCourt} et {equipeLocale}.</summary>
-    public string AppliquerSujet(string jourCourt, string equipeLocale = "")
-        => SujetTemplate
-               .Replace("{jourCourt}", jourCourt)
-               .Replace("{equipeLocale}", equipeLocale);
-
-    /// <summary>Génère le corps en substituant toutes les variables.</summary>
-    public string AppliquerCorps(string jourLong, string heure,
-                                 string nomArbitre = "", string equipeLocale = "")
-        => CorpsTemplate
-               .Replace("{jourLong}", jourLong)
-               .Replace("{heure}", heure)
-               .Replace("{nomArbitre}", nomArbitre)
+    /// <summary>
+    /// Substitue toutes les variables connues dans le template fourni.
+    /// Les paramètres non renseignés laissent la variable telle quelle.
+    /// </summary>
+    public string Appliquer(string template,
+                            string jourCourt    = "",
+                            string jourLong     = "",
+                            string heure        = "",
+                            string nomArbitre   = "",
+                            string equipeLocale = "")
+        => template
+               .Replace("{jourCourt}",    jourCourt)
+               .Replace("{jourLong}",     jourLong)
+               .Replace("{heure}",        heure)
+               .Replace("{nomArbitre}",   nomArbitre)
                .Replace("{equipeLocale}", equipeLocale);
 }
