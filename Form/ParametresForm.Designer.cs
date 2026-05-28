@@ -73,7 +73,14 @@ partial class ParametresForm
         LblSmtpFromLbl     = new Label();
         TxtSmtpFrom        = new TextBox();
 
-        // ── Boutons ───────────────────────────────────────────────────────────
+        // ── Boutons Sauvegarder par onglet ───────────────────────────────────
+        BtnSauverMontants    = new Button();
+        BtnSauverArbitre     = new Button();
+        BtnSauverNominations = new Button();
+        BtnSauverItineraire  = new Button();
+        BtnSauverSmtp        = new Button();
+
+        // ── Boutons globaux ───────────────────────────────────────────────────
         BtnOk     = new Button();
         BtnCancel = new Button();
 
@@ -103,11 +110,12 @@ partial class ParametresForm
         TcParams.Location      = new Point(12, 12);
         TcParams.Name          = "TcParams";
         TcParams.SelectedIndex = 0;
-        TcParams.Size          = new Size(396, 240);
+        TcParams.Size          = new Size(396, 260);
         TcParams.TabIndex      = 0;
 
         // ── TpMontants ───────────────────────────────────────────────────────
         TpMontants.Controls.Add(Grp);
+        TpMontants.Controls.Add(BtnSauverMontants);
         TpMontants.Location           = new Point(4, 24);
         TpMontants.Name               = "TpMontants";
         TpMontants.Padding            = new Padding(3);
@@ -120,6 +128,7 @@ partial class ParametresForm
         TpArbitre.Controls.Add(LblNomArbitreLbl);
         TpArbitre.Controls.Add(TxtNomArbitre);
         TpArbitre.Controls.Add(GrpAddr);
+        TpArbitre.Controls.Add(BtnSauverArbitre);
         TpArbitre.Location            = new Point(4, 24);
         TpArbitre.Name                = "TpArbitre";
         TpArbitre.Padding             = new Padding(3);
@@ -130,6 +139,7 @@ partial class ParametresForm
 
         // ── TpNominations ────────────────────────────────────────────────────
         TpNominations.Controls.Add(GrpNominations);
+        TpNominations.Controls.Add(BtnSauverNominations);
         TpNominations.Location        = new Point(4, 24);
         TpNominations.Name            = "TpNominations";
         TpNominations.Padding         = new Padding(3);
@@ -140,6 +150,7 @@ partial class ParametresForm
 
         // ── TpItineraire ─────────────────────────────────────────────────────
         TpItineraire.Controls.Add(GrpAzureMaps);
+        TpItineraire.Controls.Add(BtnSauverItineraire);
         TpItineraire.Location         = new Point(4, 24);
         TpItineraire.Name             = "TpItineraire";
         TpItineraire.Padding          = new Padding(3);
@@ -150,6 +161,7 @@ partial class ParametresForm
 
         // ── TpSmtp ───────────────────────────────────────────────────────────
         TpSmtp.Controls.Add(GrpSmtp);
+        TpSmtp.Controls.Add(BtnSauverSmtp);
         TpSmtp.Location               = new Point(4, 24);
         TpSmtp.Name                   = "TpSmtp";
         TpSmtp.Padding                = new Padding(3);
@@ -446,7 +458,19 @@ partial class ParametresForm
         TxtSmtpFrom.Size            = new Size(254, 23);
         TxtSmtpFrom.TabIndex        = 10;
 
-        // ── Boutons ───────────────────────────────────────────────────────────
+        // ── Boutons Sauvegarder par onglet (position commune : y=188, droite) ─
+        InitBtnSauver(BtnSauverMontants,    "BtnSauverMontants",    0);
+        BtnSauverMontants.Click    += BtnSauverMontants_Click;
+        InitBtnSauver(BtnSauverArbitre,     "BtnSauverArbitre",     1);
+        BtnSauverArbitre.Click     += BtnSauverArbitre_Click;
+        InitBtnSauver(BtnSauverNominations, "BtnSauverNominations", 2);
+        BtnSauverNominations.Click += BtnSauverNominations_Click;
+        InitBtnSauver(BtnSauverItineraire,  "BtnSauverItineraire",  3);
+        BtnSauverItineraire.Click  += BtnSauverItineraire_Click;
+        InitBtnSauver(BtnSauverSmtp,        "BtnSauverSmtp",        4);
+        BtnSauverSmtp.Click        += BtnSauverSmtp_Click;
+
+        // ── Boutons globaux ───────────────────────────────────────────────────
         BtnOk.BackColor                  = Color.FromArgb(21, 101, 192);
         BtnOk.DialogResult               = DialogResult.OK;
         BtnOk.FlatAppearance.BorderSize  = 0;
@@ -455,7 +479,7 @@ partial class ParametresForm
         BtnOk.Image                      = Properties.Resources.save1;
         BtnOk.ImageAlign                 = ContentAlignment.MiddleLeft;
         BtnOk.Padding                    = new Padding(6, 0, 0, 0);
-        BtnOk.Location                   = new Point(285, 260);
+        BtnOk.Location                   = new Point(285, 280);
         BtnOk.Name                       = "BtnOk";
         BtnOk.Size                       = new Size(123, 38);
         BtnOk.TabIndex                   = 11;
@@ -470,7 +494,7 @@ partial class ParametresForm
         BtnCancel.Image                  = Properties.Resources.cancel;
         BtnCancel.ImageAlign             = ContentAlignment.MiddleLeft;
         BtnCancel.Padding                = new Padding(6, 0, 0, 0);
-        BtnCancel.Location               = new Point(10, 260);
+        BtnCancel.Location               = new Point(10, 280);
         BtnCancel.Name                   = "BtnCancel";
         BtnCancel.Size                   = new Size(121, 38);
         BtnCancel.TabIndex               = 12;
@@ -481,7 +505,7 @@ partial class ParametresForm
         // ── ParametresForm ────────────────────────────────────────────────────
         AcceptButton      = BtnOk;
         CancelButton      = BtnCancel;
-        ClientSize        = new Size(420, 306);
+        ClientSize        = new Size(420, 326);
         Controls.Add(TcParams);
         Controls.Add(BtnOk);
         Controls.Add(BtnCancel);
@@ -572,6 +596,12 @@ partial class ParametresForm
     private TextBox       TxtSmtpPassword;
     private Label         LblSmtpFromLbl;
     private TextBox       TxtSmtpFrom;
+
+    private Button BtnSauverMontants;
+    private Button BtnSauverArbitre;
+    private Button BtnSauverNominations;
+    private Button BtnSauverItineraire;
+    private Button BtnSauverSmtp;
 
     private Button BtnOk;
     private Button BtnCancel;
