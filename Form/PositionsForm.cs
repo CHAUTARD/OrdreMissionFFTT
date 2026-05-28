@@ -10,8 +10,6 @@ public partial class PositionsForm : Form
     {
         _cfg = cfg;
         InitializeComponent();
-        AppImages.AppliquerSauvegarde(BtnOk);
-        AppImages.AppliquerAnnuler(BtnCancel);
         LoadValues();
     }
 

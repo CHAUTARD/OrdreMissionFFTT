@@ -34,7 +34,6 @@ public partial class RechercheFfttForm : Form
         _date     = date;
         _heure    = heure;
         InitializeComponent();
-        AppImages.AppliquerSauvegarde(BtnSauvegarderCred);
         TxtCp.Text     = codePostal;
         TxtApiId.Text  = _cfg.ApiId;
         TxtApiPwd.Text = _cfg.ApiPassword;

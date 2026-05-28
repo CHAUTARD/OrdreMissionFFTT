@@ -13,15 +13,16 @@ partial class RechercheFfttForm
 
     private void InitializeComponent()
     {
+        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RechercheFfttForm));
         GrpCred = new GroupBox();
-        MnuBar = new MenuStrip();
-        MnuIdentifiants = new ToolStripMenuItem();
         LblApiId = new Label();
         TxtApiId = new TextBox();
         LblApiPwd = new Label();
         TxtApiPwd = new TextBox();
         BtnSauvegarderCred = new Button();
         LblCredEtat = new Label();
+        MnuBar = new MenuStrip();
+        MnuIdentifiants = new ToolStripMenuItem();
         LblCp = new Label();
         TxtCp = new TextBox();
         BtnRechercher = new Button();
@@ -55,26 +56,10 @@ partial class RechercheFfttForm
         GrpCred.Text = "Identifiants API FFTT Smartping";
         GrpCred.Visible = false;
         // 
-        // MnuBar
-        // 
-        MnuBar.Items.AddRange(new ToolStripItem[] { MnuIdentifiants });
-        MnuBar.Location = new Point(0, 0);
-        MnuBar.Name = "MnuBar";
-        MnuBar.Size = new Size(680, 24);
-        MnuBar.TabIndex = 10;
-        MnuBar.Text = "MnuBar";
-        // 
-        // MnuIdentifiants
-        // 
-        MnuIdentifiants.Name = "MnuIdentifiants";
-        MnuIdentifiants.Size = new Size(160, 20);
-        MnuIdentifiants.Text = "⚙ Identifiants API";
-        MnuIdentifiants.Click += MnuIdentifiants_Click;
-        // 
         // LblApiId
         // 
         LblApiId.AutoSize = true;
-        LblApiId.Location = new Point(10, 24);
+        LblApiId.Location = new Point(25, 24);
         LblApiId.Name = "LblApiId";
         LblApiId.Size = new Size(26, 17);
         LblApiId.TabIndex = 0;
@@ -82,7 +67,7 @@ partial class RechercheFfttForm
         // 
         // TxtApiId
         // 
-        TxtApiId.Location = new Point(40, 21);
+        TxtApiId.Location = new Point(69, 21);
         TxtApiId.MaxLength = 50;
         TxtApiId.Name = "TxtApiId";
         TxtApiId.Size = new Size(110, 24);
@@ -91,7 +76,7 @@ partial class RechercheFfttForm
         // LblApiPwd
         // 
         LblApiPwd.AutoSize = true;
-        LblApiPwd.Location = new Point(162, 24);
+        LblApiPwd.Location = new Point(198, 24);
         LblApiPwd.Name = "LblApiPwd";
         LblApiPwd.Size = new Size(96, 17);
         LblApiPwd.TabIndex = 1;
@@ -99,7 +84,7 @@ partial class RechercheFfttForm
         // 
         // TxtApiPwd
         // 
-        TxtApiPwd.Location = new Point(258, 21);
+        TxtApiPwd.Location = new Point(309, 21);
         TxtApiPwd.MaxLength = 100;
         TxtApiPwd.Name = "TxtApiPwd";
         TxtApiPwd.PasswordChar = '●';
@@ -110,11 +95,16 @@ partial class RechercheFfttForm
         // 
         BtnSauvegarderCred.Cursor = Cursors.Hand;
         BtnSauvegarderCred.FlatStyle = FlatStyle.Flat;
-        BtnSauvegarderCred.Location = new Point(408, 19);
+        BtnSauvegarderCred.Image = Properties.Resources.save;
+        BtnSauvegarderCred.ImageAlign = ContentAlignment.MiddleLeft;
+        BtnSauvegarderCred.Padding    = new Padding(6, 0, 0, 0);
+        BtnSauvegarderCred.Location = new Point(502, 12);
         BtnSauvegarderCred.Name = "BtnSauvegarderCred";
-        BtnSauvegarderCred.Size = new Size(110, 26);
+        BtnSauvegarderCred.Size = new Size(141, 47);
         BtnSauvegarderCred.TabIndex = 3;
-        BtnSauvegarderCred.Text = "Enregistrer";
+        BtnSauvegarderCred.Text = "  &Enregistrer";
+        BtnSauvegarderCred.TextAlign = ContentAlignment.MiddleRight;
+        BtnSauvegarderCred.TextImageRelation = TextImageRelation.ImageBeforeText;
         BtnSauvegarderCred.Click += BtnSauvegarderCred_Click;
         // 
         // LblCredEtat
@@ -124,6 +114,22 @@ partial class RechercheFfttForm
         LblCredEtat.Name = "LblCredEtat";
         LblCredEtat.Size = new Size(0, 17);
         LblCredEtat.TabIndex = 5;
+        // 
+        // MnuBar
+        // 
+        MnuBar.Items.AddRange(new ToolStripItem[] { MnuIdentifiants });
+        MnuBar.Location = new Point(0, 0);
+        MnuBar.Name = "MnuBar";
+        MnuBar.Size = new Size(687, 24);
+        MnuBar.TabIndex = 10;
+        MnuBar.Text = "MnuBar";
+        // 
+        // MnuIdentifiants
+        // 
+        MnuIdentifiants.Name = "MnuIdentifiants";
+        MnuIdentifiants.Size = new Size(114, 20);
+        MnuIdentifiants.Text = "⚙ Identifiants API";
+        MnuIdentifiants.Click += MnuIdentifiants_Click;
         // 
         // LblCp
         // 
@@ -202,9 +208,9 @@ partial class RechercheFfttForm
         // LblDetail
         // 
         LblDetail.Font = new Font("Segoe UI", 9F);
-        LblDetail.Location = new Point(10, 20);
+        LblDetail.Location = new Point(6, 20);
         LblDetail.Name = "LblDetail";
-        LblDetail.Size = new Size(630, 92);
+        LblDetail.Size = new Size(644, 92);
         LblDetail.TabIndex = 0;
         // 
         // LblStatus
@@ -226,7 +232,7 @@ partial class RechercheFfttForm
         BtnEmail.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
         BtnEmail.ForeColor = Color.White;
         BtnEmail.Image = Properties.Resources.save1;
-        BtnEmail.Location = new Point(15, 407);
+        BtnEmail.Location = new Point(451, 409);
         BtnEmail.Name = "BtnEmail";
         BtnEmail.Size = new Size(220, 44);
         BtnEmail.TabIndex = 6;
@@ -241,7 +247,7 @@ partial class RechercheFfttForm
         BtnFermer.Cursor = Cursors.Hand;
         BtnFermer.FlatStyle = FlatStyle.Flat;
         BtnFermer.Image = Properties.Resources.cancel;
-        BtnFermer.Location = new Point(527, 404);
+        BtnFermer.Location = new Point(15, 406);
         BtnFermer.Name = "BtnFermer";
         BtnFermer.Size = new Size(128, 47);
         BtnFermer.TabIndex = 7;
@@ -253,7 +259,7 @@ partial class RechercheFfttForm
         // RechercheFfttForm
         // 
         CancelButton = BtnFermer;
-        ClientSize = new Size(680, 463);
+        ClientSize = new Size(687, 463);
         Controls.Add(MnuBar);
         Controls.Add(GrpCred);
         Controls.Add(LblCp);
@@ -264,9 +270,10 @@ partial class RechercheFfttForm
         Controls.Add(LblStatus);
         Controls.Add(BtnEmail);
         Controls.Add(BtnFermer);
-        MainMenuStrip = MnuBar;
         Font = new Font("Segoe UI", 9.5F);
         FormBorderStyle = FormBorderStyle.FixedDialog;
+        Icon = (Icon)resources.GetObject("$this.Icon");
+        MainMenuStrip = MnuBar;
         MaximizeBox = false;
         MinimizeBox = false;
         Name = "RechercheFfttForm";

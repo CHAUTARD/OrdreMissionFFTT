@@ -28,7 +28,9 @@ partial class SignatureForm
         BtnAnnuler.DialogResult = DialogResult.Cancel;
         BtnAnnuler.FlatStyle = FlatStyle.Flat;
         BtnAnnuler.Image = Properties.Resources.cancel;
-        BtnAnnuler.Location = new Point(297, 125);
+        BtnAnnuler.ImageAlign = ContentAlignment.MiddleLeft;
+        BtnAnnuler.Padding    = new Padding(6, 0, 0, 0);
+        BtnAnnuler.Location = new Point(23, 125);
         BtnAnnuler.Name = "BtnAnnuler";
         BtnAnnuler.Size = new Size(110, 41);
         BtnAnnuler.TabIndex = 2;
@@ -46,7 +48,9 @@ partial class SignatureForm
         BtnOk.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
         BtnOk.ForeColor = Color.White;
         BtnOk.Image = Properties.Resources.save1;
-        BtnOk.Location = new Point(153, 125);
+        BtnOk.ImageAlign = ContentAlignment.MiddleLeft;
+        BtnOk.Padding    = new Padding(6, 0, 0, 0);
+        BtnOk.Location = new Point(302, 128);
         BtnOk.Name = "BtnOk";
         BtnOk.Size = new Size(116, 41);
         BtnOk.TabIndex = 3;
@@ -70,22 +74,28 @@ partial class SignatureForm
         // 
         BtnImport.Cursor = Cursors.Hand;
         BtnImport.FlatStyle = FlatStyle.Flat;
+        BtnImport.Image = Properties.Resources.importation_de_fichiers;
         BtnImport.Location = new Point(259, 12);
         BtnImport.Name = "BtnImport";
-        BtnImport.Size = new Size(148, 41);
+        BtnImport.Size = new Size(159, 41);
         BtnImport.TabIndex = 5;
-        BtnImport.Text = "➕ &Importer image…";
+        BtnImport.Text = "  &Importer image";
+        BtnImport.TextAlign = ContentAlignment.MiddleRight;
+        BtnImport.TextImageRelation = TextImageRelation.ImageBeforeText;
         // 
         // BtnClear
         // 
         BtnClear.Cursor = Cursors.Hand;
         BtnClear.FlatStyle = FlatStyle.Flat;
         BtnClear.ForeColor = Color.DarkRed;
+        BtnClear.Image = Properties.Resources.corbeille;
         BtnClear.Location = new Point(259, 61);
         BtnClear.Name = "BtnClear";
-        BtnClear.Size = new Size(148, 38);
+        BtnClear.Size = new Size(159, 38);
         BtnClear.TabIndex = 6;
-        BtnClear.Text = "🆑 &Effacer";
+        BtnClear.Text = "   &Effacer";
+        BtnClear.TextAlign = ContentAlignment.MiddleRight;
+        BtnClear.TextImageRelation = TextImageRelation.ImageBeforeText;
         // 
         // LblSigFmt
         // 

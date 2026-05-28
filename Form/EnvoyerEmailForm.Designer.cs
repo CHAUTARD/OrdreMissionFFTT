@@ -97,7 +97,7 @@ partial class EnvoyerEmailForm
         BtnEnvoyer.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
         BtnEnvoyer.ForeColor = Color.White;
         BtnEnvoyer.Image = Properties.Resources.email;
-        BtnEnvoyer.Location = new Point(172, 303);
+        BtnEnvoyer.Location = new Point(334, 303);
         BtnEnvoyer.Name = "BtnEnvoyer";
         BtnEnvoyer.Size = new Size(182, 43);
         BtnEnvoyer.TabIndex = 4;
@@ -110,7 +110,7 @@ partial class EnvoyerEmailForm
         // 
         BtnCopier.Cursor = Cursors.Hand;
         BtnCopier.FlatStyle = FlatStyle.Flat;
-        BtnCopier.Location = new Point(12, 303);
+        BtnCopier.Location = new Point(170, 303);
         BtnCopier.Name = "BtnCopier";
         BtnCopier.Size = new Size(150, 43);
         BtnCopier.TabIndex = 3;
@@ -123,7 +123,9 @@ partial class EnvoyerEmailForm
         BtnAnnuler.DialogResult = DialogResult.Cancel;
         BtnAnnuler.FlatStyle = FlatStyle.Flat;
         BtnAnnuler.Image = Properties.Resources.cancel;
-        BtnAnnuler.Location = new Point(364, 303);
+        BtnAnnuler.ImageAlign = ContentAlignment.MiddleLeft;
+        BtnAnnuler.Padding    = new Padding(6, 0, 0, 0);
+        BtnAnnuler.Location = new Point(12, 303);
         BtnAnnuler.Name = "BtnAnnuler";
         BtnAnnuler.Size = new Size(152, 43);
         BtnAnnuler.TabIndex = 5;

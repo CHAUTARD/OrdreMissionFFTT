@@ -10,8 +10,6 @@ public partial class ParametresForm : Form
     {
         _cfg = cfg;
         InitializeComponent();
-        AppImages.AppliquerSauvegarde(BtnOk);
-        AppImages.AppliquerAnnuler(BtnCancel);
         LoadValues();
     }
 

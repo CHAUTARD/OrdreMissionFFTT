@@ -111,9 +111,10 @@ partial class Form1
         // 
         // MnuFichierQuitter
         // 
+        MnuFichierQuitter.Image = Properties.Resources.cancel;
         MnuFichierQuitter.Name = "MnuFichierQuitter";
         MnuFichierQuitter.ShortcutKeys = Keys.Alt | Keys.F4;
-        MnuFichierQuitter.Size = new Size(153, 22);
+        MnuFichierQuitter.Size = new Size(180, 22);
         MnuFichierQuitter.Text = "&Quitter";
         MnuFichierQuitter.Click += MnuFichierQuitter_Click;
         // 

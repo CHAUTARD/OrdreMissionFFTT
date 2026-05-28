@@ -18,8 +18,6 @@ public partial class SignatureForm : Form
     public SignatureForm(string? signaturePathCourant)
     {
         InitializeComponent();
-        AppImages.AppliquerSauvegarde(BtnOk);
-        AppImages.AppliquerAnnuler(BtnAnnuler);
 
         // Recharger la signature si elle était déjà configurée
         if (!string.IsNullOrEmpty(signaturePathCourant) && File.Exists(signaturePathCourant))

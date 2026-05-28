@@ -126,20 +126,21 @@ partial class ParametresForm
         // LblNomArbitreLbl
         // 
         LblNomArbitreLbl.AutoSize = true;
-        LblNomArbitreLbl.Font     = new Font("Segoe UI", 9F, FontStyle.Bold);
-        LblNomArbitreLbl.Location = new Point(12, 124);
-        LblNomArbitreLbl.Name     = "LblNomArbitreLbl";
+        LblNomArbitreLbl.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+        LblNomArbitreLbl.Location = new Point(20, 124);
+        LblNomArbitreLbl.Name = "LblNomArbitreLbl";
+        LblNomArbitreLbl.Size = new Size(53, 15);
         LblNomArbitreLbl.TabIndex = 20;
-        LblNomArbitreLbl.Text     = "Mon nom et prénom :";
+        LblNomArbitreLbl.Text = "Arbitre :";
         // 
         // TxtNomArbitre
         // 
-        TxtNomArbitre.Location        = new Point(155, 121);
-        TxtNomArbitre.MaxLength       = 80;
-        TxtNomArbitre.Name            = "TxtNomArbitre";
+        TxtNomArbitre.Location = new Point(79, 121);
+        TxtNomArbitre.MaxLength = 80;
+        TxtNomArbitre.Name = "TxtNomArbitre";
         TxtNomArbitre.PlaceholderText = "Prénom NOM";
-        TxtNomArbitre.Size            = new Size(253, 23);
-        TxtNomArbitre.TabIndex        = 21;
+        TxtNomArbitre.Size = new Size(315, 23);
+        TxtNomArbitre.TabIndex = 21;
         // 
         // GrpAddr
         // 
@@ -324,6 +325,8 @@ partial class ParametresForm
         BtnOk.FlatStyle = FlatStyle.Flat;
         BtnOk.ForeColor = Color.White;
         BtnOk.Image = Properties.Resources.save1;
+        BtnOk.ImageAlign = ContentAlignment.MiddleLeft;
+        BtnOk.Padding    = new Padding(6, 0, 0, 0);
         BtnOk.Location = new Point(285, 448);
         BtnOk.Name = "BtnOk";
         BtnOk.Size = new Size(123, 38);
@@ -339,6 +342,8 @@ partial class ParametresForm
         BtnCancel.DialogResult = DialogResult.Cancel;
         BtnCancel.FlatStyle = FlatStyle.Flat;
         BtnCancel.Image = Properties.Resources.cancel;
+        BtnCancel.ImageAlign = ContentAlignment.MiddleLeft;
+        BtnCancel.Padding    = new Padding(6, 0, 0, 0);
         BtnCancel.Location = new Point(10, 448);
         BtnCancel.Name = "BtnCancel";
         BtnCancel.Size = new Size(121, 38);
@@ -379,6 +384,7 @@ partial class ParametresForm
         GrpAzureMaps.ResumeLayout(false);
         GrpAzureMaps.PerformLayout();
         ResumeLayout(false);
+        PerformLayout();
     }
 
     private GroupBox Grp;

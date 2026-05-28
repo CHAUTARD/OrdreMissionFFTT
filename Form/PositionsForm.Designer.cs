@@ -908,7 +908,7 @@ partial class PositionsForm
         // ChkRectVisibles
         // 
         ChkRectVisibles.AutoSize = true;
-        ChkRectVisibles.Location = new Point(12, 697);
+        ChkRectVisibles.Location = new Point(152, 697);
         ChkRectVisibles.Name = "ChkRectVisibles";
         ChkRectVisibles.Size = new Size(270, 19);
         ChkRectVisibles.TabIndex = 10;
@@ -922,7 +922,9 @@ partial class PositionsForm
         BtnOk.FlatStyle = FlatStyle.Flat;
         BtnOk.ForeColor = Color.White;
         BtnOk.Image = Properties.Resources.save1;
-        BtnOk.Location = new Point(300, 680);
+        BtnOk.ImageAlign = ContentAlignment.MiddleLeft;
+        BtnOk.Padding    = new Padding(6, 0, 0, 0);
+        BtnOk.Location = new Point(433, 687);
         BtnOk.Name = "BtnOk";
         BtnOk.Size = new Size(109, 36);
         BtnOk.TabIndex = 11;
@@ -936,7 +938,9 @@ partial class PositionsForm
         BtnCancel.DialogResult = DialogResult.Cancel;
         BtnCancel.FlatStyle = FlatStyle.Flat;
         BtnCancel.Image = Properties.Resources.cancel;
-        BtnCancel.Location = new Point(433, 679);
+        BtnCancel.ImageAlign = ContentAlignment.MiddleLeft;
+        BtnCancel.Padding    = new Padding(6, 0, 0, 0);
+        BtnCancel.Location = new Point(15, 687);
         BtnCancel.Name = "BtnCancel";
         BtnCancel.Size = new Size(109, 36);
         BtnCancel.TabIndex = 12;

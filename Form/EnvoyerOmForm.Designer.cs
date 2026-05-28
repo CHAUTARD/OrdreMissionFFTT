@@ -119,6 +119,7 @@ partial class EnvoyerOmForm
         TxtSujet.Name = "TxtSujet";
         TxtSujet.Size = new Size(496, 24);
         TxtSujet.TabIndex = 0;
+        TxtSujet.Text = "Ordre de mission du {date} — {opposant}";
         // 
         // LblCorpsLbl
         // 
@@ -139,6 +140,7 @@ partial class EnvoyerOmForm
         TxtCorps.ScrollBars = ScrollBars.Vertical;
         TxtCorps.Size = new Size(556, 160);
         TxtCorps.TabIndex = 1;
+        TxtCorps.Text = "Bonjour {nom},\r\n\r\nVeuillez trouver ci-joint mon ordre de mission pour {rencontre}.\r\n\r\nCordialement,\r\n {arbitre}";
         TxtCorps.TextChanged += TxtCorps_TextChanged;
         // 
         // GrpPj
@@ -150,13 +152,14 @@ partial class EnvoyerOmForm
         GrpPj.Size = new Size(556, 58);
         GrpPj.TabIndex = 3;
         GrpPj.TabStop = false;
-        GrpPj.Text = "Pièce jointe — Ordre de mission PDF";
+        GrpPj.Text = "Pièce jointe";
         // 
         // TxtPj
         // 
         TxtPj.BackColor = SystemColors.Control;
         TxtPj.Location = new Point(10, 24);
         TxtPj.Name = "TxtPj";
+        TxtPj.PlaceholderText = "Ordre de mission rempli en PDF";
         TxtPj.ReadOnly = true;
         TxtPj.Size = new Size(420, 24);
         TxtPj.TabIndex = 0;
@@ -175,6 +178,7 @@ partial class EnvoyerOmForm
         // 
         // LblEtat
         // 
+        LblEtat.BorderStyle = BorderStyle.Fixed3D;
         LblEtat.Location = new Point(12, 414);
         LblEtat.Name = "LblEtat";
         LblEtat.Size = new Size(556, 36);
@@ -194,8 +198,7 @@ partial class EnvoyerOmForm
         BtnEnvoyer.Name = "BtnEnvoyer";
         BtnEnvoyer.Size = new Size(172, 43);
         BtnEnvoyer.TabIndex = 3;
-        BtnEnvoyer.Text = "  &Envoyer l'OM";
-        BtnEnvoyer.TextAlign = ContentAlignment.MiddleRight;
+        BtnEnvoyer.Text = "  &Envoyer l'ordre de mission";
         BtnEnvoyer.TextImageRelation = TextImageRelation.ImageBeforeText;
         BtnEnvoyer.UseVisualStyleBackColor = false;
         BtnEnvoyer.Click += BtnEnvoyer_Click;
@@ -206,7 +209,7 @@ partial class EnvoyerOmForm
         BtnAnnuler.DialogResult = DialogResult.Cancel;
         BtnAnnuler.FlatStyle = FlatStyle.Flat;
         BtnAnnuler.Image = Properties.Resources.cancel;
-        BtnAnnuler.Location = new Point(231, 465);
+        BtnAnnuler.Location = new Point(12, 465);
         BtnAnnuler.Name = "BtnAnnuler";
         BtnAnnuler.Size = new Size(148, 43);
         BtnAnnuler.TabIndex = 4;
