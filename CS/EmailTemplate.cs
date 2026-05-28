@@ -16,11 +16,11 @@ public sealed class EmailTemplate
 {
     // ── Modèles ───────────────────────────────────────────────────────────────
 
-    public string SujetTemplate { get; set; } = "Arbitrage de la rencontre du {jourCourt}";
+    public string SujetTemplate { get; set; } = "Arbitrage de la rencontre du {jourCourt}, {equipeLocale}";
 
     public string CorpsTemplate { get; set; } =
         "Bonjour,\r\n\r\n" +
-        "Je vais officier comme juge arbitre lors de votre rencontre du {jourLong} à {heure}.\r\n\r\n" +
+        "Je vais officier comme juge arbitre lors de votre rencontre du {jourLong} à {heure}, {equipeLocale}.\r\n\r\n" +
         "La rencontre est-elle toujours d'actualité, l'horaire et le lieu restent-ils inchangés ?\r\n\r\n" +
         "Pour informations :\r\n" +
         "- Je me déplace avec mon poste d'arbitrage avec GIRPE et une imprimante.\r\n\r\n" +
