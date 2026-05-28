@@ -1,14 +1,14 @@
 /* RoutingService.cs
- * Calcul d'itinéraire entre deux adresses françaises via OpenRouteService (ORS).
+ * Calcul d'itinéraire entre deux adresses françaises via Mapbox.
  *
- * Géocodage : ORS Geocode Search (Pelias / OpenStreetMap)
- *   GET https://api.openrouteservice.org/geocode/search
+ * Géocodage : Mapbox Geocoding API v5
+ *   GET https://api.mapbox.com/geocoding/v5/mapbox.places/{query}.json
  *
- * Routage   : ORS Directions v2 (driving-car)
- *   GET https://api.openrouteservice.org/v2/directions/driving-car
+ * Routage   : Mapbox Directions API v5 (driving)
+ *   GET https://api.mapbox.com/directions/v5/mapbox/driving/{lon1,lat1};{lon2,lat2}
  *
- * Clé gratuite : https://openrouteservice.org/dev/#/signup
- * Quota free   : 2 000 requêtes/jour · 40 requêtes/minute.
+ * Jeton d'accès : https://account.mapbox.com/
+ * Quota gratuit : 100 000 géocodages/mois + 100 000 directions/mois.
  */
 using System.Globalization;
 using System.Text.Json.Nodes;
@@ -17,7 +17,7 @@ namespace OrdreMission.CS;
 
 public static class RoutingService
 {
-    private const string BaseUrl = "https://api.openrouteservice.org";
+    private const string BaseUrl = "https://api.mapbox.com";
 
     private static readonly HttpClient Http = new() { Timeout = TimeSpan.FromSeconds(20) };
 
@@ -31,13 +31,13 @@ public static class RoutingService
     /// <summary>
     /// Calcule la distance (km, arrondi à 0,1) et la durée (minutes).
     /// </summary>
-    /// <param name="apiKey">Clé API OpenRouteService.</param>
-    /// <exception cref="InvalidOperationException">Adresse introuvable ou réseau indisponible.</exception>
+    /// <param name="apiKey">Jeton d'accès Mapbox (pk.eyJ1…).</param>
+    /// <exception cref="InvalidOperationException">Adresse introuvable ou erreur API.</exception>
     public static async Task<(double Km, int Minutes)> CalculerAsync(
         string adresseDepart, string adresseArrivee, string apiKey)
     {
         if (string.IsNullOrWhiteSpace(apiKey))
-            throw new InvalidOperationException("Clé API OpenRouteService non configurée.");
+            throw new InvalidOperationException("Jeton Mapbox non configuré.");
 
         var dep = await GeocoderAsync(adresseDepart,  apiKey).ConfigureAwait(false)
                   ?? throw new InvalidOperationException(
@@ -47,56 +47,57 @@ public static class RoutingService
                   ?? throw new InvalidOperationException(
                          "Adresse d'arrivée introuvable :\n" + adresseArrivee);
 
-        return await RouteOrsAsync(dep, arr, apiKey).ConfigureAwait(false);
+        return await RouteMapboxAsync(dep, arr, apiKey).ConfigureAwait(false);
     }
 
-    // ── Géocodage ORS / Pelias ────────────────────────────────────────────────
+    // ── Géocodage Mapbox ──────────────────────────────────────────────────────
 
     private static async Task<(double Lat, double Lon)?> GeocoderAsync(
         string adresse, string apiKey)
     {
-        string url = BaseUrl + "/geocode/search"
-                   + "?api_key="          + Uri.EscapeDataString(apiKey)
-                   + "&text="             + Uri.EscapeDataString(adresse)
-                   + "&boundary.country=FRA"
-                   + "&size=1";
+        string query = Uri.EscapeDataString(adresse);
+        string url   = $"{BaseUrl}/geocoding/v5/mapbox.places/{query}.json"
+                     + $"?access_token={Uri.EscapeDataString(apiKey)}"
+                     +  "&country=fr&language=fr&limit=1";
 
         string json  = await Http.GetStringAsync(url).ConfigureAwait(false);
         var    root  = JsonNode.Parse(json);
         var    feats = root?["features"]?.AsArray();
         if (feats is null || feats.Count == 0) return null;
 
-        // GeoJSON : coordinates = [lon, lat]
-        var coords = feats[0]?["geometry"]?["coordinates"]?.AsArray();
-        if (coords is null || coords.Count < 2) return null;
+        // Mapbox GeoJSON : center = [lon, lat]
+        var center = feats[0]?["center"]?.AsArray();
+        if (center is null || center.Count < 2) return null;
 
-        double lon = coords[0]?.GetValue<double>() ?? double.NaN;
-        double lat = coords[1]?.GetValue<double>() ?? double.NaN;
+        double lon = center[0]?.GetValue<double>() ?? double.NaN;
+        double lat = center[1]?.GetValue<double>() ?? double.NaN;
         if (double.IsNaN(lat) || double.IsNaN(lon)) return null;
 
         return (lat, lon);
     }
 
-    // ── Routage ORS Directions ────────────────────────────────────────────────
+    // ── Routage Mapbox Directions ─────────────────────────────────────────────
 
-    private static async Task<(double Km, int Minutes)> RouteOrsAsync(
+    private static async Task<(double Km, int Minutes)> RouteMapboxAsync(
         (double Lat, double Lon) dep, (double Lat, double Lon) arr, string apiKey)
     {
         static string F(double d) => d.ToString("F6", CultureInfo.InvariantCulture);
 
-        // ORS attend les coordonnées au format lon,lat
-        string url = BaseUrl + "/v2/directions/driving-car"
-                   + "?api_key=" + Uri.EscapeDataString(apiKey)
-                   + "&start="   + $"{F(dep.Lon)},{F(dep.Lat)}"
-                   + "&end="     + $"{F(arr.Lon)},{F(arr.Lat)}";
+        // Mapbox attend les coordonnées au format lon,lat séparées par ";"
+        string coords = $"{F(dep.Lon)},{F(dep.Lat)};{F(arr.Lon)},{F(arr.Lat)}";
+        string url    = $"{BaseUrl}/directions/v5/mapbox/driving/{coords}"
+                      + $"?access_token={Uri.EscapeDataString(apiKey)}"
+                      +  "&overview=false";
 
-        string json  = await Http.GetStringAsync(url).ConfigureAwait(false);
-        var    root  = JsonNode.Parse(json);
-        var    summ  = root?["features"]?[0]?["properties"]?["summary"]
-                       ?? throw new InvalidOperationException("Aucun itinéraire trouvé par ORS.");
+        string json   = await Http.GetStringAsync(url).ConfigureAwait(false);
+        var    root   = JsonNode.Parse(json);
+        var    routes = root?["routes"]?.AsArray();
 
-        double metres  = summ["distance"]?.GetValue<double>() ?? 0;
-        double seconds = summ["duration"]?.GetValue<double>() ?? 0;
+        if (routes is null || routes.Count == 0)
+            throw new InvalidOperationException("Aucun itinéraire trouvé par Mapbox.");
+
+        double metres  = routes[0]?["distance"]?.GetValue<double>() ?? 0;
+        double seconds = routes[0]?["duration"]?.GetValue<double>() ?? 0;
 
         return (Math.Round(metres / 1000.0, 1), (int)Math.Round(seconds / 60.0));
     }

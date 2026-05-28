@@ -380,12 +380,12 @@ public partial class Form1 : Form
             return;
         }
 
-        if (string.IsNullOrWhiteSpace(_cfg.OrsApiKey))
+        if (string.IsNullOrWhiteSpace(_cfg.MapboxApiKey))
         {
             MessageBox.Show(
-                "Clé API OpenRouteService non configurée." + Environment.NewLine
-                + "Renseignez-la dans Outils > Paramètres > OpenRouteService.",
-                "Clé manquante", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                "Jeton d'accès Mapbox non configuré." + Environment.NewLine
+                + "Renseignez-le dans Outils > Paramètres > Itinéraire.",
+                "Jeton manquant", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             return;
         }
 
@@ -406,13 +406,13 @@ public partial class Form1 : Form
 
         try
         {
-            var (km, minutes) = await RoutingService.CalculerAsync(adresseDepart, adresseArrivee, _cfg.OrsApiKey);
+            var (km, minutes) = await RoutingService.CalculerAsync(adresseDepart, adresseArrivee, _cfg.MapboxApiKey);
 
             int    h     = minutes / 60;
             int    min   = minutes % 60;
             string duree = h > 0 ? $"{h}h{min:D2}" : $"{minutes} min";
 
-            LblItineraire.Text      = $"🚘  {km:0.0} km — {duree} ";
+            LblItineraire.Text      = $"🚘  {km:0.0} km — {duree} approximatif";
             LblItineraire.ForeColor = Color.FromArgb(0, 100, 0);
 
             // Proposer de mettre à jour le nombre de km dans les indemnités

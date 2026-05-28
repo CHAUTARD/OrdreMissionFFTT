@@ -69,10 +69,13 @@ public sealed class AppSettings
     public string EmailResponsableNominations { get; set; } = "";
     public string TelResponsableNominations   { get; set; } = "";
 
-    // ── OpenRouteService ─────────────────────────────────────────────────────────
-    // Clé API ORS gratuite : https://openrouteservice.org/dev/#/signup
-    public string OrsApiKey      { get; set; } = ""; 
-    public string AzureMapsApiKey { get; set; } = "";   // conservé pour rétrocompatibilité JSON
+    // ── Mapbox (calcul d'itinéraire) ──────────────────────────────────────────
+    // Jeton d'accès public (commence par pk.eyJ1…) : https://account.mapbox.com/
+    // Quota gratuit : 100 000 géocodages/mois + 100 000 directions/mois.
+    public string MapboxApiKey   { get; set; } = "";
+    // Champs conservés pour rétrocompatibilité JSON (ne plus utiliser)
+    public string OrsApiKey      { get; set; } = "";
+    public string AzureMapsApiKey { get; set; } = "";
 
     // ── API FFTT Smartping ────────────────────────────────────────────────────
     // Identifiants obtenus auprès de la FFTT : interfaces.informatiques@fftt.email

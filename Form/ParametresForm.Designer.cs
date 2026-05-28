@@ -14,163 +14,102 @@ partial class ParametresForm
     private void InitializeComponent()
     {
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ParametresForm));
-
-        // ── TabControl ────────────────────────────────────────────────────────
-        TcParams       = new TabControl();
-        TpMontants     = new TabPage();
-        TpArbitre      = new TabPage();
-        TpNominations  = new TabPage();
-        TpItineraire   = new TabPage();
-        TpSmtp         = new TabPage();
-
-        // ── Onglet 1 : Montants réglementaires ───────────────────────────────
-        Grp          = new GroupBox();
-        LblIndemLbl  = new Label();
+        TcParams = new TabControl();
+        TpMontants = new TabPage();
+        Grp = new GroupBox();
+        LblIndemLbl = new Label();
         NudIndemFixe = new NumericUpDown();
         LblEuroIndem = new Label();
-        LblTauxLbl   = new Label();
-        NudTauxKm    = new NumericUpDown();
-        LblEuroKm    = new Label();
-
-        // ── Onglet 2 : Arbitre et Adresse de départ ──────────────────────────
+        LblTauxLbl = new Label();
+        NudTauxKm = new NumericUpDown();
+        LblEuroKm = new Label();
+        BtnSauverMontants = new Button();
+        TpArbitre = new TabPage();
         LblNomArbitreLbl = new Label();
-        TxtNomArbitre    = new TextBox();
-        GrpAddr          = new GroupBox();
-        LblNumeroLbl     = new Label();
-        TxtNumero        = new TextBox();
-        LblRueLbl        = new Label();
-        TxtRue           = new TextBox();
-        LblCpLbl         = new Label();
-        TxtCp            = new TextBox();
-        LblVilleLbl      = new Label();
-        TxtVille         = new TextBox();
-
-        // ── Onglet 3 : Responsable des nominations ────────────────────────────
-        GrpNominations       = new GroupBox();
+        TxtNomArbitre = new TextBox();
+        GrpAddr = new GroupBox();
+        LblNumeroLbl = new Label();
+        TxtNumero = new TextBox();
+        LblRueLbl = new Label();
+        TxtRue = new TextBox();
+        LblCpLbl = new Label();
+        TxtCp = new TextBox();
+        LblVilleLbl = new Label();
+        TxtVille = new TextBox();
+        BtnSauverArbitre = new Button();
+        TpNominations = new TabPage();
+        GrpNominations = new GroupBox();
         LblNomNominationsLbl = new Label();
-        TxtNomNominations    = new TextBox();
+        TxtNomNominations = new TextBox();
         LblEmailNominationsLbl = new Label();
-        TxtEmailNominations  = new TextBox();
+        TxtEmailNominations = new TextBox();
         LblTelNominationsLbl = new Label();
-        TxtTelNominations    = new TextBox();
-
-        // ── Onglet 4 : OpenRouteService ───────────────────────────────────────
-        GrpAzureMaps    = new GroupBox();
+        TxtTelNominations = new TextBox();
+        BtnSauverNominations = new Button();
+        TpItineraire = new TabPage();
+        GrpAzureMaps = new GroupBox();
         LblAzureMapsLbl = new Label();
         TxtAzureMapsKey = new TextBox();
-
-        // ── Onglet 5 : SMTP ───────────────────────────────────────────────────
-        GrpSmtp            = new GroupBox();
-        LblSmtpServeurLbl  = new Label();
-        TxtSmtpHost        = new TextBox();
-        LblSmtpPortLbl     = new Label();
-        NudSmtpPort        = new NumericUpDown();
-        ChkSmtpSsl         = new CheckBox();
-        LblSmtpUserLbl     = new Label();
-        TxtSmtpUser        = new TextBox();
+        BtnSauverItineraire = new Button();
+        TpSmtp = new TabPage();
+        GrpSmtp = new GroupBox();
+        LblSmtpServeurLbl = new Label();
+        TxtSmtpHost = new TextBox();
+        LblSmtpPortLbl = new Label();
+        NudSmtpPort = new NumericUpDown();
+        ChkSmtpSsl = new CheckBox();
+        LblSmtpUserLbl = new Label();
+        TxtSmtpUser = new TextBox();
         LblSmtpPasswordLbl = new Label();
-        TxtSmtpPassword    = new TextBox();
-        LblSmtpFromLbl     = new Label();
-        TxtSmtpFrom        = new TextBox();
-
-        // ── Boutons Sauvegarder par onglet ───────────────────────────────────
-        BtnSauverMontants    = new Button();
-        BtnSauverArbitre     = new Button();
-        BtnSauverNominations = new Button();
-        BtnSauverItineraire  = new Button();
-        BtnSauverSmtp        = new Button();
-
-        // ── Boutons globaux ───────────────────────────────────────────────────
-        BtnOk     = new Button();
+        TxtSmtpPassword = new TextBox();
+        LblSmtpFromLbl = new Label();
+        TxtSmtpFrom = new TextBox();
+        BtnSauverSmtp = new Button();
+        BtnOk = new Button();
         BtnCancel = new Button();
-
-        // ── SuspendLayout ─────────────────────────────────────────────────────
         TcParams.SuspendLayout();
         TpMontants.SuspendLayout();
-        TpArbitre.SuspendLayout();
-        TpNominations.SuspendLayout();
-        TpItineraire.SuspendLayout();
-        TpSmtp.SuspendLayout();
         Grp.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)NudIndemFixe).BeginInit();
         ((System.ComponentModel.ISupportInitialize)NudTauxKm).BeginInit();
+        TpArbitre.SuspendLayout();
         GrpAddr.SuspendLayout();
+        TpNominations.SuspendLayout();
         GrpNominations.SuspendLayout();
+        TpItineraire.SuspendLayout();
         GrpAzureMaps.SuspendLayout();
+        TpSmtp.SuspendLayout();
         GrpSmtp.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)NudSmtpPort).BeginInit();
         SuspendLayout();
-
-        // ── TcParams ─────────────────────────────────────────────────────────
+        // 
+        // TcParams
+        // 
         TcParams.Controls.Add(TpMontants);
         TcParams.Controls.Add(TpArbitre);
         TcParams.Controls.Add(TpNominations);
         TcParams.Controls.Add(TpItineraire);
         TcParams.Controls.Add(TpSmtp);
-        TcParams.Location      = new Point(12, 12);
-        TcParams.Name          = "TcParams";
+        TcParams.Location = new Point(12, 12);
+        TcParams.Name = "TcParams";
         TcParams.SelectedIndex = 0;
-        TcParams.Size          = new Size(396, 260);
-        TcParams.TabIndex      = 0;
-
-        // ── TpMontants ───────────────────────────────────────────────────────
+        TcParams.Size = new Size(396, 260);
+        TcParams.TabIndex = 0;
+        // 
+        // TpMontants
+        // 
         TpMontants.Controls.Add(Grp);
         TpMontants.Controls.Add(BtnSauverMontants);
-        TpMontants.Location           = new Point(4, 24);
-        TpMontants.Name               = "TpMontants";
-        TpMontants.Padding            = new Padding(3);
-        TpMontants.Size               = new Size(388, 212);
-        TpMontants.TabIndex           = 0;
-        TpMontants.Text               = "Montants";
+        TpMontants.Location = new Point(4, 24);
+        TpMontants.Name = "TpMontants";
+        TpMontants.Padding = new Padding(3);
+        TpMontants.Size = new Size(388, 232);
+        TpMontants.TabIndex = 0;
+        TpMontants.Text = "Montants";
         TpMontants.UseVisualStyleBackColor = true;
-
-        // ── TpArbitre ────────────────────────────────────────────────────────
-        TpArbitre.Controls.Add(LblNomArbitreLbl);
-        TpArbitre.Controls.Add(TxtNomArbitre);
-        TpArbitre.Controls.Add(GrpAddr);
-        TpArbitre.Controls.Add(BtnSauverArbitre);
-        TpArbitre.Location            = new Point(4, 24);
-        TpArbitre.Name                = "TpArbitre";
-        TpArbitre.Padding             = new Padding(3);
-        TpArbitre.Size                = new Size(388, 212);
-        TpArbitre.TabIndex            = 1;
-        TpArbitre.Text                = "Arbitre / Départ";
-        TpArbitre.UseVisualStyleBackColor = true;
-
-        // ── TpNominations ────────────────────────────────────────────────────
-        TpNominations.Controls.Add(GrpNominations);
-        TpNominations.Controls.Add(BtnSauverNominations);
-        TpNominations.Location        = new Point(4, 24);
-        TpNominations.Name            = "TpNominations";
-        TpNominations.Padding         = new Padding(3);
-        TpNominations.Size            = new Size(388, 212);
-        TpNominations.TabIndex        = 2;
-        TpNominations.Text            = "Nominations";
-        TpNominations.UseVisualStyleBackColor = true;
-
-        // ── TpItineraire ─────────────────────────────────────────────────────
-        TpItineraire.Controls.Add(GrpAzureMaps);
-        TpItineraire.Controls.Add(BtnSauverItineraire);
-        TpItineraire.Location         = new Point(4, 24);
-        TpItineraire.Name             = "TpItineraire";
-        TpItineraire.Padding          = new Padding(3);
-        TpItineraire.Size             = new Size(388, 212);
-        TpItineraire.TabIndex         = 3;
-        TpItineraire.Text             = "Itinéraire";
-        TpItineraire.UseVisualStyleBackColor = true;
-
-        // ── TpSmtp ───────────────────────────────────────────────────────────
-        TpSmtp.Controls.Add(GrpSmtp);
-        TpSmtp.Controls.Add(BtnSauverSmtp);
-        TpSmtp.Location               = new Point(4, 24);
-        TpSmtp.Name                   = "TpSmtp";
-        TpSmtp.Padding                = new Padding(3);
-        TpSmtp.Size                   = new Size(388, 212);
-        TpSmtp.TabIndex               = 4;
-        TpSmtp.Text                   = "SMTP";
-        TpSmtp.UseVisualStyleBackColor = true;
-
-        // ── Grp (Montants réglementaires) ─────────────────────────────────────
+        // 
+        // Grp
+        // 
         Grp.Controls.Add(LblIndemLbl);
         Grp.Controls.Add(NudIndemFixe);
         Grp.Controls.Add(LblEuroIndem);
@@ -178,68 +117,112 @@ partial class ParametresForm
         Grp.Controls.Add(NudTauxKm);
         Grp.Controls.Add(LblEuroKm);
         Grp.Location = new Point(6, 6);
-        Grp.Name     = "Grp";
-        Grp.Size     = new Size(376, 106);
+        Grp.Name = "Grp";
+        Grp.Size = new Size(376, 106);
         Grp.TabIndex = 0;
-        Grp.TabStop  = false;
-        Grp.Text     = "Montants réglementaires";
-
+        Grp.TabStop = false;
+        Grp.Text = "Montants réglementaires";
+        // 
+        // LblIndemLbl
+        // 
         LblIndemLbl.AutoSize = true;
         LblIndemLbl.Location = new Point(12, 28);
-        LblIndemLbl.Name     = "LblIndemLbl";
+        LblIndemLbl.Name = "LblIndemLbl";
+        LblIndemLbl.Size = new Size(89, 15);
         LblIndemLbl.TabIndex = 0;
-        LblIndemLbl.Text     = "Indemnité fixe :";
-
+        LblIndemLbl.Text = "Indemnité fixe :";
+        // 
+        // NudIndemFixe
+        // 
         NudIndemFixe.DecimalPlaces = 2;
-        NudIndemFixe.Increment     = new decimal(new int[] { 5, 0, 0, 65536 });
-        NudIndemFixe.Location      = new Point(188, 24);
-        NudIndemFixe.Maximum       = new decimal(new int[] { 9999, 0, 0, 0 });
-        NudIndemFixe.Name          = "NudIndemFixe";
-        NudIndemFixe.Size          = new Size(80, 23);
-        NudIndemFixe.TabIndex      = 1;
-
+        NudIndemFixe.Increment = new decimal(new int[] { 5, 0, 0, 65536 });
+        NudIndemFixe.Location = new Point(188, 24);
+        NudIndemFixe.Maximum = new decimal(new int[] { 9999, 0, 0, 0 });
+        NudIndemFixe.Name = "NudIndemFixe";
+        NudIndemFixe.Size = new Size(80, 23);
+        NudIndemFixe.TabIndex = 1;
+        // 
+        // LblEuroIndem
+        // 
         LblEuroIndem.AutoSize = true;
         LblEuroIndem.Location = new Point(273, 28);
-        LblEuroIndem.Name     = "LblEuroIndem";
+        LblEuroIndem.Name = "LblEuroIndem";
+        LblEuroIndem.Size = new Size(13, 15);
         LblEuroIndem.TabIndex = 2;
-        LblEuroIndem.Text     = "€";
-
+        LblEuroIndem.Text = "€";
+        // 
+        // LblTauxLbl
+        // 
         LblTauxLbl.AutoSize = true;
         LblTauxLbl.Location = new Point(12, 70);
-        LblTauxLbl.Name     = "LblTauxLbl";
+        LblTauxLbl.Name = "LblTauxLbl";
+        LblTauxLbl.Size = new Size(107, 15);
         LblTauxLbl.TabIndex = 3;
-        LblTauxLbl.Text     = "Taux kilométrique :";
-
+        LblTauxLbl.Text = "Taux kilométrique :";
+        // 
+        // NudTauxKm
+        // 
         NudTauxKm.DecimalPlaces = 2;
-        NudTauxKm.Increment     = new decimal(new int[] { 1, 0, 0, 131072 });
-        NudTauxKm.Location      = new Point(188, 66);
-        NudTauxKm.Maximum       = new decimal(new int[] { 999, 0, 0, 131072 });
-        NudTauxKm.Name          = "NudTauxKm";
-        NudTauxKm.Size          = new Size(80, 23);
-        NudTauxKm.TabIndex      = 4;
-
+        NudTauxKm.Increment = new decimal(new int[] { 1, 0, 0, 131072 });
+        NudTauxKm.Location = new Point(188, 66);
+        NudTauxKm.Maximum = new decimal(new int[] { 999, 0, 0, 131072 });
+        NudTauxKm.Name = "NudTauxKm";
+        NudTauxKm.Size = new Size(80, 23);
+        NudTauxKm.TabIndex = 4;
+        // 
+        // LblEuroKm
+        // 
         LblEuroKm.AutoSize = true;
         LblEuroKm.Location = new Point(273, 70);
-        LblEuroKm.Name     = "LblEuroKm";
+        LblEuroKm.Name = "LblEuroKm";
+        LblEuroKm.Size = new Size(41, 15);
         LblEuroKm.TabIndex = 5;
-        LblEuroKm.Text     = "€ / km";
-
-        // ── Onglet 2 — Arbitre ────────────────────────────────────────────────
+        LblEuroKm.Text = "€ / km";
+        // 
+        // BtnSauverMontants
+        // 
+        BtnSauverMontants.Location = new Point(148, 187);
+        BtnSauverMontants.Name = "BtnSauverMontants";
+        BtnSauverMontants.Size = new Size(75, 23);
+        BtnSauverMontants.TabIndex = 1;
+        BtnSauverMontants.Text = "Montant";
+        BtnSauverMontants.Click += BtnSauverMontants_Click;
+        // 
+        // TpArbitre
+        // 
+        TpArbitre.Controls.Add(LblNomArbitreLbl);
+        TpArbitre.Controls.Add(TxtNomArbitre);
+        TpArbitre.Controls.Add(GrpAddr);
+        TpArbitre.Controls.Add(BtnSauverArbitre);
+        TpArbitre.Location = new Point(4, 24);
+        TpArbitre.Name = "TpArbitre";
+        TpArbitre.Padding = new Padding(3);
+        TpArbitre.Size = new Size(388, 232);
+        TpArbitre.TabIndex = 1;
+        TpArbitre.Text = "Arbitre / Départ";
+        TpArbitre.UseVisualStyleBackColor = true;
+        // 
+        // LblNomArbitreLbl
+        // 
         LblNomArbitreLbl.AutoSize = true;
-        LblNomArbitreLbl.Font     = new Font("Segoe UI", 9F, FontStyle.Bold);
+        LblNomArbitreLbl.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
         LblNomArbitreLbl.Location = new Point(10, 16);
-        LblNomArbitreLbl.Name     = "LblNomArbitreLbl";
+        LblNomArbitreLbl.Name = "LblNomArbitreLbl";
+        LblNomArbitreLbl.Size = new Size(53, 15);
         LblNomArbitreLbl.TabIndex = 0;
-        LblNomArbitreLbl.Text     = "Arbitre :";
-
-        TxtNomArbitre.Location        = new Point(79, 13);
-        TxtNomArbitre.MaxLength       = 80;
-        TxtNomArbitre.Name            = "TxtNomArbitre";
+        LblNomArbitreLbl.Text = "Arbitre :";
+        // 
+        // TxtNomArbitre
+        // 
+        TxtNomArbitre.Location = new Point(79, 13);
+        TxtNomArbitre.MaxLength = 80;
+        TxtNomArbitre.Name = "TxtNomArbitre";
         TxtNomArbitre.PlaceholderText = "Prénom NOM";
-        TxtNomArbitre.Size            = new Size(295, 23);
-        TxtNomArbitre.TabIndex        = 1;
-
-        // ── GrpAddr (Adresse de départ) ───────────────────────────────────────
+        TxtNomArbitre.Size = new Size(295, 23);
+        TxtNomArbitre.TabIndex = 1;
+        // 
+        // GrpAddr
+        // 
         GrpAddr.Controls.Add(LblNumeroLbl);
         GrpAddr.Controls.Add(TxtNumero);
         GrpAddr.Controls.Add(LblRueLbl);
@@ -249,57 +232,99 @@ partial class ParametresForm
         GrpAddr.Controls.Add(LblVilleLbl);
         GrpAddr.Controls.Add(TxtVille);
         GrpAddr.Location = new Point(6, 44);
-        GrpAddr.Name     = "GrpAddr";
-        GrpAddr.Size     = new Size(376, 100);
+        GrpAddr.Name = "GrpAddr";
+        GrpAddr.Size = new Size(376, 100);
         GrpAddr.TabIndex = 2;
-        GrpAddr.TabStop  = false;
-        GrpAddr.Text     = "Adresse de départ";
-
+        GrpAddr.TabStop = false;
+        GrpAddr.Text = "Adresse de départ";
+        // 
+        // LblNumeroLbl
+        // 
         LblNumeroLbl.AutoSize = true;
         LblNumeroLbl.Location = new Point(10, 28);
-        LblNumeroLbl.Name     = "LblNumeroLbl";
+        LblNumeroLbl.Name = "LblNumeroLbl";
+        LblNumeroLbl.Size = new Size(27, 15);
         LblNumeroLbl.TabIndex = 0;
-        LblNumeroLbl.Text     = "N° :";
-
+        LblNumeroLbl.Text = "N° :";
+        // 
+        // TxtNumero
+        // 
         TxtNumero.Location = new Point(42, 24);
-        TxtNumero.Name     = "TxtNumero";
-        TxtNumero.Size     = new Size(55, 23);
+        TxtNumero.Name = "TxtNumero";
+        TxtNumero.Size = new Size(55, 23);
         TxtNumero.TabIndex = 1;
-
+        // 
+        // LblRueLbl
+        // 
         LblRueLbl.AutoSize = true;
         LblRueLbl.Location = new Point(108, 28);
-        LblRueLbl.Name     = "LblRueLbl";
+        LblRueLbl.Name = "LblRueLbl";
+        LblRueLbl.Size = new Size(33, 15);
         LblRueLbl.TabIndex = 2;
-        LblRueLbl.Text     = "Rue :";
-
+        LblRueLbl.Text = "Rue :";
+        // 
+        // TxtRue
+        // 
         TxtRue.Location = new Point(145, 24);
-        TxtRue.Name     = "TxtRue";
-        TxtRue.Size     = new Size(218, 23);
+        TxtRue.Name = "TxtRue";
+        TxtRue.Size = new Size(218, 23);
         TxtRue.TabIndex = 3;
-
+        // 
+        // LblCpLbl
+        // 
         LblCpLbl.AutoSize = true;
         LblCpLbl.Location = new Point(10, 64);
-        LblCpLbl.Name     = "LblCpLbl";
+        LblCpLbl.Name = "LblCpLbl";
+        LblCpLbl.Size = new Size(76, 15);
         LblCpLbl.TabIndex = 4;
-        LblCpLbl.Text     = "Code postal :";
-
+        LblCpLbl.Text = "Code postal :";
+        // 
+        // TxtCp
+        // 
         TxtCp.Location = new Point(114, 60);
-        TxtCp.Name     = "TxtCp";
-        TxtCp.Size     = new Size(80, 23);
+        TxtCp.Name = "TxtCp";
+        TxtCp.Size = new Size(80, 23);
         TxtCp.TabIndex = 5;
-
+        // 
+        // LblVilleLbl
+        // 
         LblVilleLbl.AutoSize = true;
         LblVilleLbl.Location = new Point(205, 64);
-        LblVilleLbl.Name     = "LblVilleLbl";
+        LblVilleLbl.Name = "LblVilleLbl";
+        LblVilleLbl.Size = new Size(35, 15);
         LblVilleLbl.TabIndex = 6;
-        LblVilleLbl.Text     = "Ville :";
-
+        LblVilleLbl.Text = "Ville :";
+        // 
+        // TxtVille
+        // 
         TxtVille.Location = new Point(244, 60);
-        TxtVille.Name     = "TxtVille";
-        TxtVille.Size     = new Size(120, 23);
+        TxtVille.Name = "TxtVille";
+        TxtVille.Size = new Size(120, 23);
         TxtVille.TabIndex = 7;
-
-        // ── GrpNominations ───────────────────────────────────────────────────
+        // 
+        // BtnSauverArbitre
+        // 
+        BtnSauverArbitre.Location = new Point(148, 187);
+        BtnSauverArbitre.Name = "BtnSauverArbitre";
+        BtnSauverArbitre.Size = new Size(75, 23);
+        BtnSauverArbitre.TabIndex = 3;
+        BtnSauverArbitre.Text = "Arbitre";
+        BtnSauverArbitre.Click += BtnSauverArbitre_Click;
+        // 
+        // TpNominations
+        // 
+        TpNominations.Controls.Add(GrpNominations);
+        TpNominations.Controls.Add(BtnSauverNominations);
+        TpNominations.Location = new Point(4, 24);
+        TpNominations.Name = "TpNominations";
+        TpNominations.Padding = new Padding(3);
+        TpNominations.Size = new Size(388, 232);
+        TpNominations.TabIndex = 2;
+        TpNominations.Text = "Nominations";
+        TpNominations.UseVisualStyleBackColor = true;
+        // 
+        // GrpNominations
+        // 
         GrpNominations.Controls.Add(LblNomNominationsLbl);
         GrpNominations.Controls.Add(TxtNomNominations);
         GrpNominations.Controls.Add(LblEmailNominationsLbl);
@@ -307,71 +332,135 @@ partial class ParametresForm
         GrpNominations.Controls.Add(LblTelNominationsLbl);
         GrpNominations.Controls.Add(TxtTelNominations);
         GrpNominations.Location = new Point(6, 6);
-        GrpNominations.Name     = "GrpNominations";
-        GrpNominations.Size     = new Size(376, 116);
+        GrpNominations.Name = "GrpNominations";
+        GrpNominations.Size = new Size(376, 116);
         GrpNominations.TabIndex = 0;
-        GrpNominations.TabStop  = false;
-        GrpNominations.Text     = "Responsable des nominations";
-
+        GrpNominations.TabStop = false;
+        GrpNominations.Text = "Responsable des nominations";
+        // 
+        // LblNomNominationsLbl
+        // 
         LblNomNominationsLbl.AutoSize = true;
         LblNomNominationsLbl.Location = new Point(10, 28);
-        LblNomNominationsLbl.Name     = "LblNomNominationsLbl";
+        LblNomNominationsLbl.Name = "LblNomNominationsLbl";
+        LblNomNominationsLbl.Size = new Size(40, 15);
         LblNomNominationsLbl.TabIndex = 0;
-        LblNomNominationsLbl.Text     = "Nom :";
-
-        TxtNomNominations.Location        = new Point(114, 24);
-        TxtNomNominations.Name            = "TxtNomNominations";
+        LblNomNominationsLbl.Text = "Nom :";
+        // 
+        // TxtNomNominations
+        // 
+        TxtNomNominations.Location = new Point(114, 24);
+        TxtNomNominations.Name = "TxtNomNominations";
         TxtNomNominations.PlaceholderText = "Prénom NOM";
-        TxtNomNominations.Size            = new Size(248, 23);
-        TxtNomNominations.TabIndex        = 1;
-
+        TxtNomNominations.Size = new Size(248, 23);
+        TxtNomNominations.TabIndex = 1;
+        // 
+        // LblEmailNominationsLbl
+        // 
         LblEmailNominationsLbl.AutoSize = true;
         LblEmailNominationsLbl.Location = new Point(10, 60);
-        LblEmailNominationsLbl.Name     = "LblEmailNominationsLbl";
+        LblEmailNominationsLbl.Name = "LblEmailNominationsLbl";
+        LblEmailNominationsLbl.Size = new Size(42, 15);
         LblEmailNominationsLbl.TabIndex = 2;
-        LblEmailNominationsLbl.Text     = "Email :";
-
-        TxtEmailNominations.Location        = new Point(114, 56);
-        TxtEmailNominations.Name            = "TxtEmailNominations";
+        LblEmailNominationsLbl.Text = "Email :";
+        // 
+        // TxtEmailNominations
+        // 
+        TxtEmailNominations.Location = new Point(114, 56);
+        TxtEmailNominations.Name = "TxtEmailNominations";
         TxtEmailNominations.PlaceholderText = "responsable@ligue.fftt.fr";
-        TxtEmailNominations.Size            = new Size(248, 23);
-        TxtEmailNominations.TabIndex        = 3;
-
+        TxtEmailNominations.Size = new Size(248, 23);
+        TxtEmailNominations.TabIndex = 3;
+        // 
+        // LblTelNominationsLbl
+        // 
         LblTelNominationsLbl.AutoSize = true;
         LblTelNominationsLbl.Location = new Point(10, 92);
-        LblTelNominationsLbl.Name     = "LblTelNominationsLbl";
+        LblTelNominationsLbl.Name = "LblTelNominationsLbl";
+        LblTelNominationsLbl.Size = new Size(67, 15);
         LblTelNominationsLbl.TabIndex = 4;
-        LblTelNominationsLbl.Text     = "Téléphone :";
-
-        TxtTelNominations.Location        = new Point(114, 88);
-        TxtTelNominations.Name            = "TxtTelNominations";
+        LblTelNominationsLbl.Text = "Téléphone :";
+        // 
+        // TxtTelNominations
+        // 
+        TxtTelNominations.Location = new Point(114, 88);
+        TxtTelNominations.Name = "TxtTelNominations";
         TxtTelNominations.PlaceholderText = "06 00 00 00 00";
-        TxtTelNominations.Size            = new Size(160, 23);
-        TxtTelNominations.TabIndex        = 5;
-
-        // ── GrpAzureMaps (OpenRouteService) ───────────────────────────────────
+        TxtTelNominations.Size = new Size(160, 23);
+        TxtTelNominations.TabIndex = 5;
+        // 
+        // BtnSauverNominations
+        // 
+        BtnSauverNominations.Location = new Point(148, 187);
+        BtnSauverNominations.Name = "BtnSauverNominations";
+        BtnSauverNominations.Size = new Size(96, 23);
+        BtnSauverNominations.TabIndex = 1;
+        BtnSauverNominations.Text = "Nominations";
+        BtnSauverNominations.Click += BtnSauverNominations_Click;
+        // 
+        // TpItineraire
+        // 
+        TpItineraire.Controls.Add(GrpAzureMaps);
+        TpItineraire.Controls.Add(BtnSauverItineraire);
+        TpItineraire.Location = new Point(4, 24);
+        TpItineraire.Name = "TpItineraire";
+        TpItineraire.Padding = new Padding(3);
+        TpItineraire.Size = new Size(388, 232);
+        TpItineraire.TabIndex = 3;
+        TpItineraire.Text = "Itinéraire";
+        TpItineraire.UseVisualStyleBackColor = true;
+        // 
+        // GrpAzureMaps
+        // 
         GrpAzureMaps.Controls.Add(LblAzureMapsLbl);
         GrpAzureMaps.Controls.Add(TxtAzureMapsKey);
         GrpAzureMaps.Location = new Point(6, 6);
-        GrpAzureMaps.Name     = "GrpAzureMaps";
-        GrpAzureMaps.Size     = new Size(376, 55);
+        GrpAzureMaps.Name = "GrpAzureMaps";
+        GrpAzureMaps.Size = new Size(376, 55);
         GrpAzureMaps.TabIndex = 0;
-        GrpAzureMaps.TabStop  = false;
-        GrpAzureMaps.Text     = "OpenRouteService (calcul d'itinéraire)";
-
+        GrpAzureMaps.TabStop = false;
+        GrpAzureMaps.Text = "Mapbox (calcul d'itinéraire)";
+        // 
+        // LblAzureMapsLbl
+        // 
         LblAzureMapsLbl.AutoSize = true;
         LblAzureMapsLbl.Location = new Point(10, 24);
-        LblAzureMapsLbl.Name     = "LblAzureMapsLbl";
+        LblAzureMapsLbl.Name = "LblAzureMapsLbl";
+        LblAzureMapsLbl.Size = new Size(51, 15);
         LblAzureMapsLbl.TabIndex = 0;
-        LblAzureMapsLbl.Text     = "Clé API :";
-
-        TxtAzureMapsKey.Location        = new Point(68, 20);
-        TxtAzureMapsKey.Name            = "TxtAzureMapsKey";
-        TxtAzureMapsKey.PlaceholderText = "Votre clé OpenRouteService…";
-        TxtAzureMapsKey.Size            = new Size(294, 23);
-        TxtAzureMapsKey.TabIndex        = 1;
-
-        // ── GrpSmtp ───────────────────────────────────────────────────────────
+        LblAzureMapsLbl.Text = "Jeton :";
+        // 
+        // TxtAzureMapsKey
+        // 
+        TxtAzureMapsKey.Location = new Point(68, 20);
+        TxtAzureMapsKey.Name = "TxtAzureMapsKey";
+        TxtAzureMapsKey.PlaceholderText = "pk.eyJ1…  (jeton public Mapbox)";
+        TxtAzureMapsKey.Size = new Size(294, 23);
+        TxtAzureMapsKey.TabIndex = 1;
+        // 
+        // BtnSauverItineraire
+        // 
+        BtnSauverItineraire.Location = new Point(148, 187);
+        BtnSauverItineraire.Name = "BtnSauverItineraire";
+        BtnSauverItineraire.Size = new Size(75, 23);
+        BtnSauverItineraire.TabIndex = 1;
+        BtnSauverItineraire.Text = "Itinéraire";
+        BtnSauverItineraire.Click += BtnSauverItineraire_Click;
+        // 
+        // TpSmtp
+        // 
+        TpSmtp.Controls.Add(GrpSmtp);
+        TpSmtp.Controls.Add(BtnSauverSmtp);
+        TpSmtp.Location = new Point(4, 24);
+        TpSmtp.Name = "TpSmtp";
+        TpSmtp.Padding = new Padding(3);
+        TpSmtp.Size = new Size(388, 232);
+        TpSmtp.TabIndex = 4;
+        TpSmtp.Text = "SMTP";
+        TpSmtp.UseVisualStyleBackColor = true;
+        // 
+        // GrpSmtp
+        // 
         GrpSmtp.Controls.Add(LblSmtpServeurLbl);
         GrpSmtp.Controls.Add(TxtSmtpHost);
         GrpSmtp.Controls.Add(LblSmtpPortLbl);
@@ -384,163 +473,189 @@ partial class ParametresForm
         GrpSmtp.Controls.Add(LblSmtpFromLbl);
         GrpSmtp.Controls.Add(TxtSmtpFrom);
         GrpSmtp.Location = new Point(6, 6);
-        GrpSmtp.Name     = "GrpSmtp";
-        GrpSmtp.Size     = new Size(376, 170);
+        GrpSmtp.Name = "GrpSmtp";
+        GrpSmtp.Size = new Size(376, 170);
         GrpSmtp.TabIndex = 0;
-        GrpSmtp.TabStop  = false;
-        GrpSmtp.Text     = "SMTP (envoi d'emails)";
-
+        GrpSmtp.TabStop = false;
+        GrpSmtp.Text = "SMTP (envoi d'emails)";
+        // 
+        // LblSmtpServeurLbl
+        // 
         LblSmtpServeurLbl.AutoSize = true;
         LblSmtpServeurLbl.Location = new Point(10, 24);
-        LblSmtpServeurLbl.Name     = "LblSmtpServeurLbl";
+        LblSmtpServeurLbl.Name = "LblSmtpServeurLbl";
+        LblSmtpServeurLbl.Size = new Size(52, 15);
         LblSmtpServeurLbl.TabIndex = 0;
-        LblSmtpServeurLbl.Text     = "Serveur :";
-
-        TxtSmtpHost.Location        = new Point(73, 21);
-        TxtSmtpHost.Name            = "TxtSmtpHost";
+        LblSmtpServeurLbl.Text = "Serveur :";
+        // 
+        // TxtSmtpHost
+        // 
+        TxtSmtpHost.Location = new Point(73, 21);
+        TxtSmtpHost.Name = "TxtSmtpHost";
         TxtSmtpHost.PlaceholderText = "smtp.example.com";
-        TxtSmtpHost.Size            = new Size(192, 23);
-        TxtSmtpHost.TabIndex        = 1;
-
+        TxtSmtpHost.Size = new Size(192, 23);
+        TxtSmtpHost.TabIndex = 1;
+        // 
+        // LblSmtpPortLbl
+        // 
         LblSmtpPortLbl.AutoSize = true;
         LblSmtpPortLbl.Location = new Point(273, 24);
-        LblSmtpPortLbl.Name     = "LblSmtpPortLbl";
+        LblSmtpPortLbl.Name = "LblSmtpPortLbl";
+        LblSmtpPortLbl.Size = new Size(35, 15);
         LblSmtpPortLbl.TabIndex = 2;
-        LblSmtpPortLbl.Text     = "Port :";
-
+        LblSmtpPortLbl.Text = "Port :";
+        // 
+        // NudSmtpPort
+        // 
         NudSmtpPort.Location = new Point(316, 21);
-        NudSmtpPort.Maximum  = new decimal(new int[] { 65535, 0, 0, 0 });
-        NudSmtpPort.Minimum  = new decimal(new int[] { 1, 0, 0, 0 });
-        NudSmtpPort.Name     = "NudSmtpPort";
-        NudSmtpPort.Size     = new Size(50, 23);
+        NudSmtpPort.Maximum = new decimal(new int[] { 65535, 0, 0, 0 });
+        NudSmtpPort.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+        NudSmtpPort.Name = "NudSmtpPort";
+        NudSmtpPort.Size = new Size(50, 23);
         NudSmtpPort.TabIndex = 3;
-        NudSmtpPort.Value    = new decimal(new int[] { 587, 0, 0, 0 });
-
+        NudSmtpPort.Value = new decimal(new int[] { 587, 0, 0, 0 });
+        // 
+        // ChkSmtpSsl
+        // 
         ChkSmtpSsl.AutoSize = true;
         ChkSmtpSsl.Location = new Point(10, 52);
-        ChkSmtpSsl.Name     = "ChkSmtpSsl";
+        ChkSmtpSsl.Name = "ChkSmtpSsl";
+        ChkSmtpSsl.Size = new Size(154, 19);
         ChkSmtpSsl.TabIndex = 4;
-        ChkSmtpSsl.Text     = "SSL/TLS direct (port 465)";
-
+        ChkSmtpSsl.Text = "SSL/TLS direct (port 465)";
+        // 
+        // LblSmtpUserLbl
+        // 
         LblSmtpUserLbl.AutoSize = true;
         LblSmtpUserLbl.Location = new Point(10, 82);
-        LblSmtpUserLbl.Name     = "LblSmtpUserLbl";
+        LblSmtpUserLbl.Name = "LblSmtpUserLbl";
+        LblSmtpUserLbl.Size = new Size(43, 15);
         LblSmtpUserLbl.TabIndex = 5;
-        LblSmtpUserLbl.Text     = "Login :";
-
-        TxtSmtpUser.Location        = new Point(110, 79);
-        TxtSmtpUser.Name            = "TxtSmtpUser";
+        LblSmtpUserLbl.Text = "Login :";
+        // 
+        // TxtSmtpUser
+        // 
+        TxtSmtpUser.Location = new Point(110, 79);
+        TxtSmtpUser.Name = "TxtSmtpUser";
         TxtSmtpUser.PlaceholderText = "utilisateur@example.com";
-        TxtSmtpUser.Size            = new Size(254, 23);
-        TxtSmtpUser.TabIndex        = 6;
-
+        TxtSmtpUser.Size = new Size(254, 23);
+        TxtSmtpUser.TabIndex = 6;
+        // 
+        // LblSmtpPasswordLbl
+        // 
         LblSmtpPasswordLbl.AutoSize = true;
         LblSmtpPasswordLbl.Location = new Point(10, 110);
-        LblSmtpPasswordLbl.Name     = "LblSmtpPasswordLbl";
+        LblSmtpPasswordLbl.Name = "LblSmtpPasswordLbl";
+        LblSmtpPasswordLbl.Size = new Size(83, 15);
         LblSmtpPasswordLbl.TabIndex = 7;
-        LblSmtpPasswordLbl.Text     = "Mot de passe :";
-
-        TxtSmtpPassword.Location     = new Point(110, 107);
-        TxtSmtpPassword.Name         = "TxtSmtpPassword";
+        LblSmtpPasswordLbl.Text = "Mot de passe :";
+        // 
+        // TxtSmtpPassword
+        // 
+        TxtSmtpPassword.Location = new Point(110, 107);
+        TxtSmtpPassword.Name = "TxtSmtpPassword";
         TxtSmtpPassword.PasswordChar = '●';
-        TxtSmtpPassword.Size         = new Size(254, 23);
-        TxtSmtpPassword.TabIndex     = 8;
-
+        TxtSmtpPassword.Size = new Size(254, 23);
+        TxtSmtpPassword.TabIndex = 8;
+        // 
+        // LblSmtpFromLbl
+        // 
         LblSmtpFromLbl.AutoSize = true;
         LblSmtpFromLbl.Location = new Point(10, 140);
-        LblSmtpFromLbl.Name     = "LblSmtpFromLbl";
+        LblSmtpFromLbl.Name = "LblSmtpFromLbl";
+        LblSmtpFromLbl.Size = new Size(69, 15);
         LblSmtpFromLbl.TabIndex = 9;
-        LblSmtpFromLbl.Text     = "Expéditeur :";
-
-        TxtSmtpFrom.Location        = new Point(110, 137);
-        TxtSmtpFrom.Name            = "TxtSmtpFrom";
+        LblSmtpFromLbl.Text = "Expéditeur :";
+        // 
+        // TxtSmtpFrom
+        // 
+        TxtSmtpFrom.Location = new Point(110, 137);
+        TxtSmtpFrom.Name = "TxtSmtpFrom";
         TxtSmtpFrom.PlaceholderText = "votre@adresse.fr  (vide = Login)";
-        TxtSmtpFrom.Size            = new Size(254, 23);
-        TxtSmtpFrom.TabIndex        = 10;
-
-        // ── Boutons Sauvegarder par onglet (position commune : y=188, droite) ─
-        InitBtnSauver(BtnSauverMontants,    "BtnSauverMontants",    0);
-        BtnSauverMontants.Click    += BtnSauverMontants_Click;
-        InitBtnSauver(BtnSauverArbitre,     "BtnSauverArbitre",     1);
-        BtnSauverArbitre.Click     += BtnSauverArbitre_Click;
-        InitBtnSauver(BtnSauverNominations, "BtnSauverNominations", 2);
-        BtnSauverNominations.Click += BtnSauverNominations_Click;
-        InitBtnSauver(BtnSauverItineraire,  "BtnSauverItineraire",  3);
-        BtnSauverItineraire.Click  += BtnSauverItineraire_Click;
-        InitBtnSauver(BtnSauverSmtp,        "BtnSauverSmtp",        4);
-        BtnSauverSmtp.Click        += BtnSauverSmtp_Click;
-
-        // ── Boutons globaux ───────────────────────────────────────────────────
-        BtnOk.BackColor                  = Color.FromArgb(21, 101, 192);
-        BtnOk.DialogResult               = DialogResult.OK;
-        BtnOk.FlatAppearance.BorderSize  = 0;
-        BtnOk.FlatStyle                  = FlatStyle.Flat;
-        BtnOk.ForeColor                  = Color.White;
-        BtnOk.Image                      = Properties.Resources.save1;
-        BtnOk.ImageAlign                 = ContentAlignment.MiddleLeft;
-        BtnOk.Padding                    = new Padding(6, 0, 0, 0);
-        BtnOk.Location                   = new Point(285, 280);
-        BtnOk.Name                       = "BtnOk";
-        BtnOk.Size                       = new Size(123, 38);
-        BtnOk.TabIndex                   = 11;
-        BtnOk.Text                       = "  &Enregistrer";
-        BtnOk.TextAlign                  = ContentAlignment.MiddleRight;
-        BtnOk.TextImageRelation          = TextImageRelation.ImageBeforeText;
-        BtnOk.UseVisualStyleBackColor    = false;
-        BtnOk.Click                     += BtnOk_Click;
-
-        BtnCancel.DialogResult           = DialogResult.Cancel;
-        BtnCancel.FlatStyle              = FlatStyle.Flat;
-        BtnCancel.Image                  = Properties.Resources.cancel;
-        BtnCancel.ImageAlign             = ContentAlignment.MiddleLeft;
-        BtnCancel.Padding                = new Padding(6, 0, 0, 0);
-        BtnCancel.Location               = new Point(10, 280);
-        BtnCancel.Name                   = "BtnCancel";
-        BtnCancel.Size                   = new Size(121, 38);
-        BtnCancel.TabIndex               = 12;
-        BtnCancel.Text                   = "  &Annuler";
-        BtnCancel.TextAlign              = ContentAlignment.MiddleRight;
-        BtnCancel.TextImageRelation      = TextImageRelation.ImageBeforeText;
-
-        // ── ParametresForm ────────────────────────────────────────────────────
-        AcceptButton      = BtnOk;
-        CancelButton      = BtnCancel;
-        ClientSize        = new Size(420, 326);
+        TxtSmtpFrom.Size = new Size(254, 23);
+        TxtSmtpFrom.TabIndex = 10;
+        // 
+        // BtnSauverSmtp
+        // 
+        BtnSauverSmtp.Location = new Point(148, 187);
+        BtnSauverSmtp.Name = "BtnSauverSmtp";
+        BtnSauverSmtp.Size = new Size(75, 23);
+        BtnSauverSmtp.TabIndex = 1;
+        BtnSauverSmtp.Text = "SMTP";
+        BtnSauverSmtp.Click += BtnSauverSmtp_Click;
+        // 
+        // BtnOk
+        // 
+        BtnOk.BackColor = Color.FromArgb(21, 101, 192);
+        BtnOk.DialogResult = DialogResult.OK;
+        BtnOk.FlatAppearance.BorderSize = 0;
+        BtnOk.FlatStyle = FlatStyle.Flat;
+        BtnOk.ForeColor = Color.White;
+        BtnOk.Image = Properties.Resources.save1;
+        BtnOk.ImageAlign = ContentAlignment.MiddleLeft;
+        BtnOk.Location = new Point(285, 280);
+        BtnOk.Name = "BtnOk";
+        BtnOk.Padding = new Padding(6, 0, 0, 0);
+        BtnOk.Size = new Size(123, 38);
+        BtnOk.TabIndex = 11;
+        BtnOk.Text = "  &Enregistrer";
+        BtnOk.TextAlign = ContentAlignment.MiddleRight;
+        BtnOk.TextImageRelation = TextImageRelation.ImageBeforeText;
+        BtnOk.UseVisualStyleBackColor = false;
+        BtnOk.Click += BtnOk_Click;
+        // 
+        // BtnCancel
+        // 
+        BtnCancel.DialogResult = DialogResult.Cancel;
+        BtnCancel.FlatStyle = FlatStyle.Flat;
+        BtnCancel.Image = Properties.Resources.cancel;
+        BtnCancel.ImageAlign = ContentAlignment.MiddleLeft;
+        BtnCancel.Location = new Point(10, 280);
+        BtnCancel.Name = "BtnCancel";
+        BtnCancel.Padding = new Padding(6, 0, 0, 0);
+        BtnCancel.Size = new Size(121, 38);
+        BtnCancel.TabIndex = 12;
+        BtnCancel.Text = "  &Annuler";
+        BtnCancel.TextAlign = ContentAlignment.MiddleRight;
+        BtnCancel.TextImageRelation = TextImageRelation.ImageBeforeText;
+        // 
+        // ParametresForm
+        // 
+        AcceptButton = BtnOk;
+        CancelButton = BtnCancel;
+        ClientSize = new Size(420, 326);
         Controls.Add(TcParams);
         Controls.Add(BtnOk);
         Controls.Add(BtnCancel);
-        Font              = new Font("Segoe UI", 9F);
-        FormBorderStyle   = FormBorderStyle.FixedDialog;
-        Icon              = (Icon)resources.GetObject("$this.Icon");
-        MaximizeBox       = false;
-        MinimizeBox       = false;
-        Name              = "ParametresForm";
-        StartPosition     = FormStartPosition.CenterParent;
-        Text              = "Paramètres";
-
-        // ── ResumeLayout ──────────────────────────────────────────────────────
+        Font = new Font("Segoe UI", 9F);
+        FormBorderStyle = FormBorderStyle.FixedDialog;
+        Icon = (Icon)resources.GetObject("$this.Icon");
+        MaximizeBox = false;
+        MinimizeBox = false;
+        Name = "ParametresForm";
+        StartPosition = FormStartPosition.CenterParent;
+        Text = "Paramètres";
+        TcParams.ResumeLayout(false);
+        TpMontants.ResumeLayout(false);
         Grp.ResumeLayout(false);
         Grp.PerformLayout();
         ((System.ComponentModel.ISupportInitialize)NudIndemFixe).EndInit();
         ((System.ComponentModel.ISupportInitialize)NudTauxKm).EndInit();
+        TpArbitre.ResumeLayout(false);
+        TpArbitre.PerformLayout();
         GrpAddr.ResumeLayout(false);
         GrpAddr.PerformLayout();
+        TpNominations.ResumeLayout(false);
         GrpNominations.ResumeLayout(false);
         GrpNominations.PerformLayout();
+        TpItineraire.ResumeLayout(false);
         GrpAzureMaps.ResumeLayout(false);
         GrpAzureMaps.PerformLayout();
+        TpSmtp.ResumeLayout(false);
         GrpSmtp.ResumeLayout(false);
         GrpSmtp.PerformLayout();
         ((System.ComponentModel.ISupportInitialize)NudSmtpPort).EndInit();
-        TpMontants.ResumeLayout(false);
-        TpArbitre.ResumeLayout(false);
-        TpArbitre.PerformLayout();
-        TpNominations.ResumeLayout(false);
-        TpItineraire.ResumeLayout(false);
-        TpSmtp.ResumeLayout(false);
-        TcParams.ResumeLayout(false);
         ResumeLayout(false);
-        PerformLayout();
     }
 
     // ── Déclarations ──────────────────────────────────────────────────────────

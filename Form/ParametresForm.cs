@@ -9,7 +9,9 @@ public partial class ParametresForm : Form
     public ParametresForm(AppSettings cfg)
     {
         _cfg = cfg;
+
         InitializeComponent();
+
         LoadValues();
     }
 
@@ -25,7 +27,7 @@ public partial class ParametresForm : Form
 
         TxtNomArbitre.Text         = _cfg.NomArbitre;
         TxtNomNominations.Text   = _cfg.NomResponsableNominations;
-        TxtAzureMapsKey.Text     = _cfg.OrsApiKey;
+        TxtAzureMapsKey.Text     = _cfg.MapboxApiKey;
         TxtEmailNominations.Text = _cfg.EmailResponsableNominations;
         TxtTelNominations.Text   = _cfg.TelResponsableNominations;
 
@@ -108,7 +110,7 @@ public partial class ParametresForm : Form
 
     private void SauverItineraire()
     {
-        _cfg.OrsApiKey = TxtAzureMapsKey.Text.Trim();
+        _cfg.MapboxApiKey = TxtAzureMapsKey.Text.Trim();
     }
 
     private void SauverSmtp()
@@ -131,26 +133,5 @@ public partial class ParametresForm : Form
         await Task.Delay(1500);
         btn.Text     = texte;
         btn.Enabled  = true;
-    }
-
-    // ── Initialisation commune des boutons Sauvegarder (appelée depuis Designer)
-
-    private void InitBtnSauver(Button btn, string name, int tabIndex)
-    {
-        btn.BackColor               = Color.FromArgb(21, 101, 192);
-        btn.FlatAppearance.BorderSize = 0;
-        btn.FlatStyle               = FlatStyle.Flat;
-        btn.ForeColor               = Color.White;
-        btn.Image                   = Properties.Resources.save1;
-        btn.ImageAlign              = ContentAlignment.MiddleLeft;
-        btn.Padding                 = new Padding(6, 0, 0, 0);
-        btn.Location                = new Point(222, 188);
-        btn.Name                    = name;
-        btn.Size                    = new Size(160, 28);
-        btn.TabIndex                = tabIndex + 50;
-        btn.Text                    = "  Enregistrer";
-        btn.TextAlign               = ContentAlignment.MiddleRight;
-        btn.TextImageRelation       = TextImageRelation.ImageBeforeText;
-        btn.UseVisualStyleBackColor = false;
     }
 }
