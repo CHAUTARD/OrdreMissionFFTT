@@ -13,6 +13,8 @@ public sealed class FieldPos
 public sealed class AppSettings
 {
     // ── Compétition ───────────────────────────────────────────────────────────
+
+    // Oipposant, texte écrit dans le formulaire, est le nom de l'équipe locale
     public FieldPos Opposant    { get; set; } = new() { X = 100f, Y = 700f, Hauteur = 16, Largeur = 200f };
     public FieldPos Date        { get; set; } = new() { X = 340f, Y = 700f, Hauteur = 16, Largeur = 100f };
     public FieldPos Heure       { get; set; } = new() { X = 470f, Y = 700f, Hauteur = 16, Largeur =  70f };
@@ -44,7 +46,7 @@ public sealed class AppSettings
     public string  DernierSource      { get; set; } = "";
     public decimal DernierPeage       { get; set; } = 0m;
     public decimal DernierKm          { get; set; } = 0m;
-    public string  DernierOpposant    { get; set; } = "";
+    public string  DernierEquipeLocale    { get; set; } = "";
     public string  DerniereDate       { get; set; } = "";
     public string  DerniereHeure      { get; set; } = "";
     public string  DerniereAdresse    { get; set; } = "";
@@ -76,6 +78,17 @@ public sealed class AppSettings
     // Identifiants obtenus auprès de la FFTT : interfaces.informatiques@fftt.email
     public string ApiId       { get; set; } = "";
     public string ApiPassword { get; set; } = "";
+
+    // ── SMTP (envoi d'email via MailKit) ──────────────────────────────────────
+    // SmtpSsl = false → STARTTLS (port 587 recommandé)
+    // SmtpSsl = true  → SSL/TLS direct (port 465)
+    // Mot de passe stocké en clair dans positions.json (usage local uniquement).
+    public string SmtpHost     { get; set; } = "";
+    public int    SmtpPort     { get; set; } = 587;
+    public bool   SmtpSsl      { get; set; } = false;
+    public string SmtpUser     { get; set; } = "";
+    public string SmtpPassword { get; set; } = "";
+    public string SmtpFrom     { get; set; } = "";
 
     // ── Persistance ───────────────────────────────────────────────────────────
 

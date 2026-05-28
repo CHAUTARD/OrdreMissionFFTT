@@ -42,6 +42,18 @@ partial class ParametresForm
         GrpAzureMaps = new GroupBox();
         LblAzureMapsLbl = new Label();
         TxtAzureMapsKey = new TextBox();
+        GrpSmtp = new GroupBox();
+        LblSmtpServeurLbl = new Label();
+        TxtSmtpHost = new TextBox();
+        LblSmtpPortLbl = new Label();
+        NudSmtpPort = new NumericUpDown();
+        ChkSmtpSsl = new CheckBox();
+        LblSmtpUserLbl = new Label();
+        TxtSmtpUser = new TextBox();
+        LblSmtpPasswordLbl = new Label();
+        TxtSmtpPassword = new TextBox();
+        LblSmtpFromLbl = new Label();
+        TxtSmtpFrom = new TextBox();
         BtnOk = new Button();
         BtnCancel = new Button();
         Grp.SuspendLayout();
@@ -50,6 +62,8 @@ partial class ParametresForm
         GrpAddr.SuspendLayout();
         GrpNominations.SuspendLayout();
         GrpAzureMaps.SuspendLayout();
+        GrpSmtp.SuspendLayout();
+        ((System.ComponentModel.ISupportInitialize)NudSmtpPort).BeginInit();
         SuspendLayout();
         // 
         // Grp
@@ -317,8 +331,125 @@ partial class ParametresForm
         TxtAzureMapsKey.Size = new Size(244, 23);
         TxtAzureMapsKey.TabIndex = 1;
         // 
+        //
+        // GrpSmtp
+        //
+        GrpSmtp.Controls.Add(LblSmtpServeurLbl);
+        GrpSmtp.Controls.Add(TxtSmtpHost);
+        GrpSmtp.Controls.Add(LblSmtpPortLbl);
+        GrpSmtp.Controls.Add(NudSmtpPort);
+        GrpSmtp.Controls.Add(ChkSmtpSsl);
+        GrpSmtp.Controls.Add(LblSmtpUserLbl);
+        GrpSmtp.Controls.Add(TxtSmtpUser);
+        GrpSmtp.Controls.Add(LblSmtpPasswordLbl);
+        GrpSmtp.Controls.Add(TxtSmtpPassword);
+        GrpSmtp.Controls.Add(LblSmtpFromLbl);
+        GrpSmtp.Controls.Add(TxtSmtpFrom);
+        GrpSmtp.Location = new Point(12, 441);
+        GrpSmtp.Name = "GrpSmtp";
+        GrpSmtp.Size = new Size(396, 170);
+        GrpSmtp.TabIndex = 9;
+        GrpSmtp.TabStop = false;
+        GrpSmtp.Text = "SMTP (envoi d'emails)";
+        //
+        // LblSmtpServeurLbl
+        //
+        LblSmtpServeurLbl.AutoSize = true;
+        LblSmtpServeurLbl.Location = new Point(10, 24);
+        LblSmtpServeurLbl.Name = "LblSmtpServeurLbl";
+        LblSmtpServeurLbl.Size = new Size(56, 15);
+        LblSmtpServeurLbl.TabIndex = 0;
+        LblSmtpServeurLbl.Text = "Serveur :";
+        //
+        // TxtSmtpHost
+        //
+        TxtSmtpHost.Location = new Point(73, 21);
+        TxtSmtpHost.Name = "TxtSmtpHost";
+        TxtSmtpHost.PlaceholderText = "smtp.example.com";
+        TxtSmtpHost.Size = new Size(192, 23);
+        TxtSmtpHost.TabIndex = 1;
+        //
+        // LblSmtpPortLbl
+        //
+        LblSmtpPortLbl.AutoSize = true;
+        LblSmtpPortLbl.Location = new Point(273, 24);
+        LblSmtpPortLbl.Name = "LblSmtpPortLbl";
+        LblSmtpPortLbl.Size = new Size(36, 15);
+        LblSmtpPortLbl.TabIndex = 2;
+        LblSmtpPortLbl.Text = "Port :";
+        //
+        // NudSmtpPort
+        //
+        NudSmtpPort.Location = new Point(316, 21);
+        NudSmtpPort.Maximum = new decimal(new int[] { 65535, 0, 0, 0 });
+        NudSmtpPort.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+        NudSmtpPort.Name = "NudSmtpPort";
+        NudSmtpPort.Size = new Size(68, 23);
+        NudSmtpPort.TabIndex = 3;
+        NudSmtpPort.Value = new decimal(new int[] { 587, 0, 0, 0 });
+        //
+        // ChkSmtpSsl
+        //
+        ChkSmtpSsl.AutoSize = true;
+        ChkSmtpSsl.Location = new Point(10, 52);
+        ChkSmtpSsl.Name = "ChkSmtpSsl";
+        ChkSmtpSsl.Size = new Size(174, 19);
+        ChkSmtpSsl.TabIndex = 4;
+        ChkSmtpSsl.Text = "SSL/TLS direct (port 465)";
+        //
+        // LblSmtpUserLbl
+        //
+        LblSmtpUserLbl.AutoSize = true;
+        LblSmtpUserLbl.Location = new Point(10, 82);
+        LblSmtpUserLbl.Name = "LblSmtpUserLbl";
+        LblSmtpUserLbl.Size = new Size(55, 15);
+        LblSmtpUserLbl.TabIndex = 5;
+        LblSmtpUserLbl.Text = "Login :";
+        //
+        // TxtSmtpUser
+        //
+        TxtSmtpUser.Location = new Point(110, 79);
+        TxtSmtpUser.Name = "TxtSmtpUser";
+        TxtSmtpUser.PlaceholderText = "utilisateur@example.com";
+        TxtSmtpUser.Size = new Size(274, 23);
+        TxtSmtpUser.TabIndex = 6;
+        //
+        // LblSmtpPasswordLbl
+        //
+        LblSmtpPasswordLbl.AutoSize = true;
+        LblSmtpPasswordLbl.Location = new Point(10, 110);
+        LblSmtpPasswordLbl.Name = "LblSmtpPasswordLbl";
+        LblSmtpPasswordLbl.Size = new Size(84, 15);
+        LblSmtpPasswordLbl.TabIndex = 7;
+        LblSmtpPasswordLbl.Text = "Mot de passe :";
+        //
+        // TxtSmtpPassword
+        //
+        TxtSmtpPassword.Location = new Point(110, 107);
+        TxtSmtpPassword.Name = "TxtSmtpPassword";
+        TxtSmtpPassword.PasswordChar = '●';
+        TxtSmtpPassword.Size = new Size(274, 23);
+        TxtSmtpPassword.TabIndex = 8;
+        //
+        // LblSmtpFromLbl
+        //
+        LblSmtpFromLbl.AutoSize = true;
+        LblSmtpFromLbl.Location = new Point(10, 140);
+        LblSmtpFromLbl.Name = "LblSmtpFromLbl";
+        LblSmtpFromLbl.Size = new Size(77, 15);
+        LblSmtpFromLbl.TabIndex = 9;
+        LblSmtpFromLbl.Text = "Expéditeur :";
+        //
+        // TxtSmtpFrom
+        //
+        TxtSmtpFrom.Location = new Point(110, 137);
+        TxtSmtpFrom.Name = "TxtSmtpFrom";
+        TxtSmtpFrom.PlaceholderText = "votre@adresse.fr  (vide = Login)";
+        TxtSmtpFrom.Size = new Size(274, 23);
+        TxtSmtpFrom.TabIndex = 10;
+        //
         // BtnOk
-        // 
+        //
         BtnOk.BackColor = Color.FromArgb(21, 101, 192);
         BtnOk.DialogResult = DialogResult.OK;
         BtnOk.FlatAppearance.BorderSize = 0;
@@ -327,42 +458,43 @@ partial class ParametresForm
         BtnOk.Image = Properties.Resources.save1;
         BtnOk.ImageAlign = ContentAlignment.MiddleLeft;
         BtnOk.Padding    = new Padding(6, 0, 0, 0);
-        BtnOk.Location = new Point(285, 448);
+        BtnOk.Location = new Point(285, 619);
         BtnOk.Name = "BtnOk";
         BtnOk.Size = new Size(123, 38);
-        BtnOk.TabIndex = 7;
+        BtnOk.TabIndex = 11;
         BtnOk.Text = "  &Enregistrer";
         BtnOk.TextAlign = ContentAlignment.MiddleRight;
         BtnOk.TextImageRelation = TextImageRelation.ImageBeforeText;
         BtnOk.UseVisualStyleBackColor = false;
         BtnOk.Click += BtnOk_Click;
-        // 
+        //
         // BtnCancel
-        // 
+        //
         BtnCancel.DialogResult = DialogResult.Cancel;
         BtnCancel.FlatStyle = FlatStyle.Flat;
         BtnCancel.Image = Properties.Resources.cancel;
         BtnCancel.ImageAlign = ContentAlignment.MiddleLeft;
         BtnCancel.Padding    = new Padding(6, 0, 0, 0);
-        BtnCancel.Location = new Point(10, 448);
+        BtnCancel.Location = new Point(10, 619);
         BtnCancel.Name = "BtnCancel";
         BtnCancel.Size = new Size(121, 38);
-        BtnCancel.TabIndex = 8;
+        BtnCancel.TabIndex = 12;
         BtnCancel.Text = "  &Annuler";
         BtnCancel.TextAlign = ContentAlignment.MiddleRight;
         BtnCancel.TextImageRelation = TextImageRelation.ImageBeforeText;
-        // 
+        //
         // ParametresForm
-        // 
+        //
         AcceptButton = BtnOk;
         CancelButton = BtnCancel;
-        ClientSize = new Size(420, 496);
+        ClientSize = new Size(420, 667);
         Controls.Add(LblNomArbitreLbl);
         Controls.Add(TxtNomArbitre);
         Controls.Add(Grp);
         Controls.Add(GrpAddr);
         Controls.Add(GrpNominations);
         Controls.Add(GrpAzureMaps);
+        Controls.Add(GrpSmtp);
         Controls.Add(BtnOk);
         Controls.Add(BtnCancel);
         Font = new Font("Segoe UI", 9F);
@@ -383,6 +515,9 @@ partial class ParametresForm
         GrpNominations.PerformLayout();
         GrpAzureMaps.ResumeLayout(false);
         GrpAzureMaps.PerformLayout();
+        GrpSmtp.ResumeLayout(false);
+        GrpSmtp.PerformLayout();
+        ((System.ComponentModel.ISupportInitialize)NudSmtpPort).EndInit();
         ResumeLayout(false);
         PerformLayout();
     }
@@ -417,6 +552,19 @@ partial class ParametresForm
     private TextBox  TxtEmailNominations;
     private Label    LblTelNominationsLbl;
     private TextBox  TxtTelNominations;
+
+    private GroupBox      GrpSmtp;
+    private Label         LblSmtpServeurLbl;
+    private TextBox       TxtSmtpHost;
+    private Label         LblSmtpPortLbl;
+    private NumericUpDown NudSmtpPort;
+    private CheckBox      ChkSmtpSsl;
+    private Label         LblSmtpUserLbl;
+    private TextBox       TxtSmtpUser;
+    private Label         LblSmtpPasswordLbl;
+    private TextBox       TxtSmtpPassword;
+    private Label         LblSmtpFromLbl;
+    private TextBox       TxtSmtpFrom;
 
     private Button BtnOk;
     private Button BtnCancel;

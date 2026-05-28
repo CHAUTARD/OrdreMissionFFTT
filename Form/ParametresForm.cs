@@ -28,6 +28,14 @@ public partial class ParametresForm : Form
         TxtAzureMapsKey.Text     = _cfg.OrsApiKey;
         TxtEmailNominations.Text = _cfg.EmailResponsableNominations;
         TxtTelNominations.Text   = _cfg.TelResponsableNominations;
+
+        // SMTP
+        TxtSmtpHost.Text        = _cfg.SmtpHost;
+        NudSmtpPort.Value       = _cfg.SmtpPort;
+        ChkSmtpSsl.Checked      = _cfg.SmtpSsl;
+        TxtSmtpUser.Text        = _cfg.SmtpUser;
+        TxtSmtpPassword.Text    = _cfg.SmtpPassword;
+        TxtSmtpFrom.Text        = _cfg.SmtpFrom;
     }
 
     private void BtnOk_Click(object? sender, EventArgs e)
@@ -45,6 +53,14 @@ public partial class ParametresForm : Form
         _cfg.EmailResponsableNominations = TxtEmailNominations.Text.Trim();
         _cfg.TelResponsableNominations   = TxtTelNominations.Text.Trim();
         _cfg.OrsApiKey                   = TxtAzureMapsKey.Text.Trim();
+
+        // SMTP
+        _cfg.SmtpHost     = TxtSmtpHost.Text.Trim();
+        _cfg.SmtpPort     = (int)NudSmtpPort.Value;
+        _cfg.SmtpSsl      = ChkSmtpSsl.Checked;
+        _cfg.SmtpUser     = TxtSmtpUser.Text.Trim();
+        _cfg.SmtpPassword = TxtSmtpPassword.Text;   // pas de Trim() sur le mot de passe
+        _cfg.SmtpFrom     = TxtSmtpFrom.Text.Trim();
         _cfg.Save();
     }
 }
