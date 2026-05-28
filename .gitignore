@@ -11,3 +11,4 @@ publish/
 positions.json
 PDF/
 images/
+*.pdf
