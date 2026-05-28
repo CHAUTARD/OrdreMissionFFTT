@@ -59,8 +59,11 @@ public sealed class EmailTemplate
         => SujetTemplate.Replace("{jourCourt}", jourCourt);
 
     /// <summary>Génère le corps en substituant toutes les variables.</summary>
-    public string AppliquerCorps(string jourLong, string heure)
+    public string AppliquerCorps(string jourLong, string heure,
+                                 string nomArbitre = "", string equipe = "")
         => CorpsTemplate
-               .Replace("{jourLong}",   jourLong)
-               .Replace("{heure}",      heure);
+               .Replace("{jourLong}",    jourLong)
+               .Replace("{heure}",       heure)
+               .Replace("{nomArbitre}",  nomArbitre)
+               .Replace("{equipe}",      equipe);
 }
